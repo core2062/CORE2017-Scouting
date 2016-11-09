@@ -3,7 +3,7 @@ import DatabaseCredentials
 import mysql.connector
 from mysql.connector import errorcode
 import cgi
-from web_input import data_list
+import Constants
 
 class Team(teamNumber):
     def __init__(self, teamNumber):
@@ -22,19 +22,63 @@ class Team(teamNumber):
 
         self.cursor = self.dbConnection.cursor()
         self.teamNumber = teamNumber
-        self.dataList = data_list()
+        self.dataList = Constants.allNames
         self.allData = []
         self.categoryDictionary = {}
-
         self.cursor.execute("SELECT * FROM Team" + str(self.teamNumber) + " ORDER BY match_id")
         self.allData = self.cursor.fetchall()
         for (data, count) in zip(self.dataList, self.dataList.count()):
             self.categoryDictionary[data] = self.allData[count]
 
-    def get_data(self, category):
+    def verify_category(self, category):
+        verified = 0
+        for item in self.dataList:
+            if item == category:
+                verified = 1
+        return verified
 
-        for key in self.categoryDictionary:
-            if str(key) == str(category):
-                return self.categoryDictionary[key]
-            else:
-                return 0
+    def get_data(self, category):
+        if self.verify_category(category) == 1:
+            for key in self.categoryDictionary:
+                if str(key) == str(category):
+                    return self.categoryDictionary[key]
+
+    def sum_data(self, category):
+        if self.verify_category(category) == 1:
+            sum = 0
+            for data in self.get_data(category):
+                sum += data
+            return sum
+
+    def num_data_entries(self, category):
+        if self.verify_category(category) == 1:
+            count = 0
+            for data in self.get_data(category):
+                count += count+1
+            return count
+
+    def avg_data(self, category):
+        if self.verify_category(category) == 1:
+            return self.sum_data(category)/self.num_data_entries(category)
+
+    def max_in_data(self, category):
+        if self.verify_category(category) == 1:
+            count = 0
+            for data in self.get_data(category):
+                if count == 0:
+                    max = data
+                    count = 1
+                if data > max:
+                    max = data
+            return max
+
+    def min_in_data(self, category):
+        if self.verify_category(category) == 1:
+            count = 0
+            for data in self.get_data(category):
+                if count == 0:
+                    min = data
+                    count = 1
+                if data < min:
+                    min = data
+            return min

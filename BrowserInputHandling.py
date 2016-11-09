@@ -8,7 +8,6 @@ import cgi
 
 
 class HtmlInput:
-class HtmlInput:
 
     def __init__(self):
         self.dbConnection = -1
