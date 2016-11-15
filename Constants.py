@@ -1,3 +1,4 @@
+""" Input form values """
 allNames = []
 
 checkbox_names = [
@@ -15,6 +16,11 @@ text_names = [
     'comments'
 ]
 
+radio_values = {
+    'defenceType': ('Moat', 'Rockwall', 'RoughTerrain'),
+    'hasDefender': ('Yes', 'No')
+}
+
 for checkbox in checkbox_names:
     allNames.append(checkbox)
 for radio in radio_names:
@@ -24,7 +30,14 @@ for number in number_names:
 for text in text_names:
     allNames.append(text)
 
-radio_values = {
-    'defenceType': ('Moat', 'Rockwall', 'RoughTerrain'),
-    'hasDefender': ('Yes', 'No')
-}
+""" Match Report Values """
+
+team_number_fields = [
+    'RedTeam1',
+    'RedTeam2',
+    'RedTeam3',
+    'BlueTeam1',
+    'BlueTeam2',
+    'BlueTeam3'
+]
+
