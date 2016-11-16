@@ -7,6 +7,9 @@ import Constants
 
 class Team(teamNumber):
     def __init__(self, teamNumber):
+        """ teamData is what gets manipulated with output data """
+        self.teamData = {}
+
         try:
             self.dbConnection = mysql.connector.connect(user=DatabaseCredentials.DB_USER,
                                              password=DatabaseCredentials.DB_PASS,
@@ -31,6 +34,9 @@ class Team(teamNumber):
         for (data, count) in zip(self.dataList, self.dataList.count()):
             self.categoryDictionary[data] = self.allData[count]
 
+    def team_number(self):
+        return self.teamNumber
+
     def verify_category(self, category):
 
         """ Verifies the category exists
@@ -43,7 +49,8 @@ class Team(teamNumber):
 
     def get_data(self, category):
 
-        """Returns category data in a tuple """
+        """Returns category data in a tuple
+           -Internal function-"""
 
         if self.verify_category(category) == 1:
             for key in self.categoryDictionary:
