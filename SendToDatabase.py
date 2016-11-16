@@ -1,10 +1,5 @@
-#!C:\Python34\python.exe -u
-
 # Import modules for CGI handling & database connection
-import DatabaseCredentials
-import mysql.connector
-from mysql.connector import errorcode
-import cgi
+import CoreFiles
 
 
 class HtmlInput:
@@ -22,7 +17,7 @@ class HtmlInput:
         self.numberListValues = []
         self.textListValues = []
         # Create instance of FieldStorage to get elements from the browser
-        self.form = cgi.FieldStorage()
+        self.form = CoreFiles.cgi.FieldStorage()
         # Initializes SQL Statement
         self.createTableSQL = ""
         self.insertSQL = ""
@@ -32,14 +27,14 @@ class HtmlInput:
 
     def get_db_connection(self):
         try:
-            self.dbConnection = mysql.connector.connect(user=DatabaseCredentials.DB_USER,
-                                             password=DatabaseCredentials.DB_PASS,
-                                             host=DatabaseCredentials.DB_HOST,
-                                             database=DatabaseCredentials.DB_NAME)
-        except mysql.connector.Error as err:
-            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            self.dbConnection = CoreFiles.mysql.connector.connect(user=CoreFiles.DatabaseCredentials.DB_USER,
+                                             password=CoreFiles.DatabaseCredentials.DB_PASS,
+                                             host=CoreFiles.DatabaseCredentials.DB_HOST,
+                                             database=CoreFiles.DatabaseCredentials.DB_NAME)
+        except CoreFiles.mysql.connector.Error as err:
+            if err.errno == CoreFiles.errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
-            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            elif err.errno == CoreFiles.errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
             else:
                 print(err)
@@ -155,7 +150,7 @@ class HtmlInput:
 
         try:
             self.cursor.execute(self.createTableSQL)
-        except mysql.connector.Error as error:
+        except CoreFiles.mysql.connector.Error as error:
             print(error.msg)
         self.cursor.execute(insertSQLstmt, self.insertData)
         self.dbConnection.commit()

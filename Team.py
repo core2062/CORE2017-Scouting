@@ -1,32 +1,29 @@
 # Import modules for CGI handling & database connection
-import DatabaseCredentials
-import mysql.connector
-from mysql.connector import errorcode
-import cgi
-import Constants
+import CoreFiles
 
-class Team(teamNumber):
+
+class Team:
     def __init__(self, teamNumber):
         """ teamData is what gets manipulated with output data """
         self.teamData = {}
 
         try:
-            self.dbConnection = mysql.connector.connect(user=DatabaseCredentials.DB_USER,
-                                             password=DatabaseCredentials.DB_PASS,
-                                             host=DatabaseCredentials.DB_HOST,
-                                             database=DatabaseCredentials.DB_NAME)
-        except mysql.connector.Error as err:
-            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            self.dbConnection = CoreFiles.mysql.connector.connect(user=CoreFiles.DatabaseCredentials.DB_USER,
+                                             password=CoreFiles.DatabaseCredentials.DB_PASS,
+                                             host=CoreFiles.DatabaseCredentials.DB_HOST,
+                                             database=CoreFiles.DatabaseCredentials.DB_NAME)
+        except CoreFiles.mysql.connector.Error as err:
+            if err.errno == CoreFiles.errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
-            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            elif err.errno == CoreFiles.errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
             else:
                 print(err)
 
-        self.radio_values = Constants.radio_values
+        self.radio_values = CoreFiles.Constants.radio_values
         self.cursor = self.dbConnection.cursor()
         self.teamNumber = teamNumber
-        self.dataList = Constants.allNames
+        self.dataList = CoreFiles.Constants.allNames
         self.allData = []
         self.categoryDictionary = {}
         self.cursor.execute("SELECT * FROM Team" + str(self.teamNumber) + " ORDER BY match_id")

@@ -32,7 +32,7 @@ for text in text_names:
 for radio in radio_names:
     allNames.append(text)
 
-# Match form values #
+""" Match form values  """
 
 team_number_fields = [
     'RedTeam1',

@@ -1,13 +1,13 @@
-import TeamCalculations
+import DataCalculation
 
-TeamCalculations.TeamData()
+DataCalculation.TeamData()
 class MatchReport:
 
     def __init__(self):
-        self.form = TeamCalculations.cgi.FieldStorage()
+        self.form = DataCalculation.cgi.FieldStorage()
         self.teamDictionary = {}
-        for teams in TeamCalculations.Constants.team_number_fields:
-            self.teamDictionary[teams] = TeamCalculations.TeamData(self.form.getvalue(teams))
+        for teams in DataCalculation.Constants.team_number_fields:
+            self.teamDictionary[teams] = DataCalculation.TeamData(self.form.getvalue(teams))
             # Populates teamDictionary with : key = alliance color, value = team object
         for populate in self.teamDictionary:
             populate.populatedata()
