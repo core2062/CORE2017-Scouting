@@ -1,0 +1,7 @@
+File Names = Upper cammelcase : TestFile
+Classes = Upper cammel case : TestClass
+objects = lower cammel case : testObject
+Functions = lower underscore : test_function()
+varriables = lower underscore : test_varriable
+private = underscore followed by lower underscore : _private_varrible, _private_function()
+Constants = all upper : CONSTANT

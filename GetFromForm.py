@@ -1,18 +1,21 @@
 import SendToDatabase
 import CoreFiles
 
-inputForm = SendToDatabase.HtmlInput
-inputForm.get_db_connection()
+inputForm = SendToDatabase.HtmlInput()
 inputForm.define_team_number('teamNumber')
 
-for names in CoreFiles.Constants.checkbox_names:
+# Populate the database #
+
+for names in CoreFiles.Constants.CHECKBOX_NAMES:
     inputForm.add_checkbox(names)
-for names in CoreFiles.Constants.radio_names:
+for names in CoreFiles.Constants.RADIO_NAMES:
     inputForm.add_radio(names)
-for names in CoreFiles.Constants.number_names:
+for names in CoreFiles.Constants.NUMBER_NAMES:
     inputForm.add_number(names)
-for names in CoreFiles.Constants.text_names:
+for names in CoreFiles.Constants.TEXT_NAMES:
     inputForm.add_text(names)
+
+# Execute SQL #
 
 inputForm.execute_SQL()
 inputForm.display_receipt()

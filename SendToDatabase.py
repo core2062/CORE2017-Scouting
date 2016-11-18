@@ -5,32 +5,30 @@ import CoreFiles
 class HtmlInput:
 
     def __init__(self):
-        self.dbConnection = -1
-        self.cursor = -1
-        # Initializes lists to store values posted
-        self.checkboxList = []
-        self.radioList = []
-        self.numberList = []
-        self.textList = []
-        self.checkboxListValues = []
-        self.radioListValues = []
-        self.numberListValues = []
-        self.textListValues = []
-        # Create instance of FieldStorage to get elements from the browser
-        self.form = CoreFiles.cgi.FieldStorage()
-        # Initializes SQL Statement
-        self.createTableSQL = ""
-        self.insertSQL = ""
-        self.insetSQLValues = "VALUES ("
-        self.insertData = ()
-        self.teamNumber = -1
 
-    def get_db_connection(self):
+        """ Initalizes SQL Lists and CGI """
+
+        self._checkbox_list = []
+        self._radio_list = []
+        self._number_list = []
+        self._text_list = []
+        self._checkbox_list_values = []
+        self._radio_list_values = []
+        self._number_list_values = []
+        self._text_list_values = []
+        self._create_table_SQL = ""
+        self._insert_SQL = ""
+        self._insert_SQL_values = "VALUES ("
+        self._insert_data = ()
+        self.team_number = -1
+
+        self._form = CoreFiles.cgi.FieldStorage()
+
         try:
-            self.dbConnection = CoreFiles.mysql.connector.connect(user=CoreFiles.DatabaseCredentials.DB_USER,
-                                             password=CoreFiles.DatabaseCredentials.DB_PASS,
-                                             host=CoreFiles.DatabaseCredentials.DB_HOST,
-                                             database=CoreFiles.DatabaseCredentials.DB_NAME)
+            self._dbConnection = CoreFiles.mysql.connector.connect(user=CoreFiles.DatabaseCredentials.DB_USER,
+                                                                   password=CoreFiles.DatabaseCredentials.DB_PASS,
+                                                                   host=CoreFiles.DatabaseCredentials.DB_HOST,
+                                                                   database=CoreFiles.DatabaseCredentials.DB_NAME)
         except CoreFiles.mysql.connector.Error as err:
             if err.errno == CoreFiles.errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
@@ -38,126 +36,118 @@ class HtmlInput:
                 print("Database does not exist")
             else:
                 print(err)
-        self.cursor = self.dbConnection.cursor()
+        self._cursor = self._dbConnection.cursor()
 
     def define_team_number(self, number):
-        self.teamNumber = self.form.getvalue(number)
 
-    def add_checkbox(self, inputname):
-        self.checkboxList.append(inputname)
-        if self.form.getvalue(inputname):
-            self.checkboxListValues.append("ON")
-        else:
-            self.checkboxListValues.append("OFF")
+        """ Gives the team number to the SQL """
 
-    def add_radio(self, inputname):
-        self.radioList.append(inputname)
-        if self.form.getvalue(inputname):
-            self.radioListValues.append(self.form.getvalue(inputname))
-        else:
-            self.radioListValues.append("Not set")
+        self.team_number = self._form.getvalue(number)
 
-    def add_number(self, inputname):
-        self.numberList.append(inputname)
-        if self.form.getvalue(inputname):
-            self.numberListValues.append(self.form.getvalue(inputname))
-        else:
-            self.numberListValues.append("Not set")
+    def add_checkbox(self, input_name):
 
-    def add_text(self, inputname):
-        self.textList.append(inputname)
-        if self.form.getvalue(inputname):
-            self.textListValues.append(self.form.getvalue(inputname))
+        """ Binds input_name to a form checkbox name and adds it to the SQL """
+
+        self._checkbox_list.append(str(input_name))
+        if self._form.getvalue(str(input_name)):
+            self._checkbox_list_values.append("ON")
         else:
-            self.textListValues.append("Not set")
+            self._checkbox_list_values.append("OFF")
+
+    def add_radio(self, input_name):
+
+        """ Binds input_name to a form radio name and adds it to the SQL """
+
+        self._radio_list.append(str(str(input_name)))
+        if self._form.getvalue(str(str(input_name))):
+            self._radio_list_values.append(self._form.getvalue(str(str(input_name))))
+        else:
+            self._radio_list_values.append("Not set")
+
+    def add_number(self, input_name):
+
+        """ Binds input_name to a form number name and adds it to the SQL """
+
+        self._number_list.append(str(input_name))
+        if self._form.getvalue(str(input_name)):
+            self._number_list_values.append(self._form.getvalue(str(input_name)))
+        else:
+            self._number_list_values.append("Not set")
+
+    def add_text(self, input_name):
+
+        """ Binds input_name to a form text name and adds it to the SQL """
+
+        self._text_list.append(str(input_name))
+        if self._form.getvalue(str(input_name)):
+            self._text_list_values.append(self._form.getvalue(str(input_name)))
+        else:
+            self._text_list_values.append("Not set")
 
     def execute_SQL(self):
+
+        """ Generates Table and Insert SQL statements given what fields were added """
+
         first = 0
-        self.createTableSQL += "CREATE TABLE IF NOT EXISTS `Team"
-        self.createTableSQL += str(self.teamNumber)
-        self.createTableSQL += "` (`match_id` int(11) NOT NULL AUTO_INCREMENT,"
-        self.insertSQL += "INSERT INTO Team"
-        self.insertSQL += str(self.teamNumber)
-        self.insertSQL += " ("
-        for checkboxName, checkboxValue in zip(self.checkboxList, self.checkboxListValues):
-            self.createTableSQL += "`"
-            self.createTableSQL += str(checkboxName)
-            self.createTableSQL += "` varchar(4) NOT NULL,"
-            self.insertData = self.insertData + (checkboxValue,)
-        for radioName, radioValue in zip(self.radioList, self.radioListValues):
-            self.createTableSQL += "`"
-            self.createTableSQL += str(radioName)
-            self.createTableSQL += "` varchar(20) NOT NULL,"
-            self.insertData = self.insertData + (radioValue,)
-        for numberName, numberValue in zip(self.numberList, self.numberListValues):
-            self.createTableSQL += "`"
-            self.createTableSQL += str(numberName)
-            self.createTableSQL += "` int(11) NOT NULL,"
-            self.insertData = self.insertData + (numberValue,)
-        for textName, textValue in zip(self.textList, self.textListValues):
-            self.createTableSQL += "`"
-            self.createTableSQL += str(textName)
-            self.createTableSQL += "` varchar(20) NOT NULL,"
-            self.insertData = self.insertData + (textValue,)
-        self.createTableSQL += "PRIMARY KEY (`match_id`),UNIQUE KEY `match_id` (`match_id`),KEY `"
-        for checkboxNames in self.checkboxList:
+        self._create_table_SQL += ("CREATE TABLE IF NOT EXISTS `Team", str(self.team_number),
+                                   "` (`match_id` int(11) NOT NULL AUTO_INCREMENT,")
+        self._insert_SQL += ("INSERT INTO Team", str(self.team_number), " (")
+        for checkboxName, checkboxValue in zip(self._checkbox_list, self._checkbox_list_values):
+            self._create_table_SQL += ("`", str(checkboxName), "` varchar(4) NOT NULL,")
+            self._insert_data = self._insert_data + (checkboxValue,)
+        for radioName, radioValue in zip(self._radio_list, self._radio_list_values):
+            self._create_table_SQL += ("`", str(radioName), "` varchar(20) NOT NULL,")
+            self._insert_data = self._insert_data + (radioValue,)
+        for numberName, numberValue in zip(self._number_list, self._number_list_values):
+            self._create_table_SQL += ("`", str(numberName), "` int(11) NOT NULL,")
+            self._insert_data = self._insert_data + (numberValue,)
+        for textName, textValue in zip(self._text_list, self._text_list_values):
+            self._create_table_SQL += ("`", str(textName), "` varchar(20) NOT NULL,")
+            self._insert_data = self._insert_data + (textValue,)
+        self._create_table_SQL += "PRIMARY KEY (`match_id`),UNIQUE KEY `match_id` (`match_id`),KEY `"
+        for checkboxNames in self._checkbox_list:
             if first == 0:
-                self.createTableSQL += str(checkboxNames)
-                self.createTableSQL += "` (`"
-                self.createTableSQL += str(checkboxNames)
-                self.createTableSQL += "`"
-                self.insertSQL += str(checkboxNames)
-                self.insetSQLValues += "%s"
+                self._create_table_SQL += (str(checkboxNames), "` (`", str(checkboxNames), "`")
+                self._insert_SQL += str(checkboxNames)
+                self._insert_SQL_values += "%s"
                 first = 1
             else:
-                self.createTableSQL += ",`"
-                self.createTableSQL += str(checkboxNames)
-                self.createTableSQL += "`"
-                self.insertSQL += ", "
-                self.insertSQL += str(checkboxNames)
-                self.insetSQLValues += ", %s"
-        for radioNames in self.radioList:
-            self.createTableSQL += ",`"
-            self.createTableSQL += str(radioNames)
-            self.createTableSQL += "`"
-            self.insertSQL += ", "
-            self.insertSQL += str(radioNames)
-            self.insetSQLValues += ", %s"
-        for numberNames in self.numberList:
-            self.createTableSQL += ",`"
-            self.createTableSQL += str(numberNames)
-            self.createTableSQL += "`"
-            self.insertSQL += ", "
-            self.insertSQL += str(numberNames)
-            self.insetSQLValues += ", %i"
-        for textNames in self.textList:
-            self.createTableSQL += ",`"
-            self.createTableSQL += str(textNames)
-            self.createTableSQL += "`"
-            self.insertSQL += ", "
-            self.insertSQL += str(textNames)
-            self.insetSQLValues += ", %s"
-        self.createTableSQL += ")) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;"
-        self.insertSQL += ") "
-        self.insetSQLValues += ")"
-        insertSQLstmt = (
-            self.createTableSQL,
-            self.insetSQLValues
+                self._create_table_SQL += (",`", str(checkboxNames), "`")
+                self._insert_SQL += (", ", str(checkboxNames))
+                self._insert_SQL_values += ", %s"
+        for radioNames in self._radio_list:
+            self._create_table_SQL += (",`", str(radioNames), "`")
+            self._insert_SQL += (", ", str(radioNames))
+            self._insert_SQL_values += ", %s"
+        for numberNames in self._number_list:
+            self._create_table_SQL += ",`", str(numberNames), "`"
+            self._insert_SQL += (", ", str(numberNames))
+            self._insert_SQL_values += ", %i"
+        for textNames in self._text_list:
+            self._create_table_SQL += (",`", str(textNames), "`")
+            self._insert_SQL += (", ", str(textNames))
+            self._insert_SQL_values += ", %s"
+        self._create_table_SQL += ")) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;"
+        self._insert_SQL += ") "
+        self._insert_SQL_values += ")"
+        _insert_SQLstmt = (
+            self._create_table_SQL,
+            self._insert_SQL_values
         )
 
-        #print(self.createTableSQL)
-        #print(self.createInsertSQL)
-
         try:
-            self.cursor.execute(self.createTableSQL)
+            self._cursor.execute(self._create_table_SQL)
         except CoreFiles.mysql.connector.Error as error:
             print(error.msg)
-        self.cursor.execute(insertSQLstmt, self.insertData)
-        self.dbConnection.commit()
-        self.cursor.close()
-        self.dbConnection.close()
+        self._cursor.execute(_insert_SQLstmt, self._insert_data)
+        self._dbConnection.commit()
+        self._cursor.close()
+        self._dbConnection.close()
 
     def display_receipt(self):
+
+        """ Prints a client Receipt to the browser on what was submitted """
+
         print("Content-type:text/html\r\n\r\n")
         print('<html>')
         print('<head>')
@@ -165,13 +155,13 @@ class HtmlInput:
         print('</head>')
         print('<body>')
         print('<h2>You entered the following:</h2>')
-        for textName, textValue in zip(self.textList, self.textListValues):
+        for textName, textValue in zip(self._text_list, self._text_list_values):
             print('<p>', textName, '-', textValue, '</p>')
-        for numberName, numberValue in zip(self.numberList, self.numberListValues):
+        for numberName, numberValue in zip(self._number_list, self._number_list_values):
             print('<p>', numberName, '-', numberValue, '</p>')
-        for radioName, radioValue in zip(self.radioList, self.radioListValues):
+        for radioName, radioValue in zip(self._radio_list, self._radio_list_values):
             print('<p>', radioName, '-', radioValue, '</p>')
-        for checkboxName, checkboxValue in zip(self.checkboxList, self.checkboxListValues):
+        for checkboxName, checkboxValue in zip(self._checkbox_list, self._checkbox_list_values):
             print('<p>', checkboxName, '-', checkboxValue, '</p>')
         print('</body>')
         print('</html>')

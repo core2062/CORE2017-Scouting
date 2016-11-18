@@ -1,40 +1,32 @@
+#                   #
+# Input form values #
+#                   #
 
-""" Input form values """
-
-allNames = []
-
-checkbox_names = [
+CHECKBOX_NAMES = [
     'hasAuto'
 ]
-radio_names = [
+RADIO_NAMES = [
     'defenceType',
     'hasDefender'
 ]
-number_names = [
+NUMBER_NAMES = [
     'numhighgoals',
     'numlowgoals'
 ]
-text_names = [
+TEXT_NAMES = [
     'comments'
 ]
 
-radio_values = {
+RADIO_VALUES = {
     'defenceType': ('Moat', 'Rockwall', 'RoughTerrain'),
     'hasDefender': ('Yes', 'No')
 }
 
-for checkbox in checkbox_names:
-    allNames.append(radio)
-for number in number_names:
-    allNames.append(number)
-for text in text_names:
-    allNames.append(checkbox)
-for radio in radio_names:
-    allNames.append(text)
+#                   #
+# Match form values #
+#                   #
 
-""" Match form values  """
-
-team_number_fields = [
+TEAM_NUMBER_FIELDS = [
     'RedTeam1',
     'RedTeam2',
     'RedTeam3',
@@ -44,4 +36,19 @@ team_number_fields = [
 ]
 
 MATCH_NUMBER = 'matchNum'
+
+# Populates ALL_Names #
+
+ALL_NAMES = []
+
+for checkbox in CHECKBOX_NAMES:
+    ALL_NAMES.append(checkbox)
+for number in NUMBER_NAMES:
+    ALL_NAMES.append(number)
+for text in TEXT_NAMES:
+    ALL_NAMES.append(text)
+for radio in RADIO_NAMES:
+    ALL_NAMES.append(radio)
+
+
 

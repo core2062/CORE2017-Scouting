@@ -1,3 +1,4 @@
+""" Files needed by other files """
 import Constants
 import DatabaseCredentials
 import mysql.connector

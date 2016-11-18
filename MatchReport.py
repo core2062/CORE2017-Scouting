@@ -1,21 +1,27 @@
 import DataCalculation
+import CoreFiles
 
-DataCalculation.TeamData()
+
 class MatchReport:
 
     def __init__(self):
-        self.form = DataCalculation.cgi.FieldStorage()
-        self.teamDictionary = {}
-        for teams in DataCalculation.Constants.team_number_fields:
-            self.teamDictionary[teams] = DataCalculation.TeamData(self.form.getvalue(teams))
-            # Populates teamDictionary with : key = alliance color, value = team object
-        for populate in self.teamDictionary:
-            populate.populatedata()
-        self.allianceKeys = self.teamDictionary.keys()
-        self.dataKeys = self.teamDictionary[self.allianceKeys[1]].teamData.keys()
-        # Populates dataKeys with all of the report statistic categories accessed from one of the team objects
 
-    def generate_table(self):
+        """ Setup Dictionaries for display """
+
+        self._form = CoreFiles.cgi.FieldStorage()
+        self._team_dictionary = {}
+
+        for teams in CoreFiles.Constants.TEAM_NUMBER_FIELDS:
+            # Populates _team_dictionary with : key = alliance color, value = team object
+            self._team_dictionary[teams] = DataCalculation.TeamData(self._form.getvalue(teams))
+        for populate in self._team_dictionary:
+            populate.populatedata()
+
+        self._alliance_keys = list(self._team_dictionary.keys())
+        # Populates _data_eys with all of the report statistic categories accessed from one of the team objects
+        self._data_keys = self._team_dictionary[self._alliance_keys[1]].team_data.keys()
+
+    def _generate_table(self):
 
         """ Iterates through each team objects internal dictionary that contains values for each report statistic """
 
@@ -28,18 +34,18 @@ class MatchReport:
         print('<tr>')
         # Set's up top left corner piece
         print('<td> CORE MATCH REPORT <td/>')
-        for keys in self.allianceKeys:
+        for keys in self._alliance_keys:
             # Set's up the column headers for the table
             print('<td>', keys, '<td/>')
         print('</tr>')
-        for dictionaryKey in self.dataKeys:
+        for dictionary_key in self._data_keys:
             print('<tr>')
             # Set's up the number of rows
             # Populates the first item in the row with the row header
-            print('<td>', dictionaryKey, '</td>')
-            for key in self.teamDictionary:
+            print('<td>', dictionary_key, '</td>')
+            for key in self._team_dictionary:
                 # Fills the rest of the row with data from each of the team
-                print('<td>', self.teamDictionary[key].teamData[dictionaryKey], '<td/>')
+                print('<td>', self._team_dictionary[key].team_data[dictionary_key], '<td/>')
             print('</tr>')
         print('</table>')
         print('</body>')
