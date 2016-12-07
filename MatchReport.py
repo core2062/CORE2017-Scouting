@@ -21,7 +21,7 @@ class MatchReport:
         # Populates _data_eys with all of the report statistic categories accessed from one of the team objects
         self._data_keys = self._team_dictionary[self._alliance_keys[1]].team_data.keys()
 
-    def _generate_table(self):
+    def generate_table(self):
 
         """ Iterates through each team objects internal dictionary that contains values for each report statistic """
 
@@ -51,4 +51,5 @@ class MatchReport:
         print('</body>')
         print('</html>')
 
-
+table = MatchReport()
+table.generate_table()
