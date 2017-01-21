@@ -18,7 +18,7 @@ class MatchReport:
             populate.populatedata()
 
         self._alliance_keys = list(self._team_dictionary.keys())
-        # Populates _data_eys with all of the report statistic categories accessed from one of the team objects
+        # Populates _data_keys with all of the report statistic categories accessed from one of the team objects
         self._data_keys = self._team_dictionary[self._alliance_keys[1]].team_data.keys()
 
     def generate_table(self):

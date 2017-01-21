@@ -25,18 +25,14 @@ class HtmlInput:
         self._form = CoreFiles.cgi.FieldStorage()
 
         try:
-            self._dbConnection = CoreFiles.mysql.connector.connect(user=CoreFiles.DatabaseCredentials.DB_USER,
-                                                                   password=CoreFiles.DatabaseCredentials.DB_PASS,
-                                                                   host=CoreFiles.DatabaseCredentials.DB_HOST,
-                                                                   database=CoreFiles.DatabaseCredentials.DB_NAME)
-        except CoreFiles.mysql.connector.Error as err:
-            if err.errno == CoreFiles.errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Something is wrong with your user name or password")
-            elif err.errno == CoreFiles.errorcode.ER_BAD_DB_ERROR:
-                print("Database does not exist")
-            else:
-                print(err)
-        self._cursor = self._dbConnection.cursor()
+            self._dbConnection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
+                                                           user=CoreFiles.DatabaseCredentials.DB_USER,
+                                                           password=CoreFiles.DatabaseCredentials.DB_PASS,
+                                                           database=CoreFiles.DatabaseCredentials.DB_NAME,
+                                                           charset='utf8mb4',
+                                                           cursorclass=CoreFiles.pymysql.cursors.DictCursor)
+        except:
+            print("Database Connection Error!")
 
     def define_team_number(self, number):
 
@@ -130,19 +126,19 @@ class HtmlInput:
         self._create_table_SQL += ")) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;"
         self._insert_SQL += ") "
         self._insert_SQL_values += ")"
+        #Potential need to change SQLstmt to 1 long string
         _insert_SQLstmt = (
             self._create_table_SQL,
             self._insert_SQL_values
         )
 
         try:
-            self._cursor.execute(self._create_table_SQL)
-        except CoreFiles.mysql.connector.Error as error:
-            print(error.msg)
-        self._cursor.execute(_insert_SQLstmt, self._insert_data)
-        self._dbConnection.commit()
-        self._cursor.close()
-        self._dbConnection.close()
+            with self._dbConnection.cursor() as cursor:
+                cursor.execute(self._create_table_SQL)
+                cursor.execute(_insert_SQLstmt, self._insert_data)
+            self._dbConnection.commit()
+        finally:
+            self.dbConnection.close()
 
     def display_receipt(self):
 

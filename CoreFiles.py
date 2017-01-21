@@ -1,6 +1,7 @@
 """ Files needed by other files """
 import Constants
 import DatabaseCredentials
-import mysql.connector
-from mysql.connector import errorcode
+#import mysql.connector
+#from mysql.connector import errorcode
 import cgi
+import pymysql.cursors

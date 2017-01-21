@@ -11,29 +11,28 @@ class Team:
 
         # Create and setup SQL #
 
-        try:
-            self.db_connection = CoreFiles.mysql.connector.connect(user=CoreFiles.DatabaseCredentials.DB_USER,
-                                                                   password=CoreFiles.DatabaseCredentials.DB_PASS,
-                                                                   host=CoreFiles.DatabaseCredentials.DB_HOST,
-                                                                   database=CoreFiles.DatabaseCredentials.DB_NAME)
-        except CoreFiles.mysql.connector.Error as err:
-            if err.errno == CoreFiles.errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Something is wrong with your user name or password")
-            elif err.errno == CoreFiles.errorcode.ER_BAD_DB_ERROR:
-                print("Database does not exist")
-            else:
-                print(err)
-
+        self.db_connection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
+                                                       user=CoreFiles.DatabaseCredentials.DB_USER,
+                                                       password=CoreFiles.DatabaseCredentials.DB_PASS,
+                                                       db=CoreFiles.DatabaseCredentials.DB_NAME,
+                                                       charset='utf8mb4',
+                                                       cursorclass=CoreFiles.pymysql.cursors.DictCursor)
         self._team_number = team_number
         self._radio_values = CoreFiles.Constants.RADIO_VALUES
         self._cursor = self.db_connection.cursor()
         self._data_list = CoreFiles.Constants.ALL_NAMES
         self._all_data = []
         self._category_dictionary = {}
-        self._cursor.execute("SELECT * FROM Team" + str(self.team_number) + " ORDER BY match_id")
-        self.allData = self._cursor.fetchall()
+        try:
+            with self.dbConnection.cursor() as cursor:
+                cursor.execute(("SELECT * FROM Team" + str(self.team_number) + " ORDER BY match_id"))
+                self.allData = self._cursor.fetchall()
+        finally:
+            self.db_connection.close()
         for (data, count) in zip(self._data_list, self._data_list.count()):
             self._category_dictionary[data] = self._all_data[count]
+
+
 
     def team_number(self):
 
@@ -45,6 +44,7 @@ class Team:
 
         """ Verifies the category exists
             Otherwise 'something bad happens' """
+
         verified = 0
         for item in self._data_list:
             if item == category:

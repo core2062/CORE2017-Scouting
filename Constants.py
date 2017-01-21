@@ -22,9 +22,10 @@ RADIO_VALUES = {
     'hasDefender': ('Yes', 'No')
 }
 
-#                   #
-# Match form values #
-#                   #
+#                             #
+#     Match form values       #
+# Use Same Names On Front End #
+#                             #
 
 TEAM_NUMBER_FIELDS = [
     'RedTeam1',

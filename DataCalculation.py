@@ -8,5 +8,6 @@ class TeamData(Team.Team):
         Value - calculation """
 
     def populate_data(self):
-        self.teamData['cate1'] = 69
-        self.teamData['cate2'] = 76
+        self.team_data['cate1'] = Team.sum_data("numhighgoals","numlowgoals")
+        self.team_data['cate2'] = 76
+        self.team_data['cate5'] = 74
