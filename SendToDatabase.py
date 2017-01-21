@@ -85,7 +85,7 @@ class HtmlInput:
         """ Generates Table and Insert SQL statements given what fields were added """
 
         first = 0
-        self._create_table_SQL += ("CREATE TABLE IF NOT EXISTS `Team", str(self.team_number),
+        self._create_table_SQL += ("CREATE TABLE IF NOT EXISTS `", str(self.team_number),
                                    "` (`match_id` int(11) NOT NULL AUTO_INCREMENT,")
         self._insert_SQL += ("INSERT INTO Team", str(self.team_number), " (")
         for checkboxName, checkboxValue in zip(self._checkbox_list, self._checkbox_list_values):

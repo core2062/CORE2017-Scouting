@@ -1,3 +1,6 @@
+
+""" It is important that these names appear EXACTLY the same as those supplied by the front end! """
+
 #                   #
 # Input form values #
 #                   #
@@ -37,6 +40,15 @@ TEAM_NUMBER_FIELDS = [
 ]
 
 MATCH_NUMBER = 'matchNum'
+
+#                          #
+#   Report Heading Names   #
+#                          #
+
+REPORT_HEADER = [
+    'high goal accuracy',
+    'auto pts'
+]
 
 # Populates ALL_Names #
 

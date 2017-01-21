@@ -1,4 +1,5 @@
 import Team
+import CoreFiles
 
 
 class TeamData(Team.Team):
@@ -8,6 +9,8 @@ class TeamData(Team.Team):
         Value - calculation """
 
     def populate_data(self):
-        self.team_data['cate1'] = Team.sum_data("numhighgoals","numlowgoals")
-        self.team_data['cate2'] = 76
-        self.team_data['cate5'] = 74
+
+        """ Use Constants from REPORT_HEADER when defining keys for team_data """
+
+        self.team_data[CoreFiles.Constants.REPORT_HEADER[0]] = 76
+        self.team_data[CoreFiles.Constants.REPORT_HEADER[1]] = 74

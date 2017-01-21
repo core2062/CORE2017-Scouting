@@ -5,7 +5,9 @@ import CoreFiles
 class Team:
     def __init__(self, team_number):
 
-        """ team_data is what gets manipulated with output data """
+        """ team_data is what gets manipulated with output data
+            _all_data stores all information from the database in a 2 dimential arry
+            _category_dictionary: key = category heading, value = tuple of user inputs """
 
         self.team_data = {}
 
@@ -19,14 +21,13 @@ class Team:
                                                        cursorclass=CoreFiles.pymysql.cursors.DictCursor)
         self._team_number = team_number
         self._radio_values = CoreFiles.Constants.RADIO_VALUES
-        self._cursor = self.db_connection.cursor()
         self._data_list = CoreFiles.Constants.ALL_NAMES
         self._all_data = []
         self._category_dictionary = {}
         try:
-            with self.dbConnection.cursor() as cursor:
-                cursor.execute(("SELECT * FROM Team" + str(self.team_number) + " ORDER BY match_id"))
-                self.allData = self._cursor.fetchall()
+            with self.db_connection.cursor() as cursor:
+                cursor.execute(("SELECT * FROM " + str(self.team_number) + " ORDER BY match_id"))
+                self._all_data = cursor.fetchall()
         finally:
             self.db_connection.close()
         for (data, count) in zip(self._data_list, self._data_list.count()):
