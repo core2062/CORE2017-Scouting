@@ -138,7 +138,7 @@ class HtmlInput:
                 cursor.execute(_insert_SQLstmt, self._insert_data)
             self._dbConnection.commit()
         finally:
-            self.dbConnection.close()
+            self._dbConnection.close()
 
     def display_receipt(self):
 

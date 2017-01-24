@@ -95,6 +95,7 @@ class Team:
 
         if self._verify_category(category) == 1:
             count = 0
+            max = 0
             for data in self._get_data(category):
                 if count == 0:
                     max = data
@@ -109,6 +110,7 @@ class Team:
 
         if self._verify_category(category) == 1:
             count = 0
+            min = 0
             for data in self._get_data(category):
                 if count == 0:
                     min = data

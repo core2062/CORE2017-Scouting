@@ -17,18 +17,20 @@ class CoreRankings:
         self._team_numbers = []
         self._teams_data = {}
 
-        self.db_connection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
+        self._db_connection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
                                                        user=CoreFiles.DatabaseCredentials.DB_USER,
                                                        password=CoreFiles.DatabaseCredentials.DB_PASS,
                                                        db=CoreFiles.DatabaseCredentials.DB_NAME,
                                                        charset='utf8mb4',
                                                        cursorclass=CoreFiles.pymysql.cursors.DictCursor)
         try:
-            with self.db_connection.cursor() as cursor:
+            with self._db_connection.cursor() as cursor:
+                # Potential Problem SQL, Needs Testing
+                # _team_numbers needs to be in list format!
                 cursor.execute("SELECT table_name FROM all_tables")
                 self._team_numbers = cursor.fetchall()
         finally:
-            self.db_connection.close()
+            self._db_connection.close()
 
         for teams in self._team_numbers:
             self._team_dictionary[teams] = DataCalculation.TeamData(teams)
@@ -37,14 +39,54 @@ class CoreRankings:
         for teams in self._team_numbers:
             self._teams_data[teams] = self._team_dictionary[teams].team_data
 
-    def rank_ascending(self):
+    def _sort_by_second(self, item):
 
-        """ Creates dictionary that orders teams from worst to best on given report statistic
-            - Pass Constant from REPORT_HEADER to rank by """
-        # stuff
+        """ Internal Function Used with the sorted() function as
+            a key to sort using the second value of a tuple """
 
-    def rank_decdending(self):
+        return item[1]
 
-        """ Creates dictionary that orders teams from best to worst on given report statistic
-            - Pass Constant from REPORT_HEADER to rank by """
-        # stuff
+    def _sort_by_first(self, item):
+
+        """ Internal Function Used with the sorted() function as
+            a key to sort using the first value of a tuple """
+
+        return item[0]
+
+    def rank_ascending(self, RANK_HEADER):
+
+        """  Orders teams from worst to best on given report statistic
+            - Pass Constant from REPORT_HEADER to rank by
+            - Returns Ordered list of team numbers """
+
+        # Potential optimization after testing
+        data_list = []
+        score = []
+        sorted_teams = []
+        for team in self._teams_data:
+            score.append(team[RANK_HEADER])
+        for (teamNumber, value) in zip(self._team_numbers, score):
+            data_list.append((teamNumber, value),)
+        sorted_data_list = sorted(data_list, key=self._sort_by_second)
+        for item in sorted_data_list:
+            sorted_teams.append(item[0])
+        return sorted_teams
+
+    def rank_decdending(self, RANK_HEADER):
+
+        """  Orders teams from best to worst on given report statistic
+            - Pass Constant from REPORT_HEADER to rank by
+            - Returns Ordered list of team numbers """
+
+        # Potential optimization after testing
+        data_list = []
+        score = []
+        sorted_teams = []
+        for team in self._teams_data:
+            score.append(team[RANK_HEADER])
+        for (teamNumber, value) in zip(self._team_numbers, score):
+            data_list.append((teamNumber, value), )
+        sorted_data_list = sorted(data_list, key=self._sort_by_second, reverse=True)
+        for item in sorted_data_list:
+            sorted_teams.append(item[0])
+        return sorted_teams
