@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+    		<meta charset="utf-8">
+    		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<title>CORE 2062 - 2017 Scouting Form</title>
+    		<meta name="description" content="CORE 2062 Scouting Form">
+    		<meta name="author" content="CORE2062">
+
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.js" integrity="sha256-R2QjuPRUhCdDu9NtzZByw0RaYfSme3HzzpGnmh3xelE=" crossorigin="anonymous"></script>
+
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js" integrity="sha256-IZcV0C0I1dS0/ygfO3lToRPhj+1PbFqYtK/cMb/cJLY=" crossorigin="anonymous"></script>
+
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/plugins/foundation.accordion.min.js" integrity="sha256-V/10pTqY7UnbzY0mG7SchK/BgOXY2GuP6W+8YpHvzcg=" crossorigin="anonymous"></script>
+
+    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css" integrity="sha256-Gxk756LCcjwUNjIrkNrXNqY1Q+EW/Tct/IuGRw6Q1Mo=" crossorigin="anonymous" />
+
+    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
+
+    		<link rel="stylesheet" href="parsley.css">
+    	</head>
+
+    	<body>
+			<!--<div class="bs-callout bs-callout-warning hidden">
+				<h4>Oh snap!</h4>
+				<p>This form seems to be invalid :(</p>
+			</div>
+			<div class="bs-callout bs-callout-info hidden">
+  				<h4>Yay!</h4>
+ 			 	<p>Everything seems to be ok :)</p>
+			</div>-->
+			<form id="form" data-parsley-validate="">   	
+  				<label for="scoutname">Scout name * :</label>
+  				<input type="text" class="form-control" name="scoutname" required="">
+
+				<input type="submit" class="btn btn-default" value="validate">
+			</form>
+			<script type="text/javascript">
+				$(function () {
+ 	 				$('#form').parsley().on('field:validated', function() {
+    					var ok = $('.parsley-error').length === 0;
+    					$('.bs-callout-info').toggleClass('hidden', !ok);
+    					$('.bs-callout-warning').toggleClass('hidden', ok);
+  					})
+  					.on('form:submit', function() {
+    					return false; // change this - right now it is set to "do not submit" for development purposes
+  					});
+				});
+			</script>
+    	</body>
+    </html>
