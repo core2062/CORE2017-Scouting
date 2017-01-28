@@ -85,56 +85,43 @@ class HtmlInput:
         """ Generates Table and Insert SQL statements given what fields were added """
 
         first = 0
-        self._create_table_SQL += ("CREATE TABLE IF NOT EXISTS `", str(self.team_number),
+        all_list = self._checkbox_list + self._radio_list + self._number_list + self._text_list
+        self._create_table_SQL += ("CREATE TABLE IF NOT EXISTS `" + str(self.team_number) +
                                    "` (`match_id` int(11) NOT NULL AUTO_INCREMENT,")
-        self._insert_SQL += ("INSERT INTO Team", str(self.team_number), " (")
+        self._insert_SQL += ("INSERT INTO `" + str(self.team_number) + "` (`")
         for checkboxName, checkboxValue in zip(self._checkbox_list, self._checkbox_list_values):
-            self._create_table_SQL += ("`", str(checkboxName), "` varchar(4) NOT NULL,")
-            self._insert_data = self._insert_data + (checkboxValue,)
+            self._create_table_SQL += ("`" + str(checkboxName) + "` varchar(255) COLLATE utf8_bin NOT NULL,")
+            self._insert_data += (checkboxValue,)
         for radioName, radioValue in zip(self._radio_list, self._radio_list_values):
-            self._create_table_SQL += ("`", str(radioName), "` varchar(20) NOT NULL,")
-            self._insert_data = self._insert_data + (radioValue,)
+            self._create_table_SQL += ("`" + str(radioName) + "` varchar(255) COLLATE utf8_bin NOT NULL,")
+            self._insert_data += (radioValue,)
         for numberName, numberValue in zip(self._number_list, self._number_list_values):
-            self._create_table_SQL += ("`", str(numberName), "` int(11) NOT NULL,")
-            self._insert_data = self._insert_data + (numberValue,)
+            self._create_table_SQL += ("`" + str(numberName) + "` int(11) NOT NULL,")
+            self._insert_data += (numberValue,)
         for textName, textValue in zip(self._text_list, self._text_list_values):
-            self._create_table_SQL += ("`", str(textName), "` varchar(20) NOT NULL,")
-            self._insert_data = self._insert_data + (textValue,)
+            self._create_table_SQL += ("`" + str(textName) + "` varchar(255) COLLATE utf8_bin NOT NULL,")
+            self._insert_data += (textValue,)
         self._create_table_SQL += "PRIMARY KEY (`match_id`),UNIQUE KEY `match_id` (`match_id`),KEY `"
-        for checkboxNames in self._checkbox_list:
+        for names in all_list:
             if first == 0:
-                self._create_table_SQL += (str(checkboxNames), "` (`", str(checkboxNames), "`")
-                self._insert_SQL += str(checkboxNames)
+                self._create_table_SQL += (str(names) + "` (`" + str(names) + "`")
+                self._insert_SQL += (str(names) + "`")
                 self._insert_SQL_values += "%s"
                 first = 1
             else:
-                self._create_table_SQL += (",`", str(checkboxNames), "`")
-                self._insert_SQL += (", ", str(checkboxNames))
+                self._create_table_SQL += (",`" + str(names) + "`")
+                self._insert_SQL += (", `" + str(names) + "`")
                 self._insert_SQL_values += ", %s"
-        for radioNames in self._radio_list:
-            self._create_table_SQL += (",`", str(radioNames), "`")
-            self._insert_SQL += (", ", str(radioNames))
-            self._insert_SQL_values += ", %s"
-        for numberNames in self._number_list:
-            self._create_table_SQL += ",`", str(numberNames), "`"
-            self._insert_SQL += (", ", str(numberNames))
-            self._insert_SQL_values += ", %i"
-        for textNames in self._text_list:
-            self._create_table_SQL += (",`", str(textNames), "`")
-            self._insert_SQL += (", ", str(textNames))
-            self._insert_SQL_values += ", %s"
-        self._create_table_SQL += ")) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;"
+        self._create_table_SQL += ")) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;"
         self._insert_SQL += ") "
         self._insert_SQL_values += ")"
-        #Potential need to change SQLstmt to 1 long string
-        _insert_SQLstmt = (
-            self._create_table_SQL,
-            self._insert_SQL_values
-        )
+        _insert_SQLstmt = self._insert_SQL + self._insert_SQL_values
 
         try:
             with self._dbConnection.cursor() as cursor:
+                cursor.execute("SET sql_notes = 0;")
                 cursor.execute(self._create_table_SQL)
+                cursor.execute("SET sql_notes = 1;")
                 cursor.execute(_insert_SQLstmt, self._insert_data)
             self._dbConnection.commit()
         finally:
