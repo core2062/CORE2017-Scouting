@@ -1,4 +1,8 @@
+#!/usr/bin/python
+# Allow Display of elements in HTML
+
 # Import modules for CGI handling & database connection
+
 import CoreFiles
 
 
@@ -148,3 +152,24 @@ class HtmlInput:
             print('<p>', checkboxName, '-', checkboxValue, '</p>')
         print('</body>')
         print('</html>')
+
+# Create object #
+
+inputForm = HtmlInput()
+inputForm.define_team_number('teamNumber')
+
+# Populate the database #
+
+for names in CoreFiles.Constants.CHECKBOX_NAMES:
+    inputForm.add_checkbox(names)
+for names in CoreFiles.Constants.RADIO_NAMES:
+    inputForm.add_radio(names)
+for names in CoreFiles.Constants.NUMBER_NAMES:
+    inputForm.add_number(names)
+for names in CoreFiles.Constants.TEXT_NAMES:
+    inputForm.add_text(names)
+
+# Execute SQL #
+
+inputForm.execute_SQL()
+inputForm.display_receipt()

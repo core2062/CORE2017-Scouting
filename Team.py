@@ -6,7 +6,7 @@ class Team:
     def __init__(self, team_number):
 
         """ team_data is what gets manipulated with output data
-            _all_data stores all information from the database in a 2 dimential arry
+            _all_data stores all information from the database in a 2 dimensional array
             _category_dictionary: key = category heading, value = tuple of user inputs """
 
         self.team_data = {}
@@ -26,14 +26,22 @@ class Team:
         self._category_dictionary = {}
         try:
             with self.db_connection.cursor() as cursor:
-                cursor.execute(("SELECT * FROM " + str(self.team_number) + " ORDER BY match_id"))
-                self._all_data = cursor.fetchall()
+                cursor.execute(("SELECT * FROM `" + str(self._team_number) + "` ORDER BY `match_id`"))
+                count = 0
+                id = cursor.fetchone()
+                while id is not None:
+                    keys = id.keys()
+                    values = id.values()
+                    if count == 0:
+                        for (key, value) in zip(keys, values):
+                            self._category_dictionary[key] = (value,)
+                        count = 1
+                    else:
+                        for (key, value) in zip(keys, values):
+                            self._category_dictionary[key] += (value,)
+                    id = cursor.fetchone()
         finally:
             self.db_connection.close()
-        for (data, count) in zip(self._data_list, self._data_list.count()):
-            self._category_dictionary[data] = self._all_data[count]
-
-
 
     def team_number(self):
 

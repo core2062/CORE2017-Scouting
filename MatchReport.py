@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# Allow Display of elements in HTML
+
 import DataCalculation
 import CoreFiles
 
@@ -15,7 +18,7 @@ class MatchReport:
             # Populates _team_dictionary with : key = alliance color, value = team object
             self._team_dictionary[teams] = DataCalculation.TeamData(self._form.getvalue(teams))
         for populate in self._team_dictionary:
-            populate.populatedata()
+            self._team_dictionary[populate].populate_data()
 
         self._alliance_keys = list(self._team_dictionary.keys())
         # Populates _data_keys with all of the report statistic categories accessed from one of the team objects
@@ -25,11 +28,6 @@ class MatchReport:
 
         """ Iterates through each team objects internal dictionary that contains values for each report statistic """
 
-        print("Content-type:text/html\r\n\r\n")
-        print('<html>')
-        print('<head>')
-        print('<title>Team 2062s Scouting Match Table Report</title>')
-        print('</head>')
         print('<table>')
         print('<tr>')
         # Set's up top left corner piece
@@ -48,8 +46,16 @@ class MatchReport:
                 print('<td>', self._team_dictionary[key].team_data[dictionary_key], '<td/>')
             print('</tr>')
         print('</table>')
-        print('</body>')
-        print('</html>')
+
+print("Content-type:text/html\r\n\r\n")
+print('<html>')
+print('<head>')
+print('<title>Team 2062s Scouting Match Table Report</title>')
+print('</head>')
+print('<body>')
 
 table = MatchReport()
 table.generate_table()
+
+print('</body>')
+print('</html>')
