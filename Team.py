@@ -3,6 +3,9 @@ import CoreFiles
 
 
 class Team:
+
+    """"""
+
     def __init__(self, team_number):
 
         """ team_data is what gets manipulated with output data

@@ -13,4 +13,4 @@ class TeamData(Team.Team):
         """ Use Constants from REPORT_HEADER when defining keys for team_data """
 
         self.team_data[CoreFiles.Constants.REPORT_HEADER[0]] = 76
-        self.team_data[CoreFiles.Constants.REPORT_HEADER[1]] = 74
+        self.team_data[CoreFiles.Constants.REPORT_HEADER[1]] = self.sum_data(CoreFiles.Constants.NUMBER_NAMES[0])
