@@ -24,7 +24,7 @@ class MatchReport:
             self._team_dictionary[teams] = DataCalculation.TeamData(self._form.getvalue(teams))
         for populate in self._team_dictionary:
             self._team_dictionary[populate].populate_data()
-        self._alliance_keys = list(self._team_dictionary.keys())
+        #self._alliance_keys = list(self._team_dictionary.keys())
 
         # Populates _data_keys with all of the report statistic categories accessed from one of the team objects
         # self._data_keys = self._team_dictionary[self._alliance_keys[1]].team_data.keys()
@@ -49,9 +49,11 @@ class MatchReport:
         for keys in CoreFiles.Constants.TEAM_NUMBER_FIELDS:
             # Set's up the column headers for the table
             if count < 3:
-                print('<td class ="colRed">', keys, '</td>')
+                # Red Teams
+                print('<td class ="colRed">', self._team_dictionary[keys]._team_number, '</td>')
             else:
-                print('<td class ="colBlue">', keys, '</td>')
+                # Blue Teams
+                print('<td class ="colBlue">', self._team_dictionary[keys]._team_number, '</td>')
             count += 1
         print('</tr>')
         for dictionary_key in CoreFiles.Constants.REPORT_HEADER:

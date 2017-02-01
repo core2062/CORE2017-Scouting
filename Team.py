@@ -143,3 +143,14 @@ class Team:
                     if item == data:
                         highest = data
             return highest
+
+    def list_all_results(self, category):
+
+        """ Outputs a string that contains all results separated by ;
+            *primarily used for comments* """
+
+        output = ''
+        if self._verify_category(category) == 1:
+            for data in self._get_data(category):
+                output += str(data) + '; '
+        return output
