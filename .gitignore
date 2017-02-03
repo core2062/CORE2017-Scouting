@@ -5,3 +5,8 @@ DatabaseCredentials.py
 *.xml
 TestENV.py
 TestENV.py
+__pycache__/Constants.cpython-34.pyc
+*.pyc
+TestENV.py
+*.pyc
+*.xml

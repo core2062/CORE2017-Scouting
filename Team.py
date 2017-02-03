@@ -22,7 +22,7 @@ class Team:
                                                        db=CoreFiles.DatabaseCredentials.DB_NAME,
                                                        charset='utf8mb4',
                                                        cursorclass=CoreFiles.pymysql.cursors.DictCursor)
-        self._team_number = team_number
+        self._team_number = int(team_number)
         self._radio_values = CoreFiles.Constants.RADIO_VALUES
         self._data_list = CoreFiles.Constants.ALL_NAMES
         self._all_data = []
@@ -98,7 +98,10 @@ class Team:
         """ Finds the mean of a category number set """
 
         if self._verify_category(category) == 1:
-            return self.sum_data(category)/self.num_data_entries(category)
+            if self.num_data_entries(category) != 0:
+                return self.sum_data(category)/self.num_data_entries(category)
+            else:
+                return 0
 
     def max_in_data(self, category):
 
