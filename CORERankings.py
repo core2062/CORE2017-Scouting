@@ -3,7 +3,7 @@
 
 import DataCalculation
 import CoreFiles
-
+import csv
 
 class Rankings:
 
@@ -136,7 +136,12 @@ class Rankings:
 
     def check_CSV(self, rank_list):
         # noah
-
+        with open('rankings.csv', 'wb') as csvfile:
+            fieldnames = ['Team_number','Score']
+            writer = csv.writer(csvfile, delimiter=',', fieldnames=fieldnames, lineterminator='\n')
+            writer.writeheader()
+        for team in rank_list:
+            writer.writerow({'Team_number': team[0], 'Score': team[1]})
 print("Content-type:text/html\r\n\r\n")
 print('<html>')
 print('<head>')
