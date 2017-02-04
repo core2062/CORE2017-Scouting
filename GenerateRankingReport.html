@@ -1,16 +1,14 @@
 <!doctype html>
 <html>
 <body>
-	<b>NORMAL REPORT:<b><br>
+	<b>Ranking Report:<b><br>
 	<form action="CORERankings.py" method="get">
-		High Goals: <input type="radio" name="rankBy" value="highGoals"> <br>
-		Auto: <input type="radio" name="rankBy" value="lowGoals"> <br>
+		High Goals: <input type="radio" name="ranking_type" value="highGoals"> <br>
+		Auto: <input type="radio" name="ranking_type" value="lowGoals"> <br>
 		By Ascending: <input type="radio" name="order" value="highGoals"> <br>
 		By Descending: <input type="radio" name="order" value="lowGoals"> <br>
-		CSV: <input type="radio" name="csv" value="yes"> <br>
-		No CSV: <input type="radio" name="csv" value="no"> <br>
-		<input type="submit" value ="submit">
-		<br>
+		Generate CSV: <input type="checkbox" value="CSV"> <br>
+		<input type="submit" value ="submit"><br>
 	</form>
 </body>
 </html>

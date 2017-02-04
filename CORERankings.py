@@ -3,7 +3,7 @@
 
 import DataCalculation
 import CoreFiles
-import csv
+
 
 class Rankings:
 
@@ -19,6 +19,7 @@ class Rankings:
         self._team_dictionary = {}
         self._team_numbers = []
         self._teams_data = {}
+        self._form_data = {}
 
         self._db_connection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
                                                         user=CoreFiles.DatabaseCredentials.DB_USER,
@@ -26,6 +27,7 @@ class Rankings:
                                                         db=CoreFiles.DatabaseCredentials.DB_NAME,
                                                         charset='utf8mb4',
                                                         cursorclass=CoreFiles.pymysql.cursors.DictCursor)
+
         try:
             with self._db_connection.cursor() as cursor:
                 cursor.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='example'")
@@ -61,7 +63,7 @@ class Rankings:
 
         """  Orders teams from worst to best on given report statistic
             - Pass Constant from REPORT_HEADER to rank by
-            - Returns Ordered list of team numbers """
+            - Returns Ordered tuple of team number, score pairs """
 
         # Potential optimization after testing
         data_list = []
@@ -83,7 +85,7 @@ class Rankings:
 
         """  Orders teams from best to worst on given report statistic
             - Pass Constant from REPORT_HEADER to rank by
-            - Returns Ordered list of team numbers """
+            - Returns Ordered tuple of team number, score pairs"""
 
         # Potential optimization after testing
         data_list = []
@@ -100,6 +102,38 @@ class Rankings:
         for item in sorted_data_list:
             sorted_teams.append(item[0])
         return sorted_teams"""
+
+    def rank_category(self, RANK_HEADER, priorities):
+
+        """ Orders teams from best to worst on a set of name priorities
+            - priorities = tuple of all possible radio values for the statistic
+            that are in order in which they should be displayed
+            - Pass Constant from REPORT_HEADER to rank by
+            - Returns Ordered tuple of team number, statistic pairs"""
+
+        # dictionary of list of tuples, yay :D
+        data_list = []
+        score = []
+        priority_dictionary = {}
+        sort_list = []
+        for item in priorities:
+            priority_dictionary[item] = []
+        for team in self._teams_data:
+            for category in (self._teams_data[team]):
+                if category == RANK_HEADER:
+                    score.append(self._teams_data[team][category])
+        for (teamNumber, value) in zip(self._team_numbers, score):
+            priority_dictionary[score] = ((teamNumber, value),)
+        for team in data_list:
+            for item in priority_dictionary:
+                if team[1] == priority_dictionary[item]:
+                    priority_dictionary[item].append(team,)
+        for order in priorities:
+            for category in priority_dictionary:
+                if order == category:
+                    for team in priority_dictionary[category]:
+                        sort_list.append(team,)
+        return sort_list
 
     def display_ranks(self, rank_list, category_name):
 
@@ -134,23 +168,36 @@ class Rankings:
         print('</body>')
         print('</html>')
 
-    def check_CSV(self, rank_list):
+    def download_CSV(self, rank_list, category_name):
         # noah
-        with open('rankings.csv', 'wb') as csvfile:
-            fieldnames = ['Team_number','Score']
-            writer = csv.writer(csvfile, delimiter=',', fieldnames=fieldnames, lineterminator='\n')
-            writer.writeheader()
-        for team in rank_list:
-            writer.writerow({'Team_number': team[0], 'Score': team[1]})
-print("Content-type:text/html\r\n\r\n")
-print('<html>')
-print('<head>')
-print('<title>Team 2062s Scouting Match Table Report</title>')
-print('</head>')
+        with open('rankings.csv', 'wt') as csvfile:
+            field = ['Team_number', 'Score']
+            csv_write = CoreFiles.csv.DictWriter(csvfile, fieldnames=field)
+            #csv_write.writerow({'Team_number': 'text1', category_name: str('{:%b-%d %H:%M:%S}'.format(CoreFiles.datetime.datetime.now()))})
+            for team in rank_list:
+                dict = {'Team_number': team[0], 'Score': team[1]}
+                csv_write.writerow(dict)
+            file = CoreFiles.urllib.request.URLopener()
+            file.retrieve(url='http://scouting.core2062.com/testdev/rankings.csv', filename='rankings.csv')
 
+
+""" Potentially needs re-write
+    - Goes through form inputs and generates ranking report
+    - Displays CSV if checked
+    - Not Modular & Highly dependant """
+
+form_data = {}
+form = CoreFiles.cgi.FieldStorage()
+for field in CoreFiles.Constants.RANKING_NAMES:
+    form_data[field] = form.getvalue(field)
 ranking = Rankings()
-ranking.display_ranks(ranking.rank_ascending(CoreFiles.Constants.REPORT_HEADER[1]), 'High Goals')
 
-print('<body>')
-print('</body>')
-print('</html>')
+if form_data['order'] == 'ascending':
+    ranking.display_ranks(ranking.rank_ascending(form_data['ranking_type']), form_data['ranking_type'])
+    ranking.download_CSV(ranking.rank_ascending(form_data['ranking_type']), form_data['ranking_type'])
+if form_data['order'] == 'descending':
+    ranking.display_ranks(ranking.rank_descending(form_data['ranking_type']), form_data['ranking_type'])
+    ranking.download_CSV(ranking.rank_descending(form_data['ranking_type']), form_data['ranking_type'])
+if form_data['order'] == 'category':
+    ranking.display_ranks(ranking.rank_category(form_data['ranking_type']), form_data['ranking_type'])
+    ranking.download_CSV(ranking.rank_category(form_data['ranking_type']), form_data['ranking_type'])

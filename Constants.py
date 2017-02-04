@@ -68,5 +68,13 @@ for radio in RADIO_NAMES:
 #                   #
 
 RANKING_NAMES = {
-    'rankBy': ('highGoals', 'lowGoals', 'defense')
+    'ranking_type': REPORT_HEADER,
+    'order': ('ascending', 'descending', 'category'),
+    'CSV': (1, 0)
 }
+
+RANKING_CATEGORY = {
+    REPORT_HEADER[1]: ()
+}
+for item in RADIO_VALUES[0]:
+    RANKING_CATEGORY[0] += (item,)
