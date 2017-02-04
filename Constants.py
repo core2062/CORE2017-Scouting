@@ -63,5 +63,10 @@ for text in TEXT_NAMES:
 for radio in RADIO_NAMES:
     ALL_NAMES.append(radio)
 
+#                   #
+#   CORE Rankings   #
+#                   #
 
-
+RANKING_NAMES = {
+    'rankBy': ('highGoals', 'lowGoals', 'defense')
+}

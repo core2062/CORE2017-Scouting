@@ -68,7 +68,9 @@ class Rankings:
         score = []
         sorted_teams = []
         for team in self._teams_data:
-            score.append(team[RANK_HEADER])
+            for category in (self._teams_data[team]):
+                if category == RANK_HEADER:
+                    score.append(self._teams_data[team][category])
         for (teamNumber, value) in zip(self._team_numbers, score):
             data_list.append((teamNumber, value),)
         return sorted(data_list, key=self._sort_by_second)
@@ -88,7 +90,9 @@ class Rankings:
         score = []
         sorted_teams = []
         for team in self._teams_data:
-            score.append(team[RANK_HEADER])
+            for category in (self._teams_data[team]):
+                if category == RANK_HEADER:
+                    score.append(self._teams_data[team][category])
         for (teamNumber, value) in zip(self._team_numbers, score):
             data_list.append((teamNumber, value),)
         return sorted(data_list, key=self._sort_by_second, reverse=True)
@@ -100,9 +104,9 @@ class Rankings:
     def display_ranks(self, rank_list, category_name):
 
         """ Displays table of teams in ranked order
-            - rank_list = generated dictionary that contains;
-                Key: Team Number
-                Value: Score
+            - rank_list = generated list of tuples that contains;
+                [0] Team Number
+                [1] Score
             - category_name = Report statistic the table was generated from
             (nondependent and used for naming and table readability)"""
 
@@ -121,11 +125,27 @@ class Rankings:
         count = 1
         for team in rank_list:
             print('<tr>')
-            print('<td>' + str(count) + '. ' + str(rank_list[team]) + '</td>')
-            print('<td>' + str(team) + '</td>')
+            print('<td>' + str(count) + '. ' + str(team[0]) + '</td>')
+            print('<td>' + str(team[1]) + '</td>')
             print('</tr>')
             count += 1
         print('</table>')
         print('<body>')
         print('</body>')
         print('</html>')
+
+    def check_CSV(self, rank_list):
+        # noah
+
+print("Content-type:text/html\r\n\r\n")
+print('<html>')
+print('<head>')
+print('<title>Team 2062s Scouting Match Table Report</title>')
+print('</head>')
+
+ranking = Rankings()
+ranking.display_ranks(ranking.rank_ascending(CoreFiles.Constants.REPORT_HEADER[1]), 'High Goals')
+
+print('<body>')
+print('</body>')
+print('</html>')
