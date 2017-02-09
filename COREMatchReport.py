@@ -2,7 +2,7 @@
 # Allow Display of elements in HTML
 
 import DataCalculation
-import CoreFiles
+import COREDependencies
 
 
 class MatchReport:
@@ -16,10 +16,10 @@ class MatchReport:
         """ Setup Dictionary that contains desired teams and generates their data
             for display """
 
-        self._form = CoreFiles.cgi.FieldStorage()
+        self._form = COREDependencies.cgi.FieldStorage()
         self._team_dictionary = {}
 
-        for teams in CoreFiles.Constants.TEAM_NUMBER_FIELDS:
+        for teams in COREDependencies.Constants.TEAM_NUMBER_FIELDS:
             # Populates _team_dictionary with : key = alliance color, value = team object
             self._team_dictionary[teams] = DataCalculation.TeamData(self._form.getvalue(teams))
         for populate in self._team_dictionary:
@@ -46,7 +46,7 @@ class MatchReport:
         # Set's up top left corner piece
         print('<td> CORE MATCH REPORT </td>')
         count = 0
-        for keys in CoreFiles.Constants.TEAM_NUMBER_FIELDS:
+        for keys in COREDependencies.COREConstants.TEAM_NUMBER_FIELDS:
             # Set's up the column headers for the table
             if count < 3:
                 # Red Teams
@@ -56,12 +56,12 @@ class MatchReport:
                 print('<td class ="colBlue">', self._team_dictionary[keys]._team_number, '</td>')
             count += 1
         print('</tr>')
-        for dictionary_key in CoreFiles.Constants.REPORT_HEADER:
+        for dictionary_key in COREDependencies.COREConstants.REPORT_HEADER:
             print('<tr>')
             # Set's up the number of rows
             # Populates the first item in the row with the row header
             print('<td>', dictionary_key, '</td>')
-            for key in CoreFiles.Constants.TEAM_NUMBER_FIELDS:
+            for key in COREDependencies.COREConstants.TEAM_NUMBER_FIELDS:
                 # Fills the rest of the row with data from each of the team
                 print('<td>', self._team_dictionary[key].team_data[dictionary_key], '</td>')
             print('</tr>')

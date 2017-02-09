@@ -1,5 +1,5 @@
 # Import modules for CGI handling & database connection
-import CoreFiles
+import COREDependencies
 
 
 class Team:
@@ -16,15 +16,15 @@ class Team:
 
         # Create and setup SQL #
 
-        self.db_connection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
-                                                       user=CoreFiles.DatabaseCredentials.DB_USER,
-                                                       password=CoreFiles.DatabaseCredentials.DB_PASS,
-                                                       db=CoreFiles.DatabaseCredentials.DB_NAME,
-                                                       charset='utf8mb4',
-                                                       cursorclass=CoreFiles.pymysql.cursors.DictCursor)
+        self.db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
+                                                              user=COREDependencies.COREDatabaseCredentials.DB_USER,
+                                                              password=COREDependencies.COREDatabaseCredentials.DB_PASS,
+                                                              db=COREDependencies.COREDatabaseCredentials.DB_NAME,
+                                                              charset='utf8mb4',
+                                                              cursorclass=COREDependencies.pymysql.cursors.DictCursor)
         self._team_number = int(team_number)
-        self._radio_values = CoreFiles.Constants.RADIO_VALUES
-        self._data_list = CoreFiles.Constants.ALL_NAMES
+        self._radio_values = COREDependencies.COREConstants.RADIO_VALUES
+        self._data_list = COREDependencies.COREConstants.ALL_NAMES
         self._all_data = []
         self._category_dictionary = {}
         try:

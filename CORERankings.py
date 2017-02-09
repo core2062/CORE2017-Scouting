@@ -2,7 +2,7 @@
 # Allow Display of elements in HTML
 
 import DataCalculation
-import CoreFiles
+import COREDependencies
 
 
 class Rankings:
@@ -20,13 +20,17 @@ class Rankings:
         self._team_numbers = []
         self._teams_data = {}
         self._form_data = {}
+        self._csv_name = 'CSV'
+        self._rank_option_name = 'ranking_type'
+        self._form = COREDependencies.cgi.FieldStorage()
+        self._rank_option_data = []
 
-        self._db_connection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
-                                                        user=CoreFiles.DatabaseCredentials.DB_USER,
-                                                        password=CoreFiles.DatabaseCredentials.DB_PASS,
-                                                        db=CoreFiles.DatabaseCredentials.DB_NAME,
-                                                        charset='utf8mb4',
-                                                        cursorclass=CoreFiles.pymysql.cursors.DictCursor)
+        self._db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
+                                                               user=COREDependencies.COREDatabaseCredentials.DB_USER,
+                                                               password=COREDependencies.COREDatabaseCredentials.DB_PASS,
+                                                               db=COREDependencies.COREDatabaseCredentials.DB_NAME,
+                                                               charset='utf8mb4',
+                                                               cursorclass=COREDependencies.pymysql.cursors.DictCursor)
 
         try:
             with self._db_connection.cursor() as cursor:
@@ -45,12 +49,35 @@ class Rankings:
         for teams in self._team_numbers:
             self._teams_data[teams] = self._team_dictionary[teams].team_data
 
-    def _sort_by_second(self, item):
+    def change_form_names(self, csv_name='CSV', rank_option_name='ranking_types'):
 
-        """ Internal Function Used with the sorted() function as
-            a key to sort using the second value of a tuple """
+        """ Changes the form names for CSV and general rank options to user specified
+            - csv_name: name associated with the form checkbox value that is intended to download
+            a CSV file containing the ranking report in addition to visually displaying the table
+            - rank_option_name: name associated with the ranking form radio that contains values of
+            all possible reporting options """
+        self._csv_name = csv_name
+        self._rank_option_name = rank_option_name
 
-        return item[1]
+    def register_rank_option(self, rank_statistic, rank_order='descending', category_options=None):
+
+        """ Registers form radio options and specifies how they should be ranked.
+            - rank_statistic = form value of given radio_name that is identical to
+            a RANK_HEADER name which is desired to be ranked by
+            - rank_order = how the data should be ranked. Currently the only supported field options are:
+                'descending' - Ranking from best to worst
+                'ascending' - Ranks from worst to best
+                'category' - Ranks given a tuple (category_options) of all possible submission data
+                for the supplied rank_statistic category. Intended to be used for ranking based on a
+                priority of strings. """
+
+        if rank_order == 'category':
+            if category_options is None:
+                print("No category ranking options supplied by: " + rank_statistic)
+            else:
+                self._rank_option_data.append((rank_statistic, rank_order, category_options))
+        else:
+            self._rank_option_data.append((rank_statistic, rank_order))
 
     def _sort_by_first(self, item):
 
@@ -59,7 +86,14 @@ class Rankings:
 
         return item[0]
 
-    def rank_ascending(self, RANK_HEADER):
+    def _sort_by_second(self, item):
+
+        """ Internal Function Used with the sorted() function as
+            a key to sort using the second value of a tuple """
+
+        return item[1]
+
+    def _rank_ascending(self, RANK_HEADER):
 
         """  Orders teams from worst to best on given report statistic
             - Pass Constant from REPORT_HEADER to rank by
@@ -68,7 +102,6 @@ class Rankings:
         # Potential optimization after testing
         data_list = []
         score = []
-        sorted_teams = []
         for team in self._teams_data:
             for category in (self._teams_data[team]):
                 if category == RANK_HEADER:
@@ -76,12 +109,8 @@ class Rankings:
         for (teamNumber, value) in zip(self._team_numbers, score):
             data_list.append((teamNumber, value),)
         return sorted(data_list, key=self._sort_by_second)
-        """sorted_data_list = sorted(data_list, key=self._sort_by_second)
-        for item in sorted_data_list:
-            sorted_teams.append(item[0])
-        return sorted_teams"""
 
-    def rank_descending(self, RANK_HEADER):
+    def _rank_descending(self, RANK_HEADER):
 
         """  Orders teams from best to worst on given report statistic
             - Pass Constant from REPORT_HEADER to rank by
@@ -90,7 +119,6 @@ class Rankings:
         # Potential optimization after testing
         data_list = []
         score = []
-        sorted_teams = []
         for team in self._teams_data:
             for category in (self._teams_data[team]):
                 if category == RANK_HEADER:
@@ -98,12 +126,8 @@ class Rankings:
         for (teamNumber, value) in zip(self._team_numbers, score):
             data_list.append((teamNumber, value),)
         return sorted(data_list, key=self._sort_by_second, reverse=True)
-        """sorted_data_list = sorted(data_list, key=self._sort_by_second, reverse=True)
-        for item in sorted_data_list:
-            sorted_teams.append(item[0])
-        return sorted_teams"""
 
-    def rank_category(self, RANK_HEADER, priorities):
+    def _rank_category(self, RANK_HEADER, priorities):
 
         """ Orders teams from best to worst on a set of name priorities
             - priorities = tuple of all possible radio values for the statistic
@@ -135,69 +159,74 @@ class Rankings:
                         sort_list.append(team,)
         return sort_list
 
-    def display_ranks(self, rank_list, category_name):
+    def _download_csv(self, rank_list, category_name):
 
-        """ Displays table of teams in ranked order
-            - rank_list = generated list of tuples that contains;
-                [0] Team Number
-                [1] Score
-            - category_name = Report statistic the table was generated from
-            (nondependent and used for naming and table readability)"""
+        """
+            - Needs to be finished
+        """
+
+        # noah
+        with open('rankings.csv', 'wt') as csvfile:
+            field = ['Team_number', 'Score']
+            #csv_write = CoreFiles.csv.DictWriter(csvfile, fieldnames=field)
+            #csv_write.writerow({'Team_number': 'text1', category_name: str('{:%b-%d %H:%M:%S}'.format(CoreFiles.datetime.datetime.now()))})
+            #for team in rank_list:
+            #   dict = {'Team_number': team[0], 'Score': team[1]}
+            #   csv_write.writerow(dict)
+            file = COREDependencies.urllib.request.URLopener()
+            file.retrieve(url='http://scouting.core2062.com/testdev/rankings.csv', filename='rankings.csv')
+
+    def generate_table(self):
+
+        """ Displays table of teams in ranked order based on what the form desires. Also generates and
+            downloads a CSV file if specified.
+            - Table name is dictated by the name of the desired ranking statistic"""
 
         print("Content-type:text/html\r\n\r\n")
         print('<html>')
         print('<head>')
         print('<title>Team 2062s Scouting Match Table Report</title>')
         print('</head>')
-        print('<link href="style.css" rel="stylesheet" type="text/css" />')
-        print('<table>')
-        print('<tr>')
-        # Set's up first row
-        print('<td> CORE ' + category_name + ' RANKINGS </td>')
-        print('<td>' + '{:%b-%d %H:%M:%S}'.format(CoreFiles.datetime.datetime.now()) + '</td>')
-        print('</tr>')
-        count = 1
-        for team in rank_list:
-            print('<tr>')
-            print('<td>' + str(count) + '. ' + str(team[0]) + '</td>')
-            print('<td>' + str(team[1]) + '</td>')
-            print('</tr>')
-            count += 1
-        print('</table>')
         print('<body>')
+        print('<link href="style.css" rel="stylesheet" type="text/css" />')
+        for item in self._rank_option_data:
+            if self._form.getvalue(self._rank_option_name) == item[0]:
+                if item[1] == 'ascending':
+                    rank_list = self._rank_ascending(item[0])
+                elif item[1] == 'descending':
+                    rank_list = self._rank_descending(item[0])
+                elif item[1] == 'category':
+                    rank_list = self._rank_category(item[0], item[2])
+                else:
+                    rank_list = 0
+                    print("Invalid Ranking Method!")
+                print('<table>')
+                print('<tr>')
+                print('<td> CORE ' + item[0] + ' RANKINGS </td>')
+                print('<td>' + '{:%b-%d %H:%M:%S}'.format(COREDependencies.datetime.datetime.now()) + '</td>')
+                print('</tr>')
+                count = 1
+                for team in rank_list:
+                    print('<tr>')
+                    print('<td>' + str(count) + '. ' + str(team[0]) + '</td>')
+                    print('<td>' + str(team[1]) + '</td>')
+                    print('</tr>')
+                    count += 1
+                print('</table>')
+                if self._form.getvalue(self._csv_name):
+                    self._download_csv(rank_list, item[0])
         print('</body>')
         print('</html>')
 
-    def download_CSV(self, rank_list, category_name):
-        # noah
-        with open('rankings.csv', 'wt') as csvfile:
-            field = ['Team_number', 'Score']
-            csv_write = CoreFiles.csv.DictWriter(csvfile, fieldnames=field)
-            #csv_write.writerow({'Team_number': 'text1', category_name: str('{:%b-%d %H:%M:%S}'.format(CoreFiles.datetime.datetime.now()))})
-            for team in rank_list:
-                dict = {'Team_number': team[0], 'Score': team[1]}
-                csv_write.writerow(dict)
-            file = CoreFiles.urllib.request.URLopener()
-            file.retrieve(url='http://scouting.core2062.com/testdev/rankings.csv', filename='rankings.csv')
-
-
-""" Potentially needs re-write
-    - Goes through form inputs and generates ranking report
-    - Displays CSV if checked
-    - Not Modular & Highly dependant """
-
-form_data = {}
-form = CoreFiles.cgi.FieldStorage()
-for field in CoreFiles.Constants.RANKING_NAMES:
-    form_data[field] = form.getvalue(field)
-ranking = Rankings()
-
-if form_data['order'] == 'ascending':
-    ranking.display_ranks(ranking.rank_ascending(form_data['ranking_type']), form_data['ranking_type'])
-    ranking.download_CSV(ranking.rank_ascending(form_data['ranking_type']), form_data['ranking_type'])
-if form_data['order'] == 'descending':
-    ranking.display_ranks(ranking.rank_descending(form_data['ranking_type']), form_data['ranking_type'])
-    ranking.download_CSV(ranking.rank_descending(form_data['ranking_type']), form_data['ranking_type'])
-if form_data['order'] == 'category':
-    ranking.display_ranks(ranking.rank_category(form_data['ranking_type']), form_data['ranking_type'])
-    ranking.download_CSV(ranking.rank_category(form_data['ranking_type']), form_data['ranking_type'])
+form_data = Rankings()
+form_data.change_form_names(COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['CSV'],
+                            COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['ranking_options'])
+for item in COREDependencies.COREConstants.RANK_OPTIONS:
+    if COREDependencies.COREConstants.RANK_OPTIONS[2] == 'category':
+        form_data.register_rank_option(COREDependencies.COREConstants.RANK_OPTIONS[1],
+                                       COREDependencies.COREConstants.RANK_OPTIONS[2],
+                                       COREDependencies.COREConstants.RANK_OPTIONS[3])
+    else:
+        form_data.register_rank_option(COREDependencies.COREConstants.RANK_OPTIONS[1],
+                                       COREDependencies.COREConstants.RANK_OPTIONS[2])
+form_data.generate_table()

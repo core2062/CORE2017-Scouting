@@ -3,7 +3,7 @@
 
 # Import modules for CGI handling & database connection
 
-import CoreFiles
+import COREDependencies
 
 
 class HtmlInput:
@@ -26,15 +26,15 @@ class HtmlInput:
         self._insert_data = ()
         self.team_number = -1
 
-        self._form = CoreFiles.cgi.FieldStorage()
+        self._form = COREDependencies.cgi.FieldStorage()
 
         try:
-            self._dbConnection = CoreFiles.pymysql.connect(host=CoreFiles.DatabaseCredentials.DB_HOST,
-                                                           user=CoreFiles.DatabaseCredentials.DB_USER,
-                                                           password=CoreFiles.DatabaseCredentials.DB_PASS,
-                                                           database=CoreFiles.DatabaseCredentials.DB_NAME,
+            self._dbConnection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
+                                                           user=COREDependencies.COREDatabaseCredentials.DB_USER,
+                                                           password=COREDependencies.COREDatabaseCredentials.DB_PASS,
+                                                           database=COREDependencies.COREDatabaseCredentials.DB_NAME,
                                                            charset='utf8mb4',
-                                                           cursorclass=CoreFiles.pymysql.cursors.DictCursor)
+                                                           cursorclass=COREDependencies.pymysql.cursors.DictCursor)
         except:
             print("Database Connection Error!")
 
@@ -160,13 +160,13 @@ inputForm.define_team_number('teamNumber')
 
 # Populate the database #
 
-for names in CoreFiles.Constants.CHECKBOX_NAMES:
+for names in COREDependencies.COREConstants.CHECKBOX_NAMES:
     inputForm.add_checkbox(names)
-for names in CoreFiles.Constants.RADIO_NAMES:
+for names in COREDependencies.COREConstants.RADIO_NAMES:
     inputForm.add_radio(names)
-for names in CoreFiles.Constants.NUMBER_NAMES:
+for names in COREDependencies.COREConstants.NUMBER_NAMES:
     inputForm.add_number(names)
-for names in CoreFiles.Constants.TEXT_NAMES:
+for names in COREDependencies.COREConstants.TEXT_NAMES:
     inputForm.add_text(names)
 
 # Execute SQL #

@@ -1,6 +1,6 @@
 """ Files needed by other files """
-import Constants
-import DatabaseCredentials
+import COREConstants
+import COREDatabaseCredentials
 import pymysql.cursors
 import cgi
 import datetime
