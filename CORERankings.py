@@ -56,10 +56,11 @@ class Rankings:
             a CSV file containing the ranking report in addition to visually displaying the table
             - rank_option_name: name associated with the ranking form radio that contains values of
             all possible reporting options """
-        self._csv_name = csv_name
-        self._rank_option_name = rank_option_name
 
-    def register_rank_option(self, rank_statistic, rank_order='descending', category_options=None):
+        self._csv_name = str(csv_name)
+        self._rank_option_name = str(rank_option_name)
+
+    def register_rank_option(self, field_value, rank_statistic, rank_order='descending', category_options=None):
 
         """ Registers form radio options and specifies how they should be ranked.
             - rank_statistic = form value of given radio_name that is identical to
@@ -75,9 +76,9 @@ class Rankings:
             if category_options is None:
                 print("No category ranking options supplied by: " + rank_statistic)
             else:
-                self._rank_option_data.append((rank_statistic, rank_order, category_options))
+                self._rank_option_data.append((field_value, rank_statistic, rank_order, category_options))
         else:
-            self._rank_option_data.append((rank_statistic, rank_order))
+            self._rank_option_data.append((field_value, rank_statistic, rank_order))
 
     def _sort_by_first(self, item):
 
@@ -168,11 +169,11 @@ class Rankings:
         # noah
         with open('rankings.csv', 'wt') as csvfile:
             field = ['Team_number', 'Score']
-            #csv_write = CoreFiles.csv.DictWriter(csvfile, fieldnames=field)
-            #csv_write.writerow({'Team_number': 'text1', category_name: str('{:%b-%d %H:%M:%S}'.format(CoreFiles.datetime.datetime.now()))})
-            #for team in rank_list:
-            #   dict = {'Team_number': team[0], 'Score': team[1]}
-            #   csv_write.writerow(dict)
+            csv_write = COREDependencies.csv.DictWriter(csvfile, fieldnames=field)
+            csv_write.writerow({'Team_number': 'text1', category_name: str('{:%b-%d %H:%M:%S}'.format(COREDependencies.datetime.datetime.now()))})
+            for team in rank_list:
+               dict = {'Team_number': team[0], 'Score': team[1]}
+               csv_write.writerow(dict)
             file = COREDependencies.urllib.request.URLopener()
             file.retrieve(url='http://scouting.core2062.com/testdev/rankings.csv', filename='rankings.csv')
 
@@ -188,21 +189,21 @@ class Rankings:
         print('<title>Team 2062s Scouting Match Table Report</title>')
         print('</head>')
         print('<body>')
-        print('<link href="style.css" rel="stylesheet" type="text/css" />')
+        print('<link href="COREStyle_std.css" rel="stylesheet" type="text/css" />')
         for item in self._rank_option_data:
             if self._form.getvalue(self._rank_option_name) == item[0]:
-                if item[1] == 'ascending':
-                    rank_list = self._rank_ascending(item[0])
-                elif item[1] == 'descending':
-                    rank_list = self._rank_descending(item[0])
-                elif item[1] == 'category':
-                    rank_list = self._rank_category(item[0], item[2])
+                if item[2] == 'ascending':
+                    rank_list = self._rank_ascending(item[1])
+                elif item[2] == 'descending':
+                    rank_list = self._rank_descending(item[1])
+                elif item[2] == 'category':
+                    rank_list = self._rank_category(item[1], item[3])
                 else:
                     rank_list = 0
                     print("Invalid Ranking Method!")
                 print('<table>')
                 print('<tr>')
-                print('<td> CORE ' + item[0] + ' RANKINGS </td>')
+                print('<td> CORE ' + item[1] + ' RANKINGS </td>')
                 print('<td>' + '{:%b-%d %H:%M:%S}'.format(COREDependencies.datetime.datetime.now()) + '</td>')
                 print('</tr>')
                 count = 1
@@ -214,19 +215,18 @@ class Rankings:
                     count += 1
                 print('</table>')
                 if self._form.getvalue(self._csv_name):
-                    self._download_csv(rank_list, item[0])
+                    self._download_csv(rank_list, item[1])
+            else:
+                print('No ranking data for given category')
         print('</body>')
         print('</html>')
 
 form_data = Rankings()
-form_data.change_form_names(COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['CSV'],
-                            COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['ranking_options'])
+#form_data.change_form_names(COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['CSV'],
+#                            COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['ranking_options'])
 for item in COREDependencies.COREConstants.RANK_OPTIONS:
-    if COREDependencies.COREConstants.RANK_OPTIONS[2] == 'category':
-        form_data.register_rank_option(COREDependencies.COREConstants.RANK_OPTIONS[1],
-                                       COREDependencies.COREConstants.RANK_OPTIONS[2],
-                                       COREDependencies.COREConstants.RANK_OPTIONS[3])
+    if item[1] == 'category':
+        form_data.register_rank_option(item[0], item[1], item[2])
     else:
-        form_data.register_rank_option(COREDependencies.COREConstants.RANK_OPTIONS[1],
-                                       COREDependencies.COREConstants.RANK_OPTIONS[2])
+        form_data.register_rank_option(item[0],  item[1])
 form_data.generate_table()

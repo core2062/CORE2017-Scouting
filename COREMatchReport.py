@@ -19,7 +19,7 @@ class MatchReport:
         self._form = COREDependencies.cgi.FieldStorage()
         self._team_dictionary = {}
 
-        for teams in COREDependencies.Constants.TEAM_NUMBER_FIELDS:
+        for teams in COREDependencies.COREConstants.TEAM_NUMBER_FIELDS:
             # Populates _team_dictionary with : key = alliance color, value = team object
             self._team_dictionary[teams] = DataCalculation.TeamData(self._form.getvalue(teams))
         for populate in self._team_dictionary:
@@ -40,7 +40,7 @@ class MatchReport:
         print('<title>Team 2062s Scouting Match Table Report</title>')
         print('</head>')
         print('<body>')
-        print('<link href="style.css" rel="stylesheet" type="text/css" />')
+        print('<link href="COREStyle_matchreport.css" rel="stylesheet" type="text/css" />')
         print('<table>')
         print('<tr>')
         # Set's up top left corner piece

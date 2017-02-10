@@ -13,6 +13,9 @@
 Scout HTML input field names (form dependency)
 -------------------------------------------"""
 
+# value is form name for match number
+MATCH_NUMBER = {'match_number': 'matchNum'}
+
 CHECKBOX_NAMES = [
     'hasAuto'
 ]
@@ -20,10 +23,13 @@ RADIO_NAMES = [
     'defenceType',
     'hasDefender'
 ]
+
 NUMBER_NAMES = [
     'numhighgoals',
     'numlowgoals'
 ]
+NUMBER_NAMES.append(MATCH_NUMBER['match_number'])
+
 TEXT_NAMES = [
     'comments'
 ]
@@ -55,15 +61,16 @@ TEAM_NUMBER_FIELDS = [
     'BlueTeam3'
 ]
 
-MATCH_NUMBER = 'matchNum'
+
 
 """=====================================
 Match Report Row Headers (no dependency)
 -------------------------------------"""
 
 REPORT_HEADER = [
-    'High Goal Accuracy',
-    'Auto pts'
+    'Auto pts',
+    'High Goal Accuracy'
+
 ]
 
 """=============================================
@@ -77,6 +84,8 @@ RANK_REPORT_FIELD_NAMES = {
 
 """ RANK_OPTIONS:
         - Tuple of the following data (IN ORDER):
+            + Form value name of RANK_REPORT_FIELD_NAMES['ranking_options'] that you wish to
+            correspond the ranking to
             + Name of statistic to rank by from REPORT_HEADER
             + Order in which teams should be ranked. The following are accepted
                 'descending' - Ranking from best to worst
@@ -87,9 +96,9 @@ RANK_REPORT_FIELD_NAMES = {
             category corresponding to the statistic's RADIO_VALUES values in order of
             which should be displayed first, best -> worst.
             Intended to be used for ranking based on a priority of strings.
-    EX: 'High Goal Accuracy': ('high_goal_accuracy', 'descending')
-    EX: 'Highest Auto Type': ('highest_auto_type', 'category', ('breach', 'reach', 'no_interaction')) """
+    EX: 'High Goal Accuracy': ('highGoals', 'high Goal Accuracy', 'descending')
+    EX: 'Highest Auto Type': ('highest_auto_type', 'Highest Auto', 'category', ('breach', 'reach', 'no_interaction')) """
 
 RANK_OPTIONS = [
-    ('High Goal Accuracy', 'descending')
+    ('highGoals', 'High Goal Accuracy', 'descending')
 ]
