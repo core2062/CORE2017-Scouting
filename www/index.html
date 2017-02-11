@@ -1,53 +1,89 @@
-<!DOCTYPE html>
-	<html lang="en">
-		<head>
-    		<meta charset="utf-8">
-    		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    		<title>CORE 2062 - 2017 Scouting Form</title>
-    		<meta name="description" content="CORE 2062 Scouting Form">
-    		<meta name="author" content="CORE2062">
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>CORE 2062 Scouting</title>
+		<link rel="shortcut icon" href="favicon.ico" />
+		<meta name="description" content="CORE 2062 Scouting Form">
+    	<meta name="author" content="CORE2062">
+    	<meta name="robots" content="noindex, nofollow">
 
-    		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
 
-    		<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.js" integrity="sha256-R2QjuPRUhCdDu9NtzZByw0RaYfSme3HzzpGnmh3xelE=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css" integrity="sha256-NTds7atVCDeolLUzbcl45lx4gJYO+hNXCaX1wC2HQHc=" crossorigin="anonymous" />
 
-    		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js" integrity="sha256-IZcV0C0I1dS0/ygfO3lToRPhj+1PbFqYtK/cMb/cJLY=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
-    		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/plugins/foundation.accordion.min.js" integrity="sha256-V/10pTqY7UnbzY0mG7SchK/BgOXY2GuP6W+8YpHvzcg=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js" integrity="sha256-KXypdIy75PPHsbEaVkrhBvlQg8XTQy8NvalzrIxMrco=" crossorigin="anonymous"></script>
 
-    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css" integrity="sha256-Gxk756LCcjwUNjIrkNrXNqY1Q+EW/Tct/IuGRw6Q1Mo=" crossorigin="anonymous" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.accordion.min.js" integrity="sha256-Sf8QyM10GIsdziOWIIfN7V/ah4iRxPt17tvNCHorXjc=" crossorigin="anonymous"></script>
 
-    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.tab.min.js" integrity="sha256-Qyd0HGGzEOB/qkGWHkxliFbXHCjs2VRDm8mzHEwphzk=" crossorigin="anonymous"></script>
 
-    		<link rel="stylesheet" href="parsley.css">
-    	</head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.1/awesomplete.min.js" integrity="sha256-hQ2PYbQiQS3xeguwt5BS+AMzn5V5JJ0P1kQnuoXdTnk=" crossorigin="anonymous"></script>
 
-    	<body>
-			<!--<div class="bs-callout bs-callout-warning hidden">
-				<h4>Oh snap!</h4>
-				<p>This form seems to be invalid :(</p>
-			</div>
-			<div class="bs-callout bs-callout-info hidden">
-  				<h4>Yay!</h4>
- 			 	<p>Everything seems to be ok :)</p>
-			</div>-->
-			<form id="form" data-parsley-validate="">   	
-  				<label for="scoutname">Scout name * :</label>
-  				<input type="text" class="form-control" name="scoutname" required="">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.1/awesomplete.min.css" integrity="sha256-pMulKeKs7Hns5vhu0uluhawM68QSrKg/dFfttaXCKE8=" crossorigin="anonymous" />
 
-				<input type="submit" class="btn btn-default" value="validate">
-			</form>
-			<script type="text/javascript">
-				$(function () {
- 	 				$('#form').parsley().on('field:validated', function() {
-    					var ok = $('.parsley-error').length === 0;
-    					$('.bs-callout-info').toggleClass('hidden', !ok);
-    					$('.bs-callout-warning').toggleClass('hidden', ok);
-  					})
-  					.on('form:submit', function() {
-    					return false; // change this - right now it is set to "do not submit" for development purposes
-  					});
-				});
-			</script>
-    	</body>
-    </html>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.min.js" integrity="sha256-QKOftzbqahZaXS2amOh27JacZ6TbmT4TmGxNo4Jue4Y=" crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+
+		<form name="main" id="form" action="add_to_database.php" method="post" data-parsley-validate>
+			<div class="row">
+				<div class="small-12 columns">
+					<ul class="tabs show-for-medium-up" data-tab>
+						<li class="tab-title active"><a href="#panel1">Match/Scout Info</a></li>
+      					<li class="tab-title"><a href="#panel2">Autonomous Period</a></li>
+      					<li class="tab-title"><a href="#panel3">Teleoperated Period</a></li>
+      					<li class="tab-title"><a href="#panel4">Other</a></li>
+      				</ul>
+      				<dl class="accordion" data-accordion>
+      					<dd class="accordion-navigation">
+      					
+      					<a href="#panel1" class="show-for-small-only">Match/Scout Info</a>
+      						<div id="panel1" class="content active">
+      							<div class="content-box section-box">
+      								
+      								<div class="row">
+      									<div class="small-12 columns">
+      										<label>Match Number: *
+												<input name="MatchNumber" class="form-control" data-parsley-trigger="change" type="number" placeholder="1" required/>
+											</label>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="small-12 columns">
+											<label>Team Number: *
+												<input name="TeamNumber" class="form-control" data-parsley-trigger="change" data-parsley-length="[2, 4]" placeholder="2062" required/>
+											</label>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						<a href="#panel2" class="show-for-small-only">Autonomous Period</a>
+	        				<div id="panel2" class="content">
+	        					<div class="content-box section-box">
+
+      								<div class="row">
+      									<div class="small-12 columns">
+      										<label>Sample Input: *
+												<input name="MatchNumber" type="number" placeholder="1" required/>
+											</label>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<input class="button round SubmitButton" type="submit" value="Submit"></input>	
+
+<script type="text/javascript">
+  $('#form').parsley();
+</script>
+
+	</body>
+</html>
