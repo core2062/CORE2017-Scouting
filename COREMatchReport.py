@@ -16,10 +16,21 @@ class MatchReport:
         """ Setup Dictionary that contains desired teams and generates their data
             for display """
 
+        self.TEAM_NUMBER_FIELDS = [
+            'RedTeam1',
+            'RedTeam2',
+            'RedTeam3',
+            'BlueTeam1',
+            'BlueTeam2',
+            'BlueTeam3'
+        ]
+
+        self.MATCH_NUMBER_FIELD = 'MatchNumber'
         self._form = COREDependencies.cgi.FieldStorage()
         self._team_dictionary = {}
+        self._match_number = self._form.getvalue(self.MATCH_NUMBER_FIELD)
 
-        for teams in COREDependencies.COREConstants.TEAM_NUMBER_FIELDS:
+        for teams in self.TEAM_NUMBER_FIELDS:
             # Populates _team_dictionary with : key = alliance color, value = team object
             self._team_dictionary[teams] = DataCalculation.TeamData(self._form.getvalue(teams))
         for populate in self._team_dictionary:
@@ -44,9 +55,9 @@ class MatchReport:
         print('<table>')
         print('<tr>')
         # Set's up top left corner piece
-        print('<td> CORE MATCH REPORT </td>')
+        print('<td> CORE MATCH ' + str(self._match_number) +' REPORT </td>')
         count = 0
-        for keys in COREDependencies.COREConstants.TEAM_NUMBER_FIELDS:
+        for keys in self.TEAM_NUMBER_FIELDS:
             # Set's up the column headers for the table
             if count < 3:
                 # Red Teams
@@ -61,7 +72,7 @@ class MatchReport:
             # Set's up the number of rows
             # Populates the first item in the row with the row header
             print('<td>', dictionary_key, '</td>')
-            for key in COREDependencies.COREConstants.TEAM_NUMBER_FIELDS:
+            for key in self.TEAM_NUMBER_FIELDS:
                 # Fills the rest of the row with data from each of the team
                 print('<td>', self._team_dictionary[key].team_data[dictionary_key], '</td>')
             print('</tr>')

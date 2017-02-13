@@ -142,6 +142,7 @@ class HtmlInput:
         print('</head>')
         print('<body>')
         print('<h2>You entered the following:</h2>')
+        print('<p>Team Number - ' + str(self.team_number) + '</p>')
         for textName, textValue in zip(self._text_list, self._text_list_values):
             print('<p>', textName, '-', textValue, '</p>')
         for numberName, numberValue in zip(self._number_list, self._number_list_values):

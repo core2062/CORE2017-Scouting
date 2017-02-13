@@ -50,19 +50,6 @@ for text in TEXT_NAMES:
 for radio in RADIO_NAMES:
     ALL_NAMES.append(radio)
 
-#irrelevant field that will hopefully be deleted after reframing of the report interface
-
-TEAM_NUMBER_FIELDS = [
-    'RedTeam1',
-    'RedTeam2',
-    'RedTeam3',
-    'BlueTeam1',
-    'BlueTeam2',
-    'BlueTeam3'
-]
-
-
-
 """=====================================
 Match Report Row Headers (no dependency)
 -------------------------------------"""

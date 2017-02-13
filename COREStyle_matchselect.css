@@ -11,10 +11,18 @@ td {
 	text-align: center;
 }
 
-td.colRed{
+td.red{
 	background-color: red;
 }
 
-td.colBlue{
+td.green{
+	background-color: green;
+}
+
+td.grey{
+	background-color: grey;
+}
+
+td.blue{
 	background-color: blue;
 }
