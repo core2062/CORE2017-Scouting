@@ -60,6 +60,8 @@ REPORT_HEADER = [
 
 ]
 
+TEAM_NUMBER = 1
+
 """=============================================
 Match Report input field names (form dependency)
 ---------------------------------------------"""

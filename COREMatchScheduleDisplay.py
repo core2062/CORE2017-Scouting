@@ -17,6 +17,7 @@ class ColorTeam:
         self._schedule = COREMatchSchedule.SCHEDULE
         self._teams_in_db = []
         self._team_matches_in_db = {}
+        self._my_team = COREDependencies.COREConstants.TEAM_NUMBER
 
         self._db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
                                                                user=COREDependencies.COREDatabaseCredentials.DB_USER,
@@ -82,13 +83,18 @@ class ColorTeam:
 
     def find_color(self, team_number, match_number):
 
-        """
-        Grey - Not Submited post match
-        Blue - Submited data
-        Green - Ready to Generate Report
-        Red - Not Ready to Generate Report
-        """
-        validate = False
+        """ Uses data from the match schedule and what is available in the database to color code cells
+            the teams cells to return the following:
+                Grey - Not Submitted post match
+                Blue - Submitted data
+                Green - Ready to Generate Report
+                Red - Not Ready to Generate Report
+                orange - My Team
+            - team_number: Team number that is available in the schedule
+            - match_number: Valid match number the team in question has """
+
+        if team_number == self._my_team:
+            return 'orange'
         exists = False
         team_matches = self._find_team_from_schedule(team_number)
 
@@ -96,26 +102,23 @@ class ColorTeam:
         for match in team_matches:
             if match == match_number:
                 # -- makes sure team exists in schedule
-                validate = True
-        if validate == False:
+                exists = True
+        if exists == False:
             # -- print some error or something that team is not in schedule placeholder error 'color'
             return 'error'
 
         """Blue"""
-        for team in self._team_matches_in_db:
-            if team == team_number:
-                # -- finds team in db
+        for teamz in self._team_matches_in_db:
+            if teamz == str(team_number):
                 exists = True
-                for matches in self._team_matches_in_db[team]:
+                for matches in self._team_matches_in_db[teamz]:
                     if matches == match_number:
                         return 'blue'
-                    # -- if match submitted in db is same as match num make blue
 
         """Grey"""
         if exists is True:
             if self._find_highest_match() >= match_number:
                 return 'grey'
-        # -- if team is in db and the match concerned with is lower than latest match submitted, turn grey
 
         """Green / Red"""
         if exists is False:
@@ -123,28 +126,69 @@ class ColorTeam:
                 return 'green'
             else:
                 return 'red'
-            # -- if it doesnt exist but should exist make red, otherwise if it doesnt exist but it's first instance make green
 
-        # -- Post matches in db (when to generate)
-
-        if exists is True and match_number > self._find_highest_match():
-            matches_in_db = self._find_team_from_schedule(team_number)
+        if exists is True:
             highest_in_db = 1
-            for match in matches_in_db:
-                if match > highest_in_db:
-                    highest_in_db = match
-            count = 0
-            for match in team_matches:
-                count += 1
-                if match == highest_in_db:
-                    break
-            if match_number == team_matches[count]:
-                return 'green'
-            # -- if no other color, red
+            theo_latest_in_db = 1
+            latest_in_db = 1
+            for teamaz in self._team_matches_in_db:
+                for each in self._team_matches_in_db[teamaz]:
+                    if each > theo_latest_in_db:
+                        latest_in_db = each
+                if teamaz == str(team_number):
+                    # -- finds team in db
+                    for matches in self._team_matches_in_db[teamaz]:
+                        if matches > highest_in_db:
+                            highest_in_db = matches
+            round_num = 1
+            for round in self._schedule:
+                if round_num < match_number:
+                    for buddie in round:
+                        if buddie == team_number:
+                            theo_latest_in_db = round_num
+                round_num += 1
+            flag = False
+            if theo_latest_in_db == highest_in_db:
+                for matchez in team_matches:
+                    if flag is True:
+                        if matchez == match_number:
+                            return 'green'
+                    if matchez == theo_latest_in_db:
+                        flag = True
         return 'red'
 
-cellColorizer = ColorTeam()
+    def header_color(self, match_number, teams):
 
+        """ Uses data from the match schedule and what is available in the database to color code
+            the match headers to return the following:
+                Grey - Past Match
+                Green - Ready to Generate Report
+                Red - Not Ready to Generate Report
+            - teams: tuple of all team numbers in the desired match
+            - match_number: Valid match number the teams in question have """
+
+        red_count = 0
+        green_count = 0
+        blue_count = 0
+        grey_count = 0
+        orange_count = 0
+        for team in teams:
+            color = self.find_color(team, match_number)
+            if color == 'green':
+                green_count += 1
+            if color == 'red':
+                red_count += 1
+            if color == 'blue':
+                blue_count += 1
+            if color == 'grey':
+                grey_count += 1
+            if color == 'orange':
+                orange_count += 1
+        if (green_count == 6) or (orange_count == 1 and green_count == 5):
+            return 'green'
+        if (blue_count > 0) or (grey_count == 5 and orange_count == 1):
+            return 'grey'
+        return 'red'
 
 print("Content-type:text/html\r\n\r\n")
 print('<html>')
@@ -154,6 +198,7 @@ print('</head>')
 print('<body>')
 print('<link href="COREStyle_matchselect.css" rel="stylesheet" type="text/css" />')
 
+cellColorizer = ColorTeam()
 print('<table>')
 print('<tr>')
 print('<td> CORE MATCH SCHEDULE </td>')
@@ -166,15 +211,17 @@ print('</tr>')
 match_num = 1
 for match in COREDependencies.COREMatchSchedule.SCHEDULE:
     print('<tr>')
-    print('<td><a href="COREMatchReport.py?RedTeam1=' + str(match[0]) +
+    print('<td class ="' + cellColorizer.header_color(match_num, match) +
+          '"><a href="COREMatchReport.py?RedTeam1=' + str(match[0]) +
           '&RedTeam2=' + str(match[1]) + '&RedTeam3=' + str(match[2]) +
           '&BlueTeam1=' + str(match[3]) + '&BlueTeam2=' + str(match[4]) +
           '&BlueTeam3=' + str(match[5]) + '&MatchNumber=' + str(match_num) +
           '">' + str(match_num) + '</td>')
     for team in match:
-        print('<td class ="' + cellColorizer.find_color(team, match) + '"> ' + str(team) + ' </td>')
+        print('<td class ="' + cellColorizer.find_color(team, match_num) + '"> ' + str(team) + ' </td>')
     print('</tr>')
     match_num += 1
+
 print('</table>')
 print('</body>')
 print('</html>')

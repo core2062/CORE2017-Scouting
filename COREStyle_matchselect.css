@@ -12,17 +12,20 @@ td {
 }
 
 td.red{
-	background-color: red;
+	background-color: #e60000;
 }
 
 td.green{
-	background-color: green;
+	background-color: #006600;
 }
 
 td.grey{
-	background-color: grey;
+	background-color: #808080;
 }
 
 td.blue{
-	background-color: blue;
+	background-color: #2020df;
+}
+td.orange{
+	background-color: #e65c00;
 }
