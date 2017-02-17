@@ -3,6 +3,15 @@
 
 import DataCalculation
 import COREDependencies
+import urllib.request
+
+
+class _MyHTTPRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def http_error_302(self, req, fp, code, msg, headers):
+        print('Follow redirect...')
+        return urllib.request.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
+
+    http_error_301 = http_error_303 = http_error_307 = http_error_302
 
 
 class Rankings:
@@ -28,13 +37,14 @@ class Rankings:
         self._db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
                                                                user=COREDependencies.COREDatabaseCredentials.DB_USER,
                                                                password=COREDependencies.COREDatabaseCredentials.DB_PASS,
-                                                               db=COREDependencies.COREDatabaseCredentials.DB_NAME,
+                                                               db=COREDependencies.COREConstants.COMPETITION_NAME,
                                                                charset='utf8mb4',
                                                                cursorclass=COREDependencies.pymysql.cursors.DictCursor)
 
         try:
             with self._db_connection.cursor() as cursor:
-                cursor.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='example'")
+                cursor.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='" +
+                               str(COREDependencies.COREConstants.COMPETITION_NAME) + "'")
                 id = cursor.fetchone()
                 while id is not None:
                     self._team_numbers.append(id['TABLE_NAME'])
@@ -166,16 +176,31 @@ class Rankings:
             - Needs to be finished
         """
 
-        # noah
-        with open('rankings.csv', 'wt') as csvfile:
+        with open('rankings.csv', 'wt') as file:
             field = ['Team_number', 'Score']
-            csv_write = COREDependencies.csv.DictWriter(csvfile, fieldnames=field)
-            csv_write.writerow({'Team_number': 'text1', category_name: str('{:%b-%d %H:%M:%S}'.format(COREDependencies.datetime.datetime.now()))})
+            csv_write = COREDependencies.csv.DictWriter(file, fieldnames=field)
+            csv_write.writerow({'Team_number': 'text1',
+                                category_name: str('{:%b-%d %H:%M:%S}'.format(COREDependencies.datetime.datetime.now()))})
             for team in rank_list:
-               dict = {'Team_number': team[0], 'Score': team[1]}
-               csv_write.writerow(dict)
-            file = COREDependencies.urllib.request.URLopener()
-            file.retrieve(url='http://scouting.core2062.com/testdev/rankings.csv', filename='rankings.csv')
+                dict = {'Team_number': team[0], 'Score': team[1]}
+                csv_write.writerow(dict)
+            _TARGET_URL = 'http://scouting.core2062.com/testdev/rankings.csv'
+            _CSV_OUTPUT = 'rankings.csv'
+
+            cookie_processor = urllib.request.HTTPCookieProcessor()
+
+            opener = urllib.request.build_opener(_MyHTTPRedirectHandler, cookie_processor)
+            urllib.request.install_opener(opener)
+
+            response_html = urllib.request.urlopen(_TARGET_URL).read()
+
+            print('Cookies collected:', cookie_processor.cookiejar)
+
+            print(_CSV_OUTPUT)
+
+            with file(_CSV_OUTPUT, 'wb') as f:
+                f.write(_CSV_OUTPUT)
+                f.close()
 
     def generate_table(self):
 

@@ -22,14 +22,15 @@ class ColorTeam:
         self._db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
                                                                user=COREDependencies.COREDatabaseCredentials.DB_USER,
                                                                password=COREDependencies.COREDatabaseCredentials.DB_PASS,
-                                                               db=COREDependencies.COREDatabaseCredentials.DB_NAME,
+                                                               db=COREDependencies.COREConstants.COMPETITION_NAME,
                                                                charset='utf8mb4',
                                                                cursorclass=COREDependencies.pymysql.cursors.DictCursor)
 
         try:
             with self._db_connection.cursor() as cursor:
                 cursor.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE" +
-                               " TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='example'")
+                               " TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='" +
+                               str(COREDependencies.COREConstants.COMPETITION_NAME) + "'")
                 table_name = cursor.fetchone()
                 while table_name is not None:
                     self._teams_in_db.append(table_name['TABLE_NAME'])

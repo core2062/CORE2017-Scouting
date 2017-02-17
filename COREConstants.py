@@ -10,6 +10,14 @@
             other input or variable names"""
 
 """===========================================
+General Team Info (no dependency)
+-------------------------------------------"""
+
+TEAM_NUMBER = 1
+
+COMPETITION_NAME = 'example'
+
+"""===========================================
 Scout HTML input field names (form dependency)
 -------------------------------------------"""
 
@@ -59,8 +67,6 @@ REPORT_HEADER = [
     'High Goal Accuracy'
 
 ]
-
-TEAM_NUMBER = 1
 
 """=============================================
 Match Report input field names (form dependency)

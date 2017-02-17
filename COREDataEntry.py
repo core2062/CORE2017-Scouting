@@ -29,10 +29,30 @@ class HtmlInput:
         self._form = COREDependencies.cgi.FieldStorage()
 
         try:
+            self._serverConnection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
+                                                           user=COREDependencies.COREDatabaseCredentials.DB_USER,
+                                                           password=COREDependencies.COREDatabaseCredentials.DB_PASS,
+                                                           charset='utf8mb4',
+                                                           cursorclass=COREDependencies.pymysql.cursors.DictCursor)
+        except:
+            print("Database Creation Error!")
+
+        try:
+            with self._serverConnection.cursor() as cursor:
+                cursor.execute("SET sql_notes = 0;")
+                cursor.execute(("CREATE DATABASE IF NOT EXISTS " + str(COREDependencies.COREConstants.COMPETITION_NAME)))
+                cursor.execute("SET sql_notes = 1;")
+            self._serverConnection.commit()
+        finally:
+            self._serverConnection.close()
+
+
+
+        try:
             self._dbConnection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
                                                            user=COREDependencies.COREDatabaseCredentials.DB_USER,
                                                            password=COREDependencies.COREDatabaseCredentials.DB_PASS,
-                                                           database=COREDependencies.COREDatabaseCredentials.DB_NAME,
+                                                           database=COREDependencies.COREConstants.COMPETITION_NAME,
                                                            charset='utf8mb4',
                                                            cursorclass=COREDependencies.pymysql.cursors.DictCursor)
         except:

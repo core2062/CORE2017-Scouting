@@ -19,7 +19,7 @@ class Team:
         self.db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
                                                               user=COREDependencies.COREDatabaseCredentials.DB_USER,
                                                               password=COREDependencies.COREDatabaseCredentials.DB_PASS,
-                                                              db=COREDependencies.COREDatabaseCredentials.DB_NAME,
+                                                              db=COREDependencies.COREConstants.COMPETITION_NAME,
                                                               charset='utf8mb4',
                                                               cursorclass=COREDependencies.pymysql.cursors.DictCursor)
         self._team_number = int(team_number)
