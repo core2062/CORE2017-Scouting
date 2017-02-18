@@ -1,4 +1,7 @@
-""" Formatted: red team1, red team2, red team3, blue team1, blue team3, blue team3 """
+""" Match schedule imported from TBA before competition. Use scraping program found at
+    https://github.com/core2062/TBAScraper to quickly get this data that is
+    formatted correctly,
+    Format: red team1, red team2, red team3, blue team1, blue team3, blue team3 """
 
 SCHEDULE = [
     (1,2,3,4,5,6),#1 pass 1
@@ -14,82 +17,3 @@ SCHEDULE = [
     (7,8,9,10,11,12), #11
     (13,14,15,16,17,18) #12
 ]
-"""
-3197	1396	706
-6038	4241	5003
-Quals 2s
-4804	2574	2830
-1714	3381	3418
-Quals 3
-192	5855	5903
-2498	3102	5595
-Quals 4
-2500	2358	1792
-5148	5976	5586
-Quals 5
-6223	6058	4247
-2506	4531	5096
-Quals 6
-6064	5773	537
-1716	930	3734
-Quals 7
-2194	4786	4549
-2077	269	1091
-Quals 8
-1675	3596	1306
-5552	2826	1732
-Quals 9
-1259	2530	2062
-2202	3692	4804
-Quals 10
-930	2500	3197
-2498	3381	5148
-Quals 11
-5096	2077	1716
-1396	4531	1714
-Quals 12
-5003	537	1091
-1732	6223	5855
-Quals 13
-5903	3418	6058
-6038	4786	706
-Quals 14
-1792	4549	4247
-192	1306	6064
-Quals 15
-2062	4241	3102
-2358	2194	2530
-Quals 16
-5595	3596	3692
-2202	5976	1675
-Quals 17
-2506	2574	269
-3734	5586	5552
-Quals 18
-5773	1259	192
-2826	2830	2077
-Quals 19
-5855	5096	3418
-1716	2500	4241
-Quals 20
-1306	2530	1091
-2358	4531	930
-Quals 21
-2498	5586	4786
-3692	1675	6064
-Quals 22
-3734	4804	5976
-6038	4549	1732
-Quals 23
-5003	269	5148
-2574	5595	5773
-Quals 24
-4247	2506	2826
-5903	3197	537
-Quals 25
-1259	1714	2202
-3381	6223	2194
-Quals 26
-1792	6058	2830
-1396	2062	3596
-"""

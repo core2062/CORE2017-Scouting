@@ -5,3 +5,33 @@ Functions = lower underscore : test_function()
 varriables = lower underscore : test_varriable
 private = underscore followed by lower underscore : _private_varrible, _private_function()
 Constants = all upper : CONSTANT
+
+Comments should be styled according to the following:
+
+    In Line Comments:
+        Pound sign followed by 2 spaces then a short 1 line comment explaining what the code above does.
+        Ex: #  Iterates until team is found
+
+    Header & Class Block Comments:
+        Triple quotes with 2 spaces following. Use full sentences to explain what the file or class does.
+        Ex:
+        """  Creates a CORE match report, displayed as a table to be printed and given to drive team.
+        Needs external form to supply match teams to display. Form key names are supplied in
+        CoreFile.Constants.TEAM_NUMBER_FIELDS  """
+
+    Function Comments:
+        Triple quotes with 2 spaces following. Use full sentences to describe what the function does. Then have 1 blank
+        line and tab each argument. Style each argument using "arg_name :" with a description following. If an argument
+        requires a list tab the following row 1 further and style with "opt_name -" with a description following.
+        Ex:
+        """ Registers form radio options and specifies how they should be ranked.
+
+            rank_statistic : form value of given radio_name that is identical to
+                a RANK_HEADER name which is desired to be ranked by
+            rank_order : how the data should be ranked. Currently the only supported field options are
+                one of the following.
+                    'descending' - Ranking from best to worst
+                    'ascending' - Ranks from worst to best
+                    'category' - Ranks given a tuple (category_options) of all possible submission data
+                    for the supplied rank_statistic category. Intended to be used for ranking based on a
+                    priority of strings. """

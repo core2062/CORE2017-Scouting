@@ -59,7 +59,7 @@ class Rankings:
         for teams in self._team_numbers:
             self._teams_data[teams] = self._team_dictionary[teams].team_data
 
-    def change_form_names(self, csv_name='CSV', rank_option_name='ranking_types'):
+    def change_form_names(self, csv_name='CSV', rank_option_name='ranking_type'):
 
         """ Changes the form names for CSV and general rank options to user specified
             - csv_name: name associated with the form checkbox value that is intended to download
