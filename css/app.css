@@ -1,15 +1,21 @@
 table {
-    border-collapse: collapse;
-    width: 100%;
+    /*border-collapse: collapse;
+    width: 100%;*/
+    text-align: center;
 }
 
-table, th, td {
-    border: 1px solid black;
-    font-size:small;
+table, th, td, tr {
+    /*border: 1px solid black;
+    font-size:small;*/
+    text-align: center !important; 
 }
 td {
 	text-align: center;
 }
+tr {
+	text-align: center;
+}
+
 
 td.colRed{
 	background-color: red;
