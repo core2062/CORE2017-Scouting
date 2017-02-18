@@ -43,14 +43,15 @@ print('</thead>')
 match_num = 1
 for match in COREDependencies.COREMatchSchedule.SCHEDULE:
     print('<tr>')
-    print('<td class ="' + cellColorizer.header_color(match_num, match) +
-          '"><a href="COREMatchReport.py?RedTeam1=' + str(match[0]) +
-          '&RedTeam2=' + str(match[1]) + '&RedTeam3=' + str(match[2]) +
-          '&BlueTeam1=' + str(match[3]) + '&BlueTeam2=' + str(match[4]) +
-          '&BlueTeam3=' + str(match[5]) + '&MatchNumber=' + str(match_num) +
-          '">' + str(match_num) + '</td>')
+    print('<td>' + str(match_num) + '</td>')
     for team in match:
-        print('<td class ="' + cellColorizer.find_color(team, match_num) + '"> ' + str(team) + ' </td>')
+        if cellColorizer.submit_color(team, match_num)  == None:
+            print('<td><a href ="prepopulate.php?team=' + str(team) + '&match=' + str(match_num) +
+                  '">' + str(team) + ' </td>')
+        else:
+            print('<td class ="' + cellColorizer.submit_color(team, match_num) +
+                  '"><a href ="prepopulate.php?team=' + str(team) + '&match=' + str(match_num) +
+                  '">' + str(team) + ' </td>')
     print('</tr>')
     match_num += 1
 print('</table>')

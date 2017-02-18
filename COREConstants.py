@@ -1,11 +1,10 @@
 
 """ Various constants used throughout the program that are intended primarily to map form fields,
     but also for key names
-        - form dependency:
-            Needs to be the same names as those given by the html form.
+
+        form dependency : Needs to be the same names as those given by the html form.
             It is important that these names appear EXACTLY the same as those supplied by the front end!
-        - no dependency:
-            Names that will be visually displayed on output tables.
+        no dependency : Names that will be visually displayed on output tables.
             Should be named in accordance of which they are displaying, but the name is not dependant on any
             other input or variable names"""
 
@@ -21,7 +20,7 @@ COMPETITION_NAME = 'example'
 Scout HTML input field names (form dependency)
 -------------------------------------------"""
 
-# value is form name for match number
+#  form value name that contains the match number
 MATCH_NUMBER = {'match_number': 'matchNum'}
 
 CHECKBOX_NAMES = [
@@ -74,19 +73,20 @@ Match Report input field names (form dependency)
 
 RANK_REPORT_FIELD_NAMES = {
     'CSV': 'CSV',
-    'ranking_options': 'ranking_types'
+    'ranking_options': 'ranking_type'
 }
 
-""" RANK_OPTIONS:
-        - Tuple of the following data (IN ORDER):
-            + Form value name of RANK_REPORT_FIELD_NAMES['ranking_options'] that you wish to
+""" The following describes how to use RANK_OPTIONS to map form values to rank statistics.
+    it should be a list of tuples that have the following data in them (IN ORDER).
+
+        1. Form value name of RANK_REPORT_FIELD_NAMES['ranking_options'] that you wish to
             correspond the ranking to
-            + Name of statistic to rank by from REPORT_HEADER
-            + Order in which teams should be ranked. The following are accepted
+        2. Name of statistic to rank by from REPORT_HEADER
+        3. Order in which teams should be ranked. The following are accepted
                 'descending' - Ranking from best to worst
                 'ascending' - Ranks from worst to best
                 'category' - Ranks based on multiple strings given a 3'd argument.
-            + (ORDER SPECIFIC ARGUMENT) Should only be supplied if order is 'category'.
+        (4). (ORDER SPECIFIC ARGUMENT) Should only be supplied if order is 'category'.
             A tuple of all possible submission data for the supplied rank_statistic
             category corresponding to the statistic's RADIO_VALUES values in order of
             which should be displayed first, best -> worst.

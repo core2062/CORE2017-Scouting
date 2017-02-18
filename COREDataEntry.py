@@ -1,12 +1,13 @@
 #!/usr/bin/python
 # Allow Display of elements in HTML
 
-# Import modules for CGI handling & database connection
-
 import COREDependencies
 
 
 class HtmlInput:
+
+    """ Takes data submitted by scouts and inserts it into a SQL database. The database name will be named the
+        competition name and the data will be submitted into a table that is the same name as the team number. """
 
     def __init__(self):
 
@@ -30,17 +31,18 @@ class HtmlInput:
 
         try:
             self._serverConnection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
-                                                           user=COREDependencies.COREDatabaseCredentials.DB_USER,
-                                                           password=COREDependencies.COREDatabaseCredentials.DB_PASS,
-                                                           charset='utf8mb4',
-                                                           cursorclass=COREDependencies.pymysql.cursors.DictCursor)
+                                                                      user=COREDependencies.COREDatabaseCredentials.DB_USER,
+                                                                      password=COREDependencies.COREDatabaseCredentials.DB_PASS,
+                                                                      charset='utf8mb4',
+                                                                      cursorclass=COREDependencies.pymysql.cursors.DictCursor)
         except:
             print("Database Creation Error!")
 
         try:
             with self._serverConnection.cursor() as cursor:
                 cursor.execute("SET sql_notes = 0;")
-                cursor.execute(("CREATE DATABASE IF NOT EXISTS " + str(COREDependencies.COREConstants.COMPETITION_NAME)))
+                cursor.execute(("CREATE DATABASE IF NOT EXISTS " + str(
+                    COREDependencies.COREConstants.COMPETITION_NAME)))
                 cursor.execute("SET sql_notes = 1;")
             self._serverConnection.commit()
         finally:
@@ -50,17 +52,19 @@ class HtmlInput:
 
         try:
             self._dbConnection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
-                                                           user=COREDependencies.COREDatabaseCredentials.DB_USER,
-                                                           password=COREDependencies.COREDatabaseCredentials.DB_PASS,
-                                                           database=COREDependencies.COREConstants.COMPETITION_NAME,
-                                                           charset='utf8mb4',
-                                                           cursorclass=COREDependencies.pymysql.cursors.DictCursor)
+                                                                  user=COREDependencies.COREDatabaseCredentials.DB_USER,
+                                                                  password=COREDependencies.COREDatabaseCredentials.DB_PASS,
+                                                                  database=COREDependencies.COREConstants.COMPETITION_NAME,
+                                                                  charset='utf8mb4',
+                                                                  cursorclass=COREDependencies.pymysql.cursors.DictCursor)
         except:
             print("Database Connection Error!")
 
     def define_team_number(self, number):
 
-        """ Gives the team number to the SQL """
+        """ Gives the team number form field name to the SQL
+
+            number : form field name for the team number """
 
         self.team_number = self._form.getvalue(number)
 

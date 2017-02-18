@@ -22,7 +22,8 @@ Comments should be styled according to the following:
     Function Comments:
         Triple quotes with 2 spaces following. Use full sentences to describe what the function does. Then have 1 blank
         line and tab each argument. Style each argument using "arg_name :" with a description following. If an argument
-        requires a list tab the following row 1 further and style with "opt_name -" with a description following.
+        requires a list tab the following row 1 further and style with "opt_name -" with a description following. If
+        the function returns something, it should be specified using the return : key.
         Ex:
         """ Registers form radio options and specifies how they should be ranked.
 
