@@ -51,7 +51,7 @@ class MatchReport:
         print('<title>Team 2062s Scouting Match Table Report</title>')
         print('</head>')
         print('<body>')
-        print('<link href="COREStyle_matchreport.css" rel="stylesheet" type="text/css" />')
+        print('<link href="css/app.css" rel="stylesheet" type="text/css" />')
         print('<table>')
         print('<tr>')
         print('<td> CORE MATCH ' + str(self._match_number) +' REPORT </td>')

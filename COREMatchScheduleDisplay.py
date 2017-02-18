@@ -197,7 +197,7 @@ print('<head>')
 print('<title>Team 2062s Scouting Match Table Report</title>')
 print('</head>')
 print('<body>')
-print('<link href="COREStyle_matchselect.css" rel="stylesheet" type="text/css" />')
+print('<link href="css/app.css" rel="stylesheet" type="text/css" />')
 
 cellColorizer = ColorTeam()
 print('<table>')
