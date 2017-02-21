@@ -3,8 +3,8 @@
 
 """ Creates a CORE match report, displayed as a table that is to be printed and given to drive team. """
 
-import DataCalculation
 import COREDependencies
+import DataCalculation
 
 
 class MatchReport:

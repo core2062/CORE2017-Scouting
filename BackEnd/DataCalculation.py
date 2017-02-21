@@ -1,5 +1,6 @@
-import CORETeamData
-import COREDependencies
+
+import PythonLibrary.COREDependencies as COREDependencies
+import PythonLibrary.CORETeamData as CORETeamData
 
 
 class TeamData(CORETeamData.Team):

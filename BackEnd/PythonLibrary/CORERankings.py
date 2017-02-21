@@ -1,15 +1,15 @@
 #!/usr/bin/python
 # Allow Display of elements in HTML
 
-import DataCalculation
+
 import COREDependencies
-import urllib.request
+import DataCalculation
 
 
-class _MyHTTPRedirectHandler(urllib.request.HTTPRedirectHandler):
+class _MyHTTPRedirectHandler(COREDependencies.urllib.request.HTTPRedirectHandler):
     def http_error_302(self, req, fp, code, msg, headers):
         print('Follow redirect...')
-        return urllib.request.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
+        return COREDependencies.urllib.request.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
 
     http_error_301 = http_error_303 = http_error_307 = http_error_302
 
@@ -187,12 +187,12 @@ class Rankings:
             _TARGET_URL = 'http://scouting.core2062.com/testdev/rankings.csv'
             _CSV_OUTPUT = 'rankings.csv'
 
-            cookie_processor = urllib.request.HTTPCookieProcessor()
+            cookie_processor = COREDependencies.urllib.request.HTTPCookieProcessor()
 
-            opener = urllib.request.build_opener(_MyHTTPRedirectHandler, cookie_processor)
-            urllib.request.install_opener(opener)
+            opener = COREDependencies.urllib.request.build_opener(_MyHTTPRedirectHandler, cookie_processor)
+            COREDependencies.urllib.request.install_opener(opener)
 
-            response_html = urllib.request.urlopen(_TARGET_URL).read()
+            response_html = COREDependencies.urllib.request.urlopen(_TARGET_URL).read()
 
             print('Cookies collected:', cookie_processor.cookiejar)
 
