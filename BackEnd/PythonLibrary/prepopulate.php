@@ -49,7 +49,7 @@
       								<div class="row">
       									<div class="small-12 columns">
       										<label>Match Number: *
-												<input name="MatchNumber" class="form-control" data-parsley-trigger="change" type="number" placeholder="1" required/>
+												<input name="MatchNumber" class="form-control" type="number" placeholder="1" value="<?php echo $_GET['match']; ?>" disabled/>
 											</label>
 										</div>
 									</div>
@@ -57,10 +57,22 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<label>Team Number: *
-												<input name="TeamNumber" class="form-control" data-parsley-trigger="change" data-parsley-length="[2, 4]" placeholder="2062" required/>
+												<input name="TeamNumber" class="form-control" value="<?php echo $_GET['team']; ?>" placeholder="2062" disabled/>
 											</label>
 										</div>
 									</div>
+
+									<div class="row">
+										<div class="small-12 columns">
+											<label>Scout Name: *
+												<input name="ScoutName" class="awesomplete"  data-list="
+												Brett,
+												Draven,
+												Noah
+												" placeholder="John Smith" required/>
+											</label>
+										</div>
+									</div>									
 
 								</div>
 							</div>
@@ -80,7 +92,10 @@
 								</div>
 							</div>
 							<input class="button round SubmitButton" type="submit" value="Submit"></input>	
-
+							</form>
+<script>
+      $(document).foundation();
+</script>
 <script type="text/javascript">
   $('#form').parsley();
 </script>

@@ -1,12 +1,4 @@
-table {
-    /*border-collapse: collapse;
-    width: 100%;*/
-    text-align: center;
-}
-
 table, th, td, tr {
-    /*border: 1px solid black;
-    font-size:small;*/
     text-align: center !important; 
 }
 td {
@@ -15,8 +7,23 @@ td {
 tr {
 	text-align: center;
 }
+td.not_submitted {
+ background-color: #DADADA;
+}
+td.submitted {
+ background-color: #595959;
+}
+td.ready_to_generate {
+ background-color: #FF731C;
+}
+td.not_ready_to_generate {
+ background-color: blue;
+}
+td.my_team {
+	font-weight: bold;
+}
 
-
+/* This is old CSS that is no longer used ATM
 td.colRed{
 	background-color: red;
 }
@@ -42,3 +49,4 @@ td.blue{
 td.orange{
 	background-color: #ff731c;
 }
+*/
