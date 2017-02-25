@@ -65,11 +65,11 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<label>Scout Name: *
-												<input name="ScoutName" class="form-control, awesomplete"  data-list="
+												<input name="ScoutName" class="awesomplete"  data-list="
 												Brett,
 												Draven,
 												Noah
-												" data-parsley-trigger="change" placeholder="John Smith" required/>
+												" placeholder="John Smith" required/>
 											</label>
 										</div>
 									</div>									
