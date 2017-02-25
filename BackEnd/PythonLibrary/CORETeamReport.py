@@ -9,7 +9,7 @@ form = COREDependencies.cgi.FieldStorage()
 team_number = int(form.getvalue('team_number'))
 raw_team_data = CORETeamData.Team(team_number)
 calculated_team_data = DataCalculation.TeamData(team_number)
-calculated_team_data.populatedata()
+calculated_team_data.populate_data()
 
 print("Content-type:text/html\r\n\r\n")
 print('<html>')
@@ -17,9 +17,9 @@ print('<head>')
 print('<title> Team Analysis Page</title>')
 print('</head>')
 print('<body>')
+print(str(team_number))
 print('<img src="/testdev/BackEnd/RobotPictures/' + str(team_number) +
       '.jpg" alt="Team Image Not Available" width="25%" height="25%">')
-
 print('<table>')
 print('<tr>')
 for dictionary_key in COREDependencies.COREConstants.REPORT_HEADER:
@@ -36,10 +36,10 @@ print('<tr>')
 for dictionary_key in COREDependencies.COREConstants.ALL_NAMES:
     print('<td>', dictionary_key, '</td>')
 print('</tr>')
-for rows in range(1, len(raw_team_data._get_data('match_id'))):
+for rows in range(0, (raw_team_data.num_data_entries(COREDependencies.COREConstants.MATCH_NUMBER['match_number']))):
     print('<tr>')
     for dictionary_key in COREDependencies.COREConstants.ALL_NAMES:
-        print(raw_team_data._category_dictionary[dictionary_key][rows-1])
+        print('<td>', raw_team_data._category_dictionary[dictionary_key][rows-1], '</td>')
     print('</tr>')
 print('</table>')
 

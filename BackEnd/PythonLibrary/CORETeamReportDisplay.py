@@ -4,6 +4,7 @@
 import COREDependencies
 
 team_numbers = []
+int_nums = []
 db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
                                                  user=COREDependencies.COREDatabaseCredentials.DB_USER,
                                                  password=COREDependencies.COREDatabaseCredentials.DB_PASS,
@@ -21,7 +22,9 @@ try:
             id = cursor.fetchone()
 finally:
     db_connection.close()
-
+for team in team_numbers:
+    int_nums.append(int(team))
+int_nums.sort()
 print("Content-type:text/html\r\n\r\n")
 print('<html class="no-js" lang="en">')
 print('<head>')
@@ -44,8 +47,10 @@ print('</head>')
 print('<body>')
 print('<b> Teams: </b>')
 print('<table>')
-for team in team_numbers:
+for team in int_nums:
     print('<tr>')
+    print('<td><img src="/testdev/BackEnd/RobotPictures/' + str(team) +
+          '.jpg" alt="Team Image Not Available" width="25%" height="25%"></td>')
     print('<td><a href="/testdev/BackEnd/PythonLibrary/CORETeamReport.py?team_number=' +
           str(team) + '">' + str(team) + '</a></td>')
     print('</tr>')

@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # Allow Display of elements in HTML
 
-
 import COREDependencies
 import DataCalculation
 
@@ -174,33 +173,25 @@ class Rankings:
 
         """
             - Needs to be finished
+            x - create file if not exist
         """
 
-        with open('rankings.csv', 'wt') as file:
+        with open('rankings.csv', 'w', newline='\r\n') as file:
             field = ['Team_number', 'Score']
             csv_write = COREDependencies.csv.DictWriter(file, fieldnames=field)
-            csv_write.writerow({'Team_number': 'text1',
-                                category_name: str('{:%b-%d %H:%M:%S}'.format(COREDependencies.datetime.datetime.now()))})
+            header = {'Team_number': category_name,
+                      'Score': str('{:%b-%d %H:%M:%S}'.format(COREDependencies.datetime.datetime.now()))}
+            csv_write.writerow(header)
             for team in rank_list:
                 dict = {'Team_number': team[0], 'Score': team[1]}
                 csv_write.writerow(dict)
-            _TARGET_URL = 'http://scouting.core2062.com/testdev/rankings.csv'
-            _CSV_OUTPUT = 'rankings.csv'
-
-            cookie_processor = COREDependencies.urllib.request.HTTPCookieProcessor()
-
-            opener = COREDependencies.urllib.request.build_opener(_MyHTTPRedirectHandler, cookie_processor)
-            COREDependencies.urllib.request.install_opener(opener)
-
-            response_html = COREDependencies.urllib.request.urlopen(_TARGET_URL).read()
-
-            print('Cookies collected:', cookie_processor.cookiejar)
-
-            print(_CSV_OUTPUT)
-
-            with file(_CSV_OUTPUT, 'wb') as f:
-                f.write(_CSV_OUTPUT)
-                f.close()
+            file.close()
+        """site = COREDependencies.urllib.request.urlopen(
+            "http://scouting.core2062.com/testdev/BackEnd/PythonLibrary/rankings.csv")
+        site.retrieve("http://scouting.core2062.com/testdev/BackEnd/PythonLibrary/rankings.csv", "rankings.csv")
+        with open('rankings.csv', "w", newline='') as f:
+            writer = COREDependencies.csv.writer(f)
+            writer.writerows(f)"""
 
     def generate_table(self):
 
@@ -239,7 +230,7 @@ class Rankings:
                     print('</tr>')
                     count += 1
                 print('</table>')
-                if self._form.getvalue(self._csv_name):
+                if self._form.getvalue(self._csv_name) == 'Yes':
                     self._download_csv(rank_list, item[1])
             else:
                 print('No ranking data for given category')

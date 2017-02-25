@@ -94,10 +94,16 @@ class ColorTeam:
                     'Blue' - Submitted data
                     'Green' - Ready to Generate Report
                     'Red' - Not Ready to Generate Report
-                    'orange' - My Team """
+                    'orange' - My Team
 
-        if team_number == self._my_team:
-            return 'orange'
+                    'not_submitted' - Not Submitted post match
+                    'submitted' - Submitted data
+                    'ready_to_generate' - Ready to Generate Report
+                    'not_ready_to_generate' - Not Ready to Generate Report
+                    'my_team' - My Team
+                    """
+
+
         exists = False
         team_matches = self._find_team_from_schedule(team_number)
 
@@ -116,19 +122,31 @@ class ColorTeam:
                 exists = True
                 for matches in self._team_matches_in_db[teamz]:
                     if matches == match_number:
-                        return 'blue'
+                        if team_number == self._my_team:
+                            return 'submitted my_team'
+                        else:
+                            return 'submitted'
 
         """Grey"""
         if exists is True:
             if self._find_highest_match() >= match_number:
-                return 'grey'
+                if team_number == self._my_team:
+                    return 'not_submitted my_team'
+                else:
+                    return 'not_submitted'
 
         """Green / Red"""
         if exists is False:
             if match_number == team_matches[0]:
-                return 'green'
+                if team_number == self._my_team:
+                    return 'ready_to_generate my_team'
+                else:
+                    return 'ready_to_generate'
             else:
-                return 'red'
+                if team_number == self._my_team:
+                    return 'not_ready_to_generate my_team'
+                else:
+                    return 'not_ready_to_generate'
 
         if exists is True:
             highest_in_db = 1
@@ -155,10 +173,16 @@ class ColorTeam:
                 for matchez in team_matches:
                     if flag is True:
                         if matchez == match_number:
-                            return 'green'
+                            if team_number == self._my_team:
+                                return 'ready_to_generate my_team'
+                            else:
+                                return 'ready_to_generate'
                     if matchez == theo_latest_in_db:
                         flag = True
-        return 'red'
+        if team_number == self._my_team:
+            return 'not_ready_to_generate my_team'
+        else:
+            return 'not_ready_to_generate'
 
     def header_color(self, match_number, teams):
 
@@ -170,7 +194,12 @@ class ColorTeam:
                 return :
                     Grey - Past Match
                     Green - Ready to Generate Report
-                    Red - Not Ready to Generate Report """
+                    Red - Not Ready to Generate Report
+
+                    'not_submitted' - Not Submitted post match
+                    'ready_to_generate' - Ready to Generate Report
+                    'not_ready_to_generate' - Not Ready to Generate Report
+                    """
 
         red_count = 0
         green_count = 0
@@ -179,21 +208,21 @@ class ColorTeam:
         orange_count = 0
         for team in teams:
             color = self.find_color(team, match_number)
-            if color == 'green':
+            if color == 'ready_to_generate':
                 green_count += 1
-            if color == 'red':
+            if color == 'not_ready_to_generate':
                 red_count += 1
-            if color == 'blue':
+            if color == 'submitted':
                 blue_count += 1
-            if color == 'grey':
+            if color == 'not_submitted':
                 grey_count += 1
-            if color == 'orange':
+            if color == 'my_team':
                 orange_count += 1
         if (green_count == 6) or (orange_count == 1 and green_count == 5):
-            return 'green'
+            return 'ready_to_generate'
         if (blue_count > 0) or (grey_count == 5 and orange_count == 1):
-            return 'grey'
-        return 'red'
+            return 'not_submitted'
+        return 'not_ready_to_generate'
 
     def submit_color(self, team_number, match_number):
         """ Uses data from the match schedule and what is available in the database to color code the scout
@@ -203,7 +232,10 @@ class ColorTeam:
                 match_number : Valid match number the team in question has
                 return :
                     Blue - Submitted data
-                    None - Not Submitted data"""
+                    None - Not Submitted data
+
+                    'submitted' - Submitted data
+                    """
 
         exists = False
         team_matches = self._find_team_from_schedule(team_number)
@@ -220,5 +252,5 @@ class ColorTeam:
             if teamz == str(team_number):
                 for matches in self._team_matches_in_db[teamz]:
                     if matches == match_number:
-                        return 'blue'
+                        return 'submitted'
         return None

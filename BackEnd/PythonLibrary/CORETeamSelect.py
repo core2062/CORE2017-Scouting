@@ -50,7 +50,6 @@ for match in COREDependencies.COREMatchSchedule.SCHEDULE:
                   '">' + str(team) + ' </td>')
         else:
             print('<td class ="' + cellColorizer.submit_color(team, match_num) +
-                  '"><a href ="prepopulate.php?team=' + str(team) + '&match=' + str(match_num) +
                   '">' + str(team) + ' </td>')
     print('</tr>')
     match_num += 1
