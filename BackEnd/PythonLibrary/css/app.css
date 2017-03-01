@@ -17,7 +17,7 @@ td.ready_to_generate {
  background-color: #FF731C;
 }
 td.not_ready_to_generate {
- background-color: blue;
+ background-color: #4682b4;
 }
 td.my_team {
 	font-weight: bold;
