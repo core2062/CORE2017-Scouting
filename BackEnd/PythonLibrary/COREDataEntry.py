@@ -70,7 +70,9 @@ class HtmlInput:
 
     def add_checkbox(self, input_name):
 
-        """ Binds input_name to a form checkbox name and adds it to the SQL """
+        """ Binds input_name to a form checkbox name and adds it to the SQL
+
+            input_name : scout form checkbox HTML 'value' name """
 
         self._checkbox_list.append(str(input_name))
         if self._form.getvalue(str(input_name)):
@@ -80,7 +82,9 @@ class HtmlInput:
 
     def add_radio(self, input_name):
 
-        """ Binds input_name to a form radio name and adds it to the SQL """
+        """ Binds input_name to a form radio name and adds it to the SQL
+
+            input_name : scout form radio HTML 'value' name """
 
         self._radio_list.append(str(str(input_name)))
         if self._form.getvalue(str(str(input_name))):
@@ -90,7 +94,9 @@ class HtmlInput:
 
     def add_number(self, input_name):
 
-        """ Binds input_name to a form number name and adds it to the SQL """
+        """ Binds input_name to a form number name and adds it to the SQL
+
+            input_name : scout form number HTML 'value' name """
 
         self._number_list.append(str(input_name))
         if self._form.getvalue(str(input_name)):
@@ -100,7 +106,9 @@ class HtmlInput:
 
     def add_text(self, input_name):
 
-        """ Binds input_name to a form text name and adds it to the SQL """
+        """ Binds input_name to a form text name and adds it to the SQL
+
+            input_name : scout form text HTML 'value' name """
 
         self._text_list.append(str(input_name))
         if self._form.getvalue(str(input_name)):
@@ -110,7 +118,7 @@ class HtmlInput:
 
     def execute_SQL(self):
 
-        """ Generates Table and Insert SQL statements given what fields were added """
+        """ Dynamically generates table and tnserts the scout form data into the database """
 
         first = 0
         all_list = self._checkbox_list + self._radio_list + self._number_list + self._text_list
@@ -157,7 +165,7 @@ class HtmlInput:
 
     def display_receipt(self):
 
-        """ Prints a client Receipt to the browser on what was submitted """
+        """ Prints a client Receipt to the browser of what data was submitted """
 
         print("Content-type:text/html\r\n\r\n")
         print('<html>')

@@ -5,18 +5,18 @@ import COREDependencies
 import DataCalculation
 
 
-class _MyHTTPRedirectHandler(COREDependencies.urllib.request.HTTPRedirectHandler):
+"""class _MyHTTPRedirectHandler(COREDependencies.urllib.request.HTTPRedirectHandler):
     def http_error_302(self, req, fp, code, msg, headers):
         print('Follow redirect...')
         return COREDependencies.urllib.request.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
 
-    http_error_301 = http_error_303 = http_error_307 = http_error_302
+    http_error_301 = http_error_303 = http_error_307 = http_error_302"""
 
 
 class Rankings:
 
     """ Process for looking at each teams statistics and ranking them accordingly
-        for further analysis """
+        for further analysis and decision making"""
 
     def __init__(self):
 
@@ -28,7 +28,6 @@ class Rankings:
         self._team_numbers = []
         self._teams_data = {}
         self._form_data = {}
-        self._csv_name = 'CSV'
         self._rank_option_name = 'ranking_type'
         self._form = COREDependencies.cgi.FieldStorage()
         self._rank_option_data = []
@@ -58,28 +57,29 @@ class Rankings:
         for teams in self._team_numbers:
             self._teams_data[teams] = self._team_dictionary[teams].team_data
 
-    def change_form_names(self, csv_name='CSV', rank_option_name='ranking_type'):
+    def change_form_names(self, rank_option_name='ranking_type'):
 
-        """ Changes the form names for CSV and general rank options to user specified
-            - csv_name: name associated with the form checkbox value that is intended to download
-            a CSV file containing the ranking report in addition to visually displaying the table
-            - rank_option_name: name associated with the ranking form radio that contains values of
-            all possible reporting options """
+        """ Changes the form names general rank options to user specified
 
-        self._csv_name = str(csv_name)
+            rank_option_name : name associated with the ranking form radio that contains values of
+                all possible reporting options """
+
         self._rank_option_name = str(rank_option_name)
 
     def register_rank_option(self, field_value, rank_statistic, rank_order='descending', category_options=None):
 
         """ Registers form radio options and specifies how they should be ranked.
-            - rank_statistic = form value of given radio_name that is identical to
-            a RANK_HEADER name which is desired to be ranked by
-            - rank_order = how the data should be ranked. Currently the only supported field options are:
+
+            field_value : HTML From 'value' that should perform the desired calculation
+            rank_statistic : form value of given radio_name that is identical to
+                a RANK_HEADER name which is desired to be ranked by
+            rank_order : how the data should be ranked. Currently the only supported field options are:
                 'descending' - Ranking from best to worst
                 'ascending' - Ranks from worst to best
-                'category' - Ranks given a tuple (category_options) of all possible submission data
-                for the supplied rank_statistic category. Intended to be used for ranking based on a
-                priority of strings. """
+                'category' - Ranks given a tuple (category_options)
+            category_options : left as None unless rank_order='category'. It should contain
+                a tuple of all possible submission data for the supplied rank_statistic category.
+                Intended to be used for ranking based on a priority list of text names. """
 
         if rank_order == 'category':
             if category_options is None:
@@ -92,22 +92,23 @@ class Rankings:
     def _sort_by_first(self, item):
 
         """ Internal Function Used with the sorted() function as
-            a key to sort using the first value of a tuple """
+            a key to sort using the first value of a tuple. """
 
         return item[0]
 
     def _sort_by_second(self, item):
 
         """ Internal Function Used with the sorted() function as
-            a key to sort using the second value of a tuple """
+            a key to sort using the second value of a tuple. """
 
         return item[1]
 
     def _rank_ascending(self, RANK_HEADER):
 
-        """  Orders teams from worst to best on given report statistic
-            - Pass Constant from REPORT_HEADER to rank by
-            - Returns Ordered tuple of team number, score pairs """
+        """  Orders teams from worst to best on given report statistic.
+
+            RANK_HEADER : Constant from REPORT_HEADER to rank by
+            return : Ordered tuple of team number, score pairs """
 
         # Potential optimization after testing
         data_list = []
@@ -122,9 +123,10 @@ class Rankings:
 
     def _rank_descending(self, RANK_HEADER):
 
-        """  Orders teams from best to worst on given report statistic
-            - Pass Constant from REPORT_HEADER to rank by
-            - Returns Ordered tuple of team number, score pairs"""
+        """  Orders teams from best to worst on given report statistic.
+
+            RANK_HEADER : Constant from REPORT_HEADER to rank by
+            return : Ordered tuple of team number, score pairs"""
 
         # Potential optimization after testing
         data_list = []
@@ -139,13 +141,14 @@ class Rankings:
 
     def _rank_category(self, RANK_HEADER, priorities):
 
-        """ Orders teams from best to worst on a set of name priorities
-            - priorities = tuple of all possible radio values for the statistic
-            that are in order in which they should be displayed
-            - Pass Constant from REPORT_HEADER to rank by
-            - Returns Ordered tuple of team number, statistic pairs"""
+        """ Orders teams from best to worst on a set of name priorities.
 
-        # dictionary of list of tuples, yay :D
+            RANK_HEADER : Constant from REPORT_HEADER to rank by.
+            priorities : tuple of all possible radio values for the statistic
+            that are in order in which they should be displayed.
+
+            return : Ordered tuple of team number, statistic pairs. """
+
         data_list = []
         score = []
         priority_dictionary = {}
@@ -171,10 +174,10 @@ class Rankings:
 
     def _download_csv(self, rank_list, category_name):
 
-        """
-            - Needs to be finished
-            x - create file if not exist
-        """
+        """ Populates and prompts download of csv file contining rank information.
+
+            rank_list : list containing team number, score tuple pairs.
+            category_name : ranking name used for conventions and filename. """
 
         with open('rankings.csv', 'w', newline='\r\n') as file:
             field = ['Team_number', 'Score']
@@ -186,6 +189,8 @@ class Rankings:
                 dict = {'Team_number': team[0], 'Score': team[1]}
                 csv_write.writerow(dict)
             file.close()
+            print('<a href = "rankings.csv" download="' + category_name + ' hr.min.sec ' +
+                  str('{:%H:%M:%S}'.format(COREDependencies.datetime.datetime.now())) + '">Download</a>')
         """site = COREDependencies.urllib.request.urlopen(
             "http://scouting.core2062.com/testdev/BackEnd/PythonLibrary/rankings.csv")
         site.retrieve("http://scouting.core2062.com/testdev/BackEnd/PythonLibrary/rankings.csv", "rankings.csv")
@@ -196,8 +201,8 @@ class Rankings:
     def generate_table(self):
 
         """ Displays table of teams in ranked order based on what the form desires. Also generates and
-            downloads a CSV file if specified.
-            - Table name is dictated by the name of the desired ranking statistic"""
+            downloads a CSV file. Table name is dictated by the name of the desired
+            ranking statistic. """
 
         print("Content-type:text/html\r\n\r\n")
         print('<html>')
@@ -230,16 +235,12 @@ class Rankings:
                     print('</tr>')
                     count += 1
                 print('</table>')
-                if self._form.getvalue(self._csv_name) == 'Yes':
-                    self._download_csv(rank_list, item[1])
-            else:
-                print('No ranking data for given category')
+                self._download_csv(rank_list, item[1])
         print('</body>')
         print('</html>')
 
 form_data = Rankings()
-#form_data.change_form_names(COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['CSV'],
-#                            COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['ranking_options'])
+form_data.change_form_names(COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['ranking_options'])
 for item in COREDependencies.COREConstants.RANK_OPTIONS:
     if item[1] == 'category':
         form_data.register_rank_option(item[0], item[1], item[2])

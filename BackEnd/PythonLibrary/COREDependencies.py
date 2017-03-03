@@ -6,8 +6,10 @@ import csv
 import urllib.request
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # 1 folder above
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))) #2 folders above
+# Access to one folder above
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Access to two folders above
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import COREConstants
 import COREDatabaseCredentials
 import COREClassColor

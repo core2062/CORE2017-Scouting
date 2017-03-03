@@ -1,6 +1,11 @@
 #!/usr/bin/python
 # Allow Display of elements in HTML
 
+""" Creates an 'advanced' team analysis interface. Displays all calculated report statistics in
+    addition to all raw data for the team in the database. Supports providing a picture of the
+    team's robot in folder '../RobotPictures'. The picture should be the team number in order
+    for the display to recognize it. """
+
 import COREDependencies
 import CORETeamData
 import DataCalculation

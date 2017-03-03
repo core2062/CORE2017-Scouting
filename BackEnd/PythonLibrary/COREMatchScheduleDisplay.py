@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # Allow Display of elements in HTML
 
+""" Creates a simple user interface for the user to generate match reports based on the
+    COREMatchSchedule for upcoming or past matches. """
+
 import COREDependencies
 
 print("Content-type:text/html\r\n\r\n")

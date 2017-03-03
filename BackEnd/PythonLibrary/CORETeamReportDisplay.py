@@ -1,6 +1,11 @@
 #!/usr/bin/python
 # Allow Display of elements in HTML
 
+""" Creates a simple user interface for the user to select teams to generate an advanced
+    report based on the teams available in the database. Supports providing a picture of the
+    team's robot in folder '../RobotPictures'. The picture should be the team number in order
+    for the display to recognize it. """
+
 import COREDependencies
 
 team_numbers = []

@@ -90,18 +90,11 @@ class ColorTeam:
                 team_number : Team number that is available in the schedule
                 match_number : Valid match number the team in question has
                 return :
-                    'Grey' - Not Submitted post match
-                    'Blue' - Submitted data
-                    'Green' - Ready to Generate Report
-                    'Red' - Not Ready to Generate Report
-                    'orange' - My Team
-
                     'not_submitted' - Not Submitted post match
                     'submitted' - Submitted data
                     'ready_to_generate' - Ready to Generate Report
                     'not_ready_to_generate' - Not Ready to Generate Report
-                    'my_team' - My Team
-                    """
+                    'my_team' - My Team """
 
 
         exists = False
@@ -192,14 +185,9 @@ class ColorTeam:
                 teams : tuple of all team numbers in the desired match
                 match_number : Valid match number the teams in question have
                 return :
-                    Grey - Past Match
-                    Green - Ready to Generate Report
-                    Red - Not Ready to Generate Report
-
                     'not_submitted' - Not Submitted post match
                     'ready_to_generate' - Ready to Generate Report
-                    'not_ready_to_generate' - Not Ready to Generate Report
-                    """
+                    'not_ready_to_generate' - Not Ready to Generate Report"""
 
         red_count = 0
         green_count = 0
@@ -231,11 +219,8 @@ class ColorTeam:
                 team_number : Team number that is available in the schedule
                 match_number : Valid match number the team in question has
                 return :
-                    Blue - Submitted data
                     None - Not Submitted data
-
-                    'submitted' - Submitted data
-                    """
+                    'submitted' - Submitted data """
 
         exists = False
         team_matches = self._find_team_from_schedule(team_number)

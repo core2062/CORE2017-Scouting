@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # Allow Display of elements in HTML
 
+""" Simple interface for scout users to select the team/match they are designated
+    to scout. Sends match and team data to full scout form as prepopulated data in order to
+    prevent match/team number errors that would break the system."""
+
 import COREDependencies
 
 print("Content-type:text/html\r\n\r\n")

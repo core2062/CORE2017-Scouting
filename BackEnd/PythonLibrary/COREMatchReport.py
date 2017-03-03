@@ -35,7 +35,6 @@ class MatchReport:
         self._team_dictionary = {}
         self._match_number = self._form.getvalue(self.MATCH_NUMBER_FIELD)
         for teams in self.TEAM_NUMBER_FIELDS:
-            #  Populates _team_dictionary with : key = alliance color, value = team object
             self._team_dictionary[teams] = DataCalculation.TeamData(self._form.getvalue(teams))
         for populate in self._team_dictionary:
             self._team_dictionary[populate].populate_data()
@@ -73,8 +72,5 @@ class MatchReport:
         print('</body>')
         print('</html>')
 
-#  Creates and generates table
 table = MatchReport()
 table.generate_table()
-
-
