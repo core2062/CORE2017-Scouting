@@ -39,7 +39,7 @@ print('<meta name="description" content="CORE 2062 Scouting">')
 print('<meta name="author" content="CORE2062">')
 print('<meta name="robots" content="noindex, nofollow">')
 print('<meta name="theme-color" content="#ff731c" />')
-print('<meta name="viewport" content="width=device-width, initial-scale=1.0">')
+print('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">')
 print('<title>CORE 2062 Scouting | Match Display</title>')
 print('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" ' +
       'integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />')
