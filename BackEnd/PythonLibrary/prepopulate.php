@@ -82,12 +82,28 @@
 	        					<div class="content-box section-box">
 
       								<div class="row">
-      									<div class="small-12 columns">
-      										<label>Sample Input: *
-												<input name="MatchNumber" type="number" placeholder="1" required/>
-											</label>
-										</div>
-									</div>
+      									<fieldset class="large-6 columns">
+      										<legend>Deliver Gear: *</legend>
+      										 <input id="leftgear" type="checkbox"><label for="leftgear">Left</label>
+      										 <input id="middlegear" type="checkbox"><label for="middlegear">Middle</label>
+      										 <input id="rightgear" type="checkbox"><label for="rightgear">Right</label>
+      									</fieldset>
+      								</div>
+
+      								<div class="row">
+      									<fieldset class="large-6 columns">
+											<legend>Cross Baseline?: *</legend>
+												<div class="switch">
+												<input class="switch-input" id="yes-no" type="checkbox" name="exampleSwitch">
+  <label class="switch-paddle" for="yes-no">
+    <span class="show-for-sr">Do you like me?</span>
+    <span class="switch-active" aria-hidden="true">Yes</span>
+    <span class="switch-inactive" aria-hidden="true">No</span>
+  </label>
+</div>	
+      									</fieldset>
+      								</div>
+
 
 								</div>
 							</div>
