@@ -57,6 +57,17 @@ for match in COREDependencies.COREMatchSchedule.SCHEDULE:
     print('</tr>')
     match_num += 1
 print('</table>')
+# brett make this better plz, ty m8
+print('<form action="COREMatchReport.py" method="post">')
+print('MatchNumber= <input type="number" name="MatchNumber" required>')
+print('RedTeam1= <input type="number" name="RedTeam1" required>')
+print('RedTeam2= <input type="number" name="RedTeam2" required>')
+print('RedTeam3= <input type="number" name="RedTeam3" required>')
+print('BlueTeam1= <input type="number" name="BlueTeam1" required>')
+print('BlueTeam2= <input type="number" name="BlueTeam2" required>')
+print('BlueTeam3= <input type="number" name="BlueTeam3" required>')
+print('<input type="submit" value="submit"><br>')
+print('</form>')
 print('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="' +
       'sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>')
 print('<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js" integrity=' +

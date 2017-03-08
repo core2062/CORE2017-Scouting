@@ -58,6 +58,12 @@ for match in COREDependencies.COREMatchSchedule.SCHEDULE:
     print('</tr>')
     match_num += 1
 print('</table>')
+# brett plz fix this, ty m8
+print('<form action="prepopulate.php" method="post">')
+print('MatchNumber= <input type="number" name="match" required>')
+print('TeamNumber= <input type="number" name="team" required>')
+print('<input type="submit" value="submit"><br>')
+print('</form>')
 print('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="' +
       'sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>')
 print('<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js" integrity=' +

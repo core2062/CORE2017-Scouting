@@ -191,12 +191,6 @@ class Rankings:
             file.close()
             print('<a href = "rankings.csv" download="' + category_name + ' hr.min.sec ' +
                   str('{:%H:%M:%S}'.format(COREDependencies.datetime.datetime.now())) + '">Download</a>')
-        """site = COREDependencies.urllib.request.urlopen(
-            "http://scouting.core2062.com/testdev/BackEnd/PythonLibrary/rankings.csv")
-        site.retrieve("http://scouting.core2062.com/testdev/BackEnd/PythonLibrary/rankings.csv", "rankings.csv")
-        with open('rankings.csv', "w", newline='') as f:
-            writer = COREDependencies.csv.writer(f)
-            writer.writerows(f)"""
 
     def generate_table(self):
 
