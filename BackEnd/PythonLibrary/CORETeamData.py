@@ -156,9 +156,9 @@ class Team:
                     min = data
             return min
 
-    def return_best(self, category, rank_order):
+    def rank_category(self, category, rank_order):
 
-        """ Radio specific function which displays best option.
+        """ RADIO SPECIFIC FUNCTION which displays best option.
 
             category : header that exists in the database.
             rankOrder : Tuple of all radio options available in that category
@@ -172,6 +172,42 @@ class Team:
                     if item == data:
                         highest = data
             return highest
+
+    def avg_category(self, category):
+
+        """ RADIO SPECIFIC FUNCTION which displays the option which appears most for the team.
+
+            category : radio name that exists in the database.
+            return : most common radio option. """
+
+        if self._verify_category(category) == 1:
+            maxx = 0
+            maxx_name = 'No_Data'
+            for item in COREDependencies.COREConstants.RADIO_VALUES[category]:
+                count = 0
+                for data in self._get_data(category):
+                    if item == data:
+                        count += 1
+                if count > maxx:
+                    maxx = count
+                    maxx_name = item
+            return maxx_name
+
+    def times_key_exists_in_category(self, category, key):
+
+        """ RADIO SPECIFIC FUNCTION which looks for the number of entries for a specific key
+            in the given radio category.
+
+            category : radio name that exists in the database.
+            key : a COREDependencies.COREConstants.RADIO_VALUES option for the given category
+            return : number of times 'key' exists """
+
+        if self._verify_category(category) == 1:
+            count = 0
+            for data in self._get_data(category):
+                if key == data:
+                    count += 1
+            return count
 
     def list_all_results(self, category):
 

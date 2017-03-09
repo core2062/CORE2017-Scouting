@@ -20,17 +20,12 @@ COMPETITION_NAME = 'example'
 Scout HTML input field names (form dependency)
 -------------------------------------------"""
 
-#  form value name that contains the match number
+#  form value name that contains the match number change second value
 MATCH_NUMBER = {'match_number': 'matchNum'}
 
 CHECKBOX_NAMES = [
     'hasAuto'
 ]
-RADIO_NAMES = [
-    'defenceType',
-    'hasDefender'
-]
-
 NUMBER_NAMES = [
     'numhighgoals',
     'numlowgoals'
@@ -40,7 +35,10 @@ NUMBER_NAMES.append(MATCH_NUMBER['match_number'])
 TEXT_NAMES = [
     'comments'
 ]
-
+RADIO_NAMES = [
+    'defenceType',
+    'hasDefender'
+]
 RADIO_VALUES = {
     'defenceType': ('Moat', 'Rockwall', 'RoughTerrain'),
     'hasDefender': ('Yes', 'No')

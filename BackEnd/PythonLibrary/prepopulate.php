@@ -83,15 +83,23 @@
 
       								<div class="row">
       									<fieldset class="large-6 columns">
+<<<<<<< HEAD
       										<legend>Deliver Gear:</legend>
       										 <input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="checkbox"><label for="leftgear">Left</label>
       										 <input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="checkbox"><label for="middlegear">Middle</label>
       										 <input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="checkbox"><label for="rightgear">Right</label>
+=======
+      										<legend>Deliver Gear: *</legend>
+      										 <input id="leftgear" type="checkbox"><label for="leftgear">Left</label>
+      										 <input id="middlegear" type="checkbox"><label for="middlegear">Middle</label>
+      										 <input id="rightgear" type="checkbox"><label for="rightgear">Right</label>
+>>>>>>> 4152b44b6993117fa8fcd97c252afd2e801d2ff0
       									</fieldset>
       								</div>
 
       								<div class="row">
       									<fieldset class="large-6 columns">
+<<<<<<< HEAD
       										<legend>Crossed Baseline:</legend>
       										 <input id="CrossedBaseline" value="CrossedBaselineAuto" type="checkbox"><label for="CrossedBaseline">Yes</label>
       									</fieldset>
@@ -113,6 +121,20 @@
       										</label>
       									</fieldset>
       								</div>       								    									      						
+=======
+											<legend>Cross Baseline?: *</legend>
+												<div class="switch">
+												<input class="switch-input" id="yes-no" type="checkbox" name="exampleSwitch">
+  <label class="switch-paddle" for="yes-no">
+    <span class="show-for-sr">Do you like me?</span>
+    <span class="switch-active" aria-hidden="true">Yes</span>
+    <span class="switch-inactive" aria-hidden="true">No</span>
+  </label>
+</div>	
+      									</fieldset>
+      								</div>
+
+>>>>>>> 4152b44b6993117fa8fcd97c252afd2e801d2ff0
 
 								</div>
 							</div>
