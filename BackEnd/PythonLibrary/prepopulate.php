@@ -82,12 +82,37 @@
 	        					<div class="content-box section-box">
 
       								<div class="row">
-      									<div class="small-12 columns">
-      										<label>Sample Input: *
-												<input name="MatchNumber" type="number" placeholder="1" required/>
-											</label>
-										</div>
-									</div>
+      									<fieldset class="large-6 columns">
+      										<legend>Deliver Gear:</legend>
+      										 <input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="checkbox"><label for="leftgear">Left</label>
+      										 <input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="checkbox"><label for="middlegear">Middle</label>
+      										 <input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="checkbox"><label for="rightgear">Right</label>
+      									</fieldset>
+      								</div>
+
+      								<div class="row">
+      									<fieldset class="large-6 columns">
+      										<legend>Crossed Baseline:</legend>
+      										 <input id="CrossedBaseline" value="CrossedBaselineAuto" type="checkbox"><label for="CrossedBaseline">Yes</label>
+      									</fieldset>
+      								</div>
+
+      								<div class="row">
+      									<fieldset class="large-6 columns">
+      										<legend>Score Fuel:</legend>
+      										 <input name="FuelAuto" id="FuelLowAuto" value="FuelLowAuto" type="radio"><label for="FuelLowAuto">Low Goal</label>
+      										 <input name="FuelAuto" id="FuelHighAuto" value="FuelHighAuto" type="radio"><label for="FuelHighAuto">High Goal</label>	 
+      									</fieldset>
+      								</div>
+
+      								<div class="row">  <!--make this conditional based on fuel scoring in auto
+      									<fieldset class="large-6 columns">-->
+      										<legend>Pressure Quantity: *</legend>
+      										<label>
+      											<input type="tel" name="PressureAuto">
+      										</label>
+      									</fieldset>
+      								</div>       								    									      						
 
 								</div>
 							</div>
