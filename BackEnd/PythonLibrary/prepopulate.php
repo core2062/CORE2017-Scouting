@@ -30,7 +30,7 @@
 	</head>
 	<body>
 
-		<form name="main" id="form" action="add_to_database.php" method="post" data-parsley-validate>
+		<form name="main" id="form" action="COREDataEntry.py" method="post" data-parsley-validate>
 			<div class="row">
 				<div class="small-12 columns">
 					<ul class="tabs show-for-medium-up" data-tab>
@@ -49,7 +49,7 @@
       								<div class="row">
       									<div class="small-12 columns">
       										<label>Match Number: *
-												<input name="MatchNumber" class="form-control" type="number" placeholder="1" value="<?php echo $_GET['match']; ?>" disabled/>
+												<input name="MatchNumber" class="form-control" type="number" placeholder="1" value="<?php echo $_GET['match']; ?>" readonly/>
 											</label>
 										</div>
 									</div>
@@ -57,7 +57,7 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<label>Team Number: *
-												<input name="TeamNumber" class="form-control" value="<?php echo $_GET['team']; ?>" placeholder="2062" disabled/>
+												<input name="TeamNumber" class="form-control" value="<?php echo $_GET['team']; ?>" placeholder="2062" readonly/>
 											</label>
 										</div>
 									</div>
@@ -88,7 +88,7 @@
       										 <input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="radio"><label for="leftgear">Left</label>
       										 <input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
       										 <input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
-       										 <input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="None">Right</label>     										 
+       										 <input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">Right</label>     										 
       										
       									</fieldset>
       								</div>
@@ -230,8 +230,8 @@
 
       										<legend>Fuel Pickup Style:</legend>
 
-      										 <input name="FuelPickupStyle" id="FuelPickupHopper" value="Hopper" type="radio"><label for="FuelPickupHopper">Hopper/Feeder</label>
-      										 <input name="FuelPickupStyle" id="FuelPickupFloor" value="Floor" type="radio"><label for="FuelPickupFloor">Floor</label>
+      										 <input name="FuelPickupHopper" id="FuelPickupHopper" type="checkbox"><label for="FuelPickupHopper">Hopper/Feeder</label>
+      										 <input name="FuelPickupFloor" id="FuelPickupFloor" type="checkbox"><label for="FuelPickupFloor">Floor</label>
       									</fieldset>
       								</div>
 
