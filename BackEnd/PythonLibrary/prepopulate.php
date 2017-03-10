@@ -77,31 +77,26 @@
 								</div>
 							</div>
 
+
 						<a href="#panel2" class="show-for-small-only">Autonomous Period</a>
 	        				<div id="panel2" class="content">
 	        					<div class="content-box section-box">
 
       								<div class="row">
       									<fieldset class="large-6 columns">
-<<<<<<< HEAD
       										<legend>Deliver Gear:</legend>
-      										 <input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="checkbox"><label for="leftgear">Left</label>
-      										 <input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="checkbox"><label for="middlegear">Middle</label>
-      										 <input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="checkbox"><label for="rightgear">Right</label>
-=======
-      										<legend>Deliver Gear: *</legend>
-      										 <input id="leftgear" type="checkbox"><label for="leftgear">Left</label>
-      										 <input id="middlegear" type="checkbox"><label for="middlegear">Middle</label>
-      										 <input id="rightgear" type="checkbox"><label for="rightgear">Right</label>
->>>>>>> 4152b44b6993117fa8fcd97c252afd2e801d2ff0
+      										 <input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="radio"><label for="leftgear">Left</label>
+      										 <input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
+      										 <input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
+       										 <input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="None">Right</label>     										 
+      										
       									</fieldset>
       								</div>
 
       								<div class="row">
       									<fieldset class="large-6 columns">
-<<<<<<< HEAD
       										<legend>Crossed Baseline:</legend>
-      										 <input id="CrossedBaseline" value="CrossedBaselineAuto" type="checkbox"><label for="CrossedBaseline">Yes</label>
+      										 <input id="CrossedBaseline" name="CrossedBaselineAuto" type="checkbox"><label for="CrossedBaseline">Yes</label>
       									</fieldset>
       								</div>
 
@@ -120,21 +115,128 @@
       											<input type="tel" name="PressureAuto">
       										</label>
       									</fieldset>
-      								</div>       								    									      						
-=======
-											<legend>Cross Baseline?: *</legend>
-												<div class="switch">
-												<input class="switch-input" id="yes-no" type="checkbox" name="exampleSwitch">
-  <label class="switch-paddle" for="yes-no">
-    <span class="show-for-sr">Do you like me?</span>
-    <span class="switch-active" aria-hidden="true">Yes</span>
-    <span class="switch-inactive" aria-hidden="true">No</span>
-  </label>
-</div>	
+      								</div> 
+      							</div>
+      						</div>	      								    						
+
+      					<a href="#panel3" class="show-for-small-only">Teleoperated Period</a>
+      						<div id="panel3" class="content active">
+      							<div class="content-box section-box">
+ 
+                   					<div class="row">
+                    					<div class="large-12 columns">
+                      						<div class="row collapse">
+                          				<label>Number of Fuel Cycles:</label>
+                        				<div class="small-4 columns">
+                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("FuelCycleCountTele").stepDown(1);' value='-'/>
+                        				</div>  
+                        				<div class="small-4 columns">
+                           					 <input required type="number" name="FuelCycleCountTele" id="FuelCycleCountTele" min="0" step="1" value ="0" required readonly>
+                        				</div>
+                        				<div class="small-4 columns">
+                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("FuelCycleCountTele").stepUp(1);' value='+'/>
+                        				</div>
+                      				</div>
+                   				 </div>
+                  				</div> 
+
+                   					<div class="row">
+                    					<div class="large-12 columns">
+                      						<div class="row collapse">
+                          				<label>Number of Gears Delivered:</label>
+                        				<div class="small-4 columns">
+                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDeliveredTele").stepDown(1);' value='-'/>
+                        				</div>  
+                        				<div class="small-4 columns">
+                           					 <input required type="number" name="GearsDeliveredTele" id="GearsDeliveredTele" min="0" step="1" value ="0" required readonly>
+                        				</div>
+                        				<div class="small-4 columns">
+                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("GearsDeliveredTele").stepUp(1);' value='+'/>
+                        				</div>
+                      				</div>
+                   				 </div>
+                  				</div>
+
+                  					<fieldset>
+                  					<legend>Gears Dropped:</legend>
+                   					<div class="row">
+                    					<div class="large-12 columns">
+                      						<div class="row collapse">
+                          				<label>Number of Gears Dropped at Peg:</label>
+                        				<div class="small-4 columns">
+                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDroppedTele").stepDown(1);' value='-'/>
+                        				</div>  
+                        				<div class="small-4 columns">
+                           					 <input required type="number" name="GearsDroppedTele" id="GearsDroppedTele" min="0" step="1" value ="0" required readonly>
+                        				</div>
+                        				<div class="small-4 columns">
+                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("GearsDroppedTele").stepUp(1);' value='+'/>
+                        				</div>
+                      				</div>
+                   				 </div>
+                  				</div>  
+
+                   					<div class="row">
+                    					<div class="large-12 columns">
+                      						<div class="row collapse">
+                          				<label>Number of Gears Lost In Transit:</label>
+                        				<div class="small-4 columns">
+                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDroppedTransitTele").stepDown(1);' value='-'/>
+                        				</div>  
+                        				<div class="small-4 columns">
+                           					 <input required type="number" name="GearsDroppedTransitTele" id="GearsDroppedTransitTele" min="0" step="1" value ="0" required readonly>
+                        				</div>
+                        				<div class="small-4 columns">
+                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("GearsDroppedTransitTele").stepUp(1);' value='+'/>
+                        				</div>
+                      				</div>
+                   				 </div>
+                  				</div> 
+
+                   					<div class="row">
+                    					<div class="large-12 columns">
+                      						<div class="row collapse">
+                          				<label>Number of Gears Dropped at Feeder Station:</label>
+                        				<div class="small-4 columns">
+                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDroppedFeederTele").stepDown(1);' value='-'/>
+                        				</div>  
+                        				<div class="small-4 columns">
+                           					 <input required type="number" name="GearsDroppedFeederTele" id="GearsDroppedFeederTele" min="0" step="1" value ="0" required readonly>
+                        				</div>
+                        				<div class="small-4 columns">
+                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("GearsDroppedFeederTele").stepUp(1);' value='+'/>
+                        				</div>
+                      				</div>
+                   				 </div>
+                  				</div> 
+                  				</fieldset>
+
+      							<div class="row">
+      									<fieldset class="large-12 columns">
+
+      										<legend>Gear Manipulation:</legend>
+
+      										 <input name="GearFloorPickup" id="GearFloorPickup" type="checkbox"><label for="GearFloorPickup">Floor Pickup?</label>
+
+      										<legend>Gear Floor Pickup Type:</legend>
+      										 <input name="GearFloorPickupType" id="ActivePickup" value="Active" type="radio"><label for="ActivePickup">Active</label>
+      										  <input name="GearFloorPickupType" id="PassivePickup" value="Passive" type="radio"><label for="PassivePickup">Passive</label>
+      										  <input name="GearFloorPickupType" id="NoPickup" value="None" type="radio"><label for="NoPickup">None</label>
+      									</fieldset>
+      								</div>                  				
+
+      							<div class="row">
+      									<fieldset class="large-12 columns">
+
+      										<legend>Fuel Pickup Style:</legend>
+
+      										 <input name="FuelPickupStyle" id="FuelPickupHopper" value="Hopper" type="radio"><label for="FuelPickupHopper">Hopper/Feeder</label>
+      										 <input name="FuelPickupStyle" id="FuelPickupFloor" value="Floor" type="radio"><label for="FuelPickupFloor">Floor</label>
       									</fieldset>
       								</div>
 
->>>>>>> 4152b44b6993117fa8fcd97c252afd2e801d2ff0
+								</div>
+							</div>      								
 
 								</div>
 							</div>
