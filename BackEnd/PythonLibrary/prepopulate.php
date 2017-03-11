@@ -273,7 +273,14 @@
       								</div>
 
       									</fieldset>  
-                      				
+
+
+      								<div class="row">
+      									<fieldset class="large-6 columns">
+      										<legend>Active Defense:</legend>
+      										 <input name="ActiveDefense" id="ActiveDefense" type="checkbox"><label for="ActiveDefense">Yes</label>
+      									</fieldset>
+      								</div>                      				
                    				 
                   				
 
