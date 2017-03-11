@@ -140,22 +140,6 @@
 									<div class="row">
                     					<div class="large-12 columns">
                       						<div class="row collapse">
-                          				<label>Number of Fuel Cycles:</label>
-                        				<div class="small-4 columns">
-                          					<input required type='button' class="button postfix" onclick='document.getElementById("GearsDeliveredTele").stepDown(1);' value='-'/>
-                        				</div>  
-                        				<div class="small-4 columns">
-                           					 <input required type="number" name="GearsDeliveredTele" id="GearsDeliveredTele" min="0" step="1" value ="0" required readonly>
-                        				</div>
-                        				<div class="small-4 columns">
-                          				<input required type='button' class="button postfix" onclick='document.getElementById("GearsDeliveredTele").stepUp(1);' value='+'/>
-                        				</div>
-                      				</div>
-                   				 </div>
-                  				</div>   <!--                					
-                   					<div class="row">
-                    					<div class="large-12 columns">
-                      						<div class="row collapse">
                           				<label>Number of Gears Delivered:</label>
                         				<div class="small-4 columns">
                           					<input required type='button' class="button postfix" onclick='document.getElementById("GearsDeliveredTele").stepDown(1);' value='-'/>
@@ -168,7 +152,7 @@
                         				</div>
                       				</div>
                    				 </div>
-                  				</div>   
+                  				</div>                					 
                   				
                   					<fieldset>
                   					<legend>Gears Dropped:</legend>
@@ -252,7 +236,7 @@
 							</div>      								
 
 								</div>
-							</div> -->
+							</div> 
 							<input class="button round SubmitButton" type="submit" value="Submit">
 							</form>
 <script>
