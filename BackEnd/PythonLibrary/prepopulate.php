@@ -81,7 +81,7 @@
       										 	<input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="radio"><label for="leftgear">Left</label>
       										 	<input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
       										 	<input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
-       										 	<input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">Right</label>     										 
+       										 	<input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>     										 
       										</fieldset>
       									</div>
 
@@ -102,9 +102,9 @@
 
       								<div class="row"> 
       									<fieldset class="large-6 columns">
-      										<legend>Pressure Quantity: *</legend>
+      										<legend>Post Auto Pressure: *</legend>
       										<label>
-      											<input type="tel" name="PressureAuto">
+      											<input type="tel" value="0" name="PressureAuto">
       										</label>
       									</fieldset>
       								</div>
@@ -122,7 +122,7 @@
                    					<div class="row">
                     					<div class="large-12 columns">
                       						<div class="row collapse">
-                          						<label>Number of Fuel Cycles:</label>
+                          						<label>Fuel Cycles:</label>
                         							<div class="small-4 columns">
                           								<input required type='button' class="button postfix" onclick='document.getElementById("FuelCycleCountTele").stepDown(1);' value='-'/>
                         							</div>  
@@ -141,7 +141,7 @@
 									<div class="row">
                     					<div class="large-12 columns">
                       						<div class="row collapse">
-                          				<label>Number of Gears Delivered:</label>
+                          				<label>Gears Delivered:</label>
                         				<div class="small-4 columns">
                           					<input required type='button' class="button postfix" onclick='document.getElementById("GearsDeliveredTele").stepDown(1);' value='-'/>
                         				</div>  
@@ -161,7 +161,7 @@
                   					<legend>Gears Dropped:</legend>
                     					<div class="large-12 columns">
                       						<div class="row collapse">
-                          				<label>Number of Gears Dropped at Peg:</label>
+                          				<label>Gears Dropped at Peg:</label>
                         				<div class="small-4 columns">
                           					<input required type='button' class="button postfix" onclick='document.getElementById("GearsDroppedTele").stepDown(1);' value='-'/>
                         				</div>  
@@ -173,13 +173,13 @@
                         				</div>
                       				</div>
                    				 </div>
-                   				 </fieldset>
+                   				 
                   				</div>  
 
                    					<div class="row">
                     					<div class="large-12 columns">
                       						<div class="row collapse">
-                          				<label>Number of Gears Lost In Transit:</label>
+                          				<label>Gears Lost In Transit:</label>
                         				<div class="small-4 columns">
                           					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDroppedTransitTele").stepDown(1);' value='-'/>
                         				</div>  
@@ -196,7 +196,7 @@
                    					<div class="row">
                     					<div class="large-12 columns">
                       						<div class="row collapse">
-                          				<label>Number of Gears Dropped at Feeder Station:</label>
+                          				<label>Gears Dropped at Feeder Station:</label>
                         				<div class="small-4 columns">
                           					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDroppedFeederTele").stepDown(1);' value='-'/>
                         				</div>  
@@ -208,7 +208,8 @@
                         				</div>
                       				</div>
                    				 </div>
-                  				</div> 
+                  				</div>
+                  				</fieldset>
                   				
 
       							<div class="row">
@@ -218,7 +219,7 @@
 
       										 <input name="GearFloorPickup" id="GearFloorPickup" type="checkbox"><label for="GearFloorPickup">Floor Pickup?</label>
 
-      										<legend>Gear Floor Pickup Type:</legend>
+      										<legend>Gear Handling Type:</legend>
       										 <input name="GearFloorPickupType" id="ActivePickup" value="Active" type="radio"><label for="ActivePickup">Active</label>
       										  <input name="GearFloorPickupType" id="PassivePickup" value="Passive" type="radio"><label for="PassivePickup">Passive</label>
       										  <input name="GearFloorPickupType" id="NoPickup" value="None" type="radio"><label for="NoPickup">None</label>
@@ -239,11 +240,11 @@
 							
 
 							<fieldset>
-								<legend>Shooter Type:</legend>
+								<legend>Score Fuel:</legend>
 								<div class="row">
 									
-									<input name="ShooterType" id="High" value="High" type="radio"><label for="High">High</label>
-									<input name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low</label>
+									<input name="ShooterType" id="High" value="High" type="radio"><label for="High">High Goal</label>
+									<input name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low Goal</label>
 									 <input name="ShooterType" id="None" value="None" type="radio"><label for="None">None</label>
 
 								</div>
@@ -278,14 +279,16 @@
 
        								<div class="row">
       									<fieldset class="large-6 columns">
-      										<legend>Low Goal Frequency:</legend>
+      										<legend>Low Goal:</legend>
+                          <legend> </legend>
+                          <legend>Frequency:</legend>
       										 <input name="LowGoalFrequency" id="SlowLow" value="SlowLow" type="radio"><label for="SlowLow">Slow</label>
       										 <input name="LowGoalFrequency" id="FastLow" value="FastLow" type="radio"><label for="FastLow">Fast</label>	 
       									</fieldset>
       								</div>                 										      								
 
-								</div>
-							</div> 
+							
+							 
 
 							<fieldset>
 								<legend>Climbing:</legend>
