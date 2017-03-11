@@ -137,21 +137,37 @@ class HtmlInput:
         for textName, textValue in zip(self._text_list, self._text_list_values):
             self._create_table_SQL += ("`" + str(textName) + "` varchar(255) COLLATE utf8_bin NOT NULL,")
             self._insert_data += (textValue,)
-        self._create_table_SQL += "PRIMARY KEY (`match_id`),UNIQUE KEY `match_id` (`match_id`),KEY `"
+        self._create_table_SQL += "PRIMARY KEY (`match_id`),UNIQUE KEY `match_id` (`match_id`)"
         for names in all_list:
             if first == 0:
-                self._create_table_SQL += (str(names) + "` (`" + str(names) + "`")
                 self._insert_SQL += (str(names) + "`")
                 self._insert_SQL_values += "%s"
                 first = 1
             else:
-                self._create_table_SQL += (",`" + str(names) + "`")
                 self._insert_SQL += (", `" + str(names) + "`")
                 self._insert_SQL_values += ", %s"
-        self._create_table_SQL += ")) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;"
+        self._create_table_SQL += ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;"
         self._insert_SQL += ") "
         self._insert_SQL_values += ")"
         _insert_SQLstmt = self._insert_SQL + self._insert_SQL_values
+
+        """
+        #Debug Code for printing the SQL out.
+        #Uncomment this block and comment The try statement below to view inset sql
+        print("Content-type:text/html\r\n\r\n")
+        print('<html>')
+        print('<head>')
+        print('<title>CGI receipt</title>')
+        print('</head>')
+        print('<body>')
+        print(self._create_table_SQL)
+        print('<p> ------------ </p>')
+        print(_insert_SQLstmt)
+        print('<p> ------------ </p>')
+        print(self._insert_data)
+        print('</body>')
+        print('</html>')
+        """
 
         try:
             with self._dbConnection.cursor() as cursor:
@@ -162,6 +178,7 @@ class HtmlInput:
             self._dbConnection.commit()
         finally:
             self._dbConnection.close()
+
 
     def display_receipt(self):
 
@@ -189,7 +206,7 @@ class HtmlInput:
 # Create object #
 
 inputForm = HtmlInput()
-inputForm.define_team_number('teamNumber')
+inputForm.define_team_number(COREDependencies.COREConstants.TEAM_FIELD_NUMBER['team_number'])
 
 # Populate the database #
 
