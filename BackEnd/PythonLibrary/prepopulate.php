@@ -97,6 +97,7 @@
       										<legend>Score Fuel:</legend>
       										 <input name="FuelAuto" id="FuelLowAuto" value="FuelLowAuto" type="radio"><label for="FuelLowAuto">Low Goal</label>
       										 <input name="FuelAuto" id="FuelHighAuto" value="FuelHighAuto" type="radio"><label for="FuelHighAuto">High Goal</label>	 
+      										 <input name="FuelAuto" id="FuelNoneAuto" value="FuelNoneAuto" type="radio"><label for="FuelNoneAuto">None</label>	      										 
       									</fieldset>
       								</div>
 
@@ -272,15 +273,7 @@
       										</label>
       								</div>
 
-      									</fieldset>  
-
-
-      								<div class="row">
-      									<fieldset class="large-6 columns">
-      										<legend>Active Defense:</legend>
-      										 <input name="ActiveDefense" id="ActiveDefense" type="checkbox"><label for="ActiveDefense">Yes</label>
-      									</fieldset>
-      								</div>                      				
+      									</fieldset>                       				
                    				 
                   				
 
@@ -307,6 +300,13 @@
 
 								</div>
 							</fieldset>
+
+      								<div class="row">
+      									<fieldset class="large-6 columns">
+      										<legend>Active Defense:</legend>
+      										 <input name="ActiveDefense" id="ActiveDefense" type="checkbox"><label for="ActiveDefense">Yes</label>
+      									</fieldset>
+      								</div> 							
 
 
 
