@@ -200,6 +200,7 @@ class HtmlInput:
             print('<p>', radioName, '-', radioValue, '</p>')
         for checkboxName, checkboxValue in zip(self._checkbox_list, self._checkbox_list_values):
             print('<p>', checkboxName, '-', checkboxValue, '</p>')
+        print('<a href = "CORETeamSelect.py">Back To Scout Form</a>')
         print('</body>')
         print('</html>')
 

@@ -69,12 +69,13 @@ Match Report Row Headers (no dependency)
 -------------------------------------"""
 
 REPORT_HEADER = [
+    'Avg Fuel Cycles'
+]
+
 """ 'Auto pts',
     'High Goal Accuracy',
     'Auto Type',
     'Comments' """
-
-]
 
 """=============================================
 Match Report input field names (form dependency)
@@ -103,6 +104,7 @@ RANK_REPORT_FIELD_NAMES = {
     EX: 'Highest Auto Type': ('highest_auto_type', 'Highest Auto', 'category', ('breach', 'reach', 'no_interaction')) """
 
 RANK_OPTIONS = [
-    """"('highGoals', 'High Goal Accuracy', 'descending'),
-    ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""
+    ('FuelCycles', 'Avg Fuel Cycles', 'descending')
 ]
+"""('highGoals', 'High Goal Accuracy', 'descending'),
+    ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""
