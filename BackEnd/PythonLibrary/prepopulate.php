@@ -29,7 +29,6 @@
 
 	</head>
 	<body>
-
 		<form name="main" id="form" action="COREDataEntry.py" method="post" data-parsley-validate>
 			<div class="row">
 				<div class="small-12 columns">
@@ -37,7 +36,6 @@
 						<li class="tab-title active"><a href="#panel1">Match/Scout Info</a></li>
       					<li class="tab-title"><a href="#panel2">Autonomous Period</a></li>
       					<li class="tab-title"><a href="#panel3">Teleoperated Period</a></li>
-      					<li class="tab-title"><a href="#panel4">Other</a></li>
       				</ul>
       				<dl class="accordion" data-accordion>
       					<dd class="accordion-navigation">
@@ -73,21 +71,19 @@
 								</div>
 							</div>
 
+							<a href="#panel2" class="show-for-small-only">Autonomous Period</a>
+	        					<div id="panel2" class="content">
+	        						<div class="content-box section-box">
 
-						<a href="#panel2" class="show-for-small-only">Autonomous Period</a>
-	        				<div id="panel2" class="content">
-	        					<div class="content-box section-box">
-
-      								<div class="row">
-      									<fieldset class="large-6 columns">
+      									<div class="row">
+      										<fieldset class="large-6 columns">
       										<legend>Deliver Gear:</legend>
-      										 <input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="radio"><label for="leftgear">Left</label>
-      										 <input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
-      										 <input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
-       										 <input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">Right</label>     										 
-      										
-      									</fieldset>
-      								</div>
+      										 	<input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="radio"><label for="leftgear">Left</label>
+      										 	<input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
+      										 	<input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
+       										 	<input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">Right</label>     										 
+      										</fieldset>
+      									</div>
 
       								<div class="row">
       									<fieldset class="large-6 columns">
@@ -111,30 +107,35 @@
       											<input type="tel" name="PressureAuto">
       										</label>
       									</fieldset>
-      								</div> 
+      								</div>
+
       							</div>
-      						</div>	      								    						
+      						</div>	
+
+
+
 
       					<a href="#panel3" class="show-for-small-only">Teleoperated Period</a>
-      						<div id="panel3" class="content active">
+      						<div id="panel3" class="content">
       							<div class="content-box section-box">
  
                    					<div class="row">
                     					<div class="large-12 columns">
                       						<div class="row collapse">
-                          				<label>Number of Fuel Cycles:</label>
-                        				<div class="small-4 columns">
-                          					<input required type='button' class="button postfix" onclick='document.getElementById("FuelCycleCountTele").stepDown(1);' value='-'/>
-                        				</div>  
-                        				<div class="small-4 columns">
-                           					 <input required type="number" name="FuelCycleCountTele" id="FuelCycleCountTele" min="0" step="1" value ="0" required readonly>
-                        				</div>
-                        				<div class="small-4 columns">
-                          				<input required type='button' class="button postfix" onclick='document.getElementById("FuelCycleCountTele").stepUp(1);' value='+'/>
-                        				</div>
-                      				</div>
-                   				 </div>
-                  				</div> 
+                          						<label>Number of Fuel Cycles:</label>
+                        							<div class="small-4 columns">
+                          								<input required type='button' class="button postfix" onclick='document.getElementById("FuelCycleCountTele").stepDown(1);' value='-'/>
+                        							</div>  
+                        							<div class="small-4 columns">
+                           					 			<input required type="number" name="FuelCycleCountTele" id="FuelCycleCountTele" min="0" step="1" value ="0" required readonly>
+                        							</div>
+                        							<div class="small-4 columns">
+                          								<input required type='button' class="button postfix" onclick='document.getElementById("FuelCycleCountTele").stepUp(1);' value='+'/>
+                        							</div>
+                      						</div>
+                   				 		</div>
+                  					</div>
+
 
 
 									<div class="row">
@@ -154,9 +155,10 @@
                    				 </div>
                   				</div>                					 
                   				
-                  					<fieldset>
-                  					<legend>Gears Dropped:</legend>
+
                    					<div class="row">
+                   					 <fieldset>
+                  					<legend>Gears Dropped:</legend>
                     					<div class="large-12 columns">
                       						<div class="row collapse">
                           				<label>Number of Gears Dropped at Peg:</label>
@@ -171,6 +173,7 @@
                         				</div>
                       				</div>
                    				 </div>
+                   				 </fieldset>
                   				</div>  
 
                    					<div class="row">
@@ -206,7 +209,7 @@
                       				</div>
                    				 </div>
                   				</div> 
-                  				</fieldset>
+                  				
 
       							<div class="row">
       									<fieldset class="large-12 columns">
@@ -233,12 +236,77 @@
       								</div>
 
 								</div>
-							</div>      								
+							
+
+							<fieldset>
+								<legend>Shooter Type:</legend>
+								<div class="row">
+									
+									<input name="ShooterType" id="High" value="High" type="radio"><label for="High">High</label>
+									<input name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low</label>
+									 <input name="ShooterType" id="None" value="None" type="radio"><label for="None">None</label>
+
+								</div>
+							</fieldset>
+
+
+                  					<fieldset>
+                  					<legend>High Goal:</legend>
+                   					<div class="row">
+      										<legend>Frequency:</legend>
+      										 <input name="HighFrequency" id="Slow" value="Slow" type="radio"><label for="Slow">Slow</label>
+      										 <input name="HighFrequency" id="Medium" value="Medium" type="radio"><label for="Medium">Medium</label>
+      										 <input name="HighFrequency" id="Fast" value="Fast" type="radio"><label for="Fast">Fast</label>
+
+      										 <legend>Accuracy:</legend>
+      										 <input name="HighAccuracy" id="25" value="25" type="radio"><label for="25">25% or less</label>
+      										 <input name="HighAccuracy" id="50" value="50" type="radio"><label for="50">About 50%</label>
+      										 <input name="HighAccuracy" id="75" value="75" type="radio"><label for="75">75% or more</label>
+      								</div>
+
+      								<div class="row"> 
+      										<legend>Post Match Alliance Pressure:</legend>
+      										<label>
+      											<input type="tel" name="HighAlliancePressure">
+      										</label>
+      								</div>
+
+      									</fieldset>  
+                      				
+                   				 
+                  				
+
+       								<div class="row">
+      									<fieldset class="large-6 columns">
+      										<legend>Low Goal Frequency:</legend>
+      										 <input name="LowGoalFrequency" id="SlowLow" value="SlowLow" type="radio"><label for="SlowLow">Slow</label>
+      										 <input name="LowGoalFrequency" id="FastLow" value="FastLow" type="radio"><label for="FastLow">Fast</label>	 
+      									</fieldset>
+      								</div>                 										      								
 
 								</div>
 							</div> 
+
+							<fieldset>
+								<legend>Climbing:</legend>
+								<div class="row">
+									
+									<input name="Climb" id="DidClimb" value="DidClimb" type="radio"><label for="DidClimb">Sucessful Climb</label>
+									<input name="Climb" id="NoClimb" value="NoClimb" type="radio"><label for="NoClimb">No Climb</label>
+									 <input name="Climb" id="ClimbFail" value="ClimbFail" type="radio"><label for="ClimbFail">Failed Climb</label>
+
+								</div>
+							</fieldset>
+
+
+
+
+
 							<input class="button round SubmitButton" type="submit" value="Submit">
 							</form>
+
+							
+							</dl>
 <script>
       $(document).foundation();
 </script>
@@ -247,4 +315,4 @@
 </script>
 
 	</body>
-</html>
+</html>     												
