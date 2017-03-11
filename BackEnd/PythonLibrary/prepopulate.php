@@ -65,11 +65,7 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<label>Scout Name: *
-												<input name="ScoutName" class="awesomplete"  data-list="
-												Brett,
-												Draven,
-												Noah
-												" placeholder="John Smith" required/>
+												<input name="ScoutName" placeholder="John Smith" required/>
 											</label>
 										</div>
 									</div>									
@@ -96,7 +92,7 @@
       								<div class="row">
       									<fieldset class="large-6 columns">
       										<legend>Crossed Baseline:</legend>
-      										 <input id="CrossedBaseline" name="CrossedBaselineAuto" type="checkbox"><label for="CrossedBaseline">Yes</label>
+      										 <input name="CrossedBaselineAuto" id="CrossedBaseline" type="checkbox"><label for="CrossedBaseline">Yes</label>
       									</fieldset>
       								</div>
 
@@ -108,8 +104,8 @@
       									</fieldset>
       								</div>
 
-      								<div class="row">  <!--make this conditional based on fuel scoring in auto
-      									<fieldset class="large-6 columns">-->
+      								<div class="row"> 
+      									<fieldset class="large-6 columns">
       										<legend>Pressure Quantity: *</legend>
       										<label>
       											<input type="tel" name="PressureAuto">
@@ -128,35 +124,36 @@
                       						<div class="row collapse">
                           				<label>Number of Fuel Cycles:</label>
                         				<div class="small-4 columns">
-                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("FuelCycleCountTele").stepDown(1);' value='-'/>
+                          					<input required type='button' class="button postfix" onclick='document.getElementById("FuelCycleCountTele").stepDown(1);' value='-'/>
                         				</div>  
                         				<div class="small-4 columns">
                            					 <input required type="number" name="FuelCycleCountTele" id="FuelCycleCountTele" min="0" step="1" value ="0" required readonly>
                         				</div>
                         				<div class="small-4 columns">
-                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("FuelCycleCountTele").stepUp(1);' value='+'/>
+                          				<input required type='button' class="button postfix" onclick='document.getElementById("FuelCycleCountTele").stepUp(1);' value='+'/>
                         				</div>
                       				</div>
                    				 </div>
                   				</div> 
 
-                   					<div class="row">
+
+									<div class="row">
                     					<div class="large-12 columns">
                       						<div class="row collapse">
                           				<label>Number of Gears Delivered:</label>
                         				<div class="small-4 columns">
-                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDeliveredTele").stepDown(1);' value='-'/>
+                          					<input required type='button' class="button postfix" onclick='document.getElementById("GearsDeliveredTele").stepDown(1);' value='-'/>
                         				</div>  
                         				<div class="small-4 columns">
                            					 <input required type="number" name="GearsDeliveredTele" id="GearsDeliveredTele" min="0" step="1" value ="0" required readonly>
                         				</div>
                         				<div class="small-4 columns">
-                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("GearsDeliveredTele").stepUp(1);' value='+'/>
+                          				<input required type='button' class="button postfix" onclick='document.getElementById("GearsDeliveredTele").stepUp(1);' value='+'/>
                         				</div>
                       				</div>
                    				 </div>
-                  				</div>
-
+                  				</div>                					 
+                  				
                   					<fieldset>
                   					<legend>Gears Dropped:</legend>
                    					<div class="row">
@@ -164,13 +161,13 @@
                       						<div class="row collapse">
                           				<label>Number of Gears Dropped at Peg:</label>
                         				<div class="small-4 columns">
-                          					<input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("GearsDroppedTele").stepDown(1);' value='-'/>
+                          					<input required type='button' class="button postfix" onclick='document.getElementById("GearsDroppedTele").stepDown(1);' value='-'/>
                         				</div>  
                         				<div class="small-4 columns">
                            					 <input required type="number" name="GearsDroppedTele" id="GearsDroppedTele" min="0" step="1" value ="0" required readonly>
                         				</div>
                         				<div class="small-4 columns">
-                          				<input required type='button' class="button postfix" name='add' onclick='document.getElementById("GearsDroppedTele").stepUp(1);' value='+'/>
+                          				<input required type='button' class="button postfix" onclick='document.getElementById("GearsDroppedTele").stepUp(1);' value='+'/>
                         				</div>
                       				</div>
                    				 </div>
@@ -239,8 +236,8 @@
 							</div>      								
 
 								</div>
-							</div>
-							<input class="button round SubmitButton" type="submit" value="Submit"></input>	
+							</div> 
+							<input class="button round SubmitButton" type="submit" value="Submit">
 							</form>
 <script>
       $(document).foundation();
