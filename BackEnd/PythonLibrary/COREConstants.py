@@ -12,36 +12,45 @@
 General Team Info (no dependency)
 -------------------------------------------"""
 
-TEAM_NUMBER = 1
+TEAM_NUMBER = 2062
 
-COMPETITION_NAME = 'example'
+COMPETITION_NAME = 'testdata'
 
 """===========================================
 Scout HTML input field names (form dependency)
 -------------------------------------------"""
 
-#  form value name that contains the match number change second value
-MATCH_NUMBER = {'match_number': 'matchNum'}
+#  form value name that contains the match and team number. (change second name)
+TEAM_FIELD_NUMBER = {'team_number': 'TeamNumber'}
+MATCH_NUMBER = {'match_number': 'MatchNumber'}
 
 CHECKBOX_NAMES = [
-    'hasAuto'
+    'CrossedBaselineAuto',
+    'GearFloorPickup',
+    'FuelPickupHopper',
+    'FuelPickupFloor'
 ]
 NUMBER_NAMES = [
-    'numhighgoals',
-    'numlowgoals'
+    'PressureAuto',
+    'FuelCycleCountTele',
+    'GearsDeliveredTele',
+    'GearsDroppedTele',
+    'GearsDroppedTransitTele',
+    'GearsDroppedFeederTele'
 ]
 NUMBER_NAMES.append(MATCH_NUMBER['match_number'])
-
 TEXT_NAMES = [
-    'comments'
+    'ScoutName'
 ]
 RADIO_NAMES = [
-    'defenceType',
-    'hasDefender'
+    'DeliverGearAuto',
+    'FuelAuto',
+    'GearFloorPickupType'
 ]
 RADIO_VALUES = {
-    'defenceType': ('Moat', 'Rockwall', 'RoughTerrain'),
-    'hasDefender': ('Yes', 'No')
+    'DeliverGearAuto': ('LeftGearAuto', 'MiddleGearAuto', 'RightGearAuto', 'None'),
+    'FuelAuto': ('FuelLowAuto', 'FuelHighAuto'),
+    'GearFloorPickupType': ('Active', 'Passive', 'None')
 }
 
 ALL_NAMES = []
@@ -60,10 +69,10 @@ Match Report Row Headers (no dependency)
 -------------------------------------"""
 
 REPORT_HEADER = [
-    'Auto pts',
+""" 'Auto pts',
     'High Goal Accuracy',
     'Auto Type',
-    'Comments'
+    'Comments' """
 
 ]
 
@@ -94,6 +103,6 @@ RANK_REPORT_FIELD_NAMES = {
     EX: 'Highest Auto Type': ('highest_auto_type', 'Highest Auto', 'category', ('breach', 'reach', 'no_interaction')) """
 
 RANK_OPTIONS = [
-    ('highGoals', 'High Goal Accuracy', 'descending'),
-    ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))
+    """"('highGoals', 'High Goal Accuracy', 'descending'),
+    ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""
 ]
