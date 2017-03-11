@@ -28,29 +28,41 @@ CHECKBOX_NAMES = [
     'CrossedBaselineAuto',
     'GearFloorPickup',
     'FuelPickupHopper',
-    'FuelPickupFloor'
+    'FuelPickupFloor',
+    'ActiveDefense'
 ]
 NUMBER_NAMES = [
+    MATCH_NUMBER['match_number'],
     'PressureAuto',
     'FuelCycleCountTele',
     'GearsDeliveredTele',
     'GearsDroppedTele',
     'GearsDroppedTransitTele',
-    'GearsDroppedFeederTele'
+    'GearsDroppedFeederTele',
+    'HighAlliancePressure',
 ]
-NUMBER_NAMES.append(MATCH_NUMBER['match_number'])
 TEXT_NAMES = [
     'ScoutName'
 ]
 RADIO_NAMES = [
     'DeliverGearAuto',
     'FuelAuto',
-    'GearFloorPickupType'
+    'GearFloorPickupType',
+    'ShooterType',
+    'HighFrequency',
+    'HighAccuracy',
+    'LowGoalFrequency',
+    'Climb'
 ]
 RADIO_VALUES = {
     'DeliverGearAuto': ('LeftGearAuto', 'MiddleGearAuto', 'RightGearAuto', 'None'),
-    'FuelAuto': ('FuelLowAuto', 'FuelHighAuto'),
-    'GearFloorPickupType': ('Active', 'Passive', 'None')
+    'FuelAuto': ('FuelLowAuto', 'FuelHighAuto', 'FuelNoneAuto'),
+    'GearFloorPickupType': ('Active', 'Passive', 'None'),
+    'ShooterType': ('High', 'Low', 'None'),
+    'HighFrequency': ('Slow', 'Medium', 'Fast'),
+    'HighAccuracy': ('25', '50', '75'),
+    'LowGoalFrequency': ('SlowLow', 'FastLow'),
+    'Climb': ('DidClimb', 'NoClimb', 'ClimbFail')
 }
 
 ALL_NAMES = []

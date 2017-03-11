@@ -23,7 +23,7 @@ print('<title> Team Analysis Page</title>')
 print('</head>')
 print('<body>')
 print(str(team_number))
-print('<img src="/testdev/BackEnd/RobotPictures/' + str(team_number) +
+print('<img src="../RobotPictures/' + str(team_number) +
       '.jpg" alt="Team Image Not Available" width="25%" height="25%">')
 print('<table>')
 print('<tr>')
