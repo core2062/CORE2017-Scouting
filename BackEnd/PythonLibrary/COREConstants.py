@@ -28,29 +28,41 @@ CHECKBOX_NAMES = [
     'CrossedBaselineAuto',
     'GearFloorPickup',
     'FuelPickupHopper',
-    'FuelPickupFloor'
+    'FuelPickupFloor',
+    'ActiveDefense'
 ]
 NUMBER_NAMES = [
+    MATCH_NUMBER['match_number'],
     'PressureAuto',
     'FuelCycleCountTele',
     'GearsDeliveredTele',
     'GearsDroppedTele',
     'GearsDroppedTransitTele',
-    'GearsDroppedFeederTele'
+    'GearsDroppedFeederTele',
+    'HighAlliancePressure',
 ]
-NUMBER_NAMES.append(MATCH_NUMBER['match_number'])
 TEXT_NAMES = [
     'ScoutName'
 ]
 RADIO_NAMES = [
     'DeliverGearAuto',
     'FuelAuto',
-    'GearFloorPickupType'
+    'GearFloorPickupType',
+    'ShooterType',
+    'HighFrequency',
+    'HighAccuracy',
+    'LowGoalFrequency',
+    'Climb'
 ]
 RADIO_VALUES = {
     'DeliverGearAuto': ('LeftGearAuto', 'MiddleGearAuto', 'RightGearAuto', 'None'),
-    'FuelAuto': ('FuelLowAuto', 'FuelHighAuto'),
-    'GearFloorPickupType': ('Active', 'Passive', 'None')
+    'FuelAuto': ('FuelLowAuto', 'FuelHighAuto', 'FuelNoneAuto'),
+    'GearFloorPickupType': ('Active', 'Passive', 'None'),
+    'ShooterType': ('High', 'Low', 'None'),
+    'HighFrequency': ('Slow', 'Medium', 'Fast'),
+    'HighAccuracy': ('25', '50', '75'),
+    'LowGoalFrequency': ('SlowLow', 'FastLow'),
+    'Climb': ('DidClimb', 'NoClimb', 'ClimbFail')
 }
 
 ALL_NAMES = []
@@ -69,13 +81,12 @@ Match Report Row Headers (no dependency)
 -------------------------------------"""
 
 REPORT_HEADER = [
-    'Avg Fuel Cycles'
+    'Avg Fuel Cycles',
+    'Avg Gears Tele',
+    'Avg Gears Auto'
 ]
 
-""" 'Auto pts',
-    'High Goal Accuracy',
-    'Auto Type',
-    'Comments' """
+
 
 """=============================================
 Match Report input field names (form dependency)
@@ -104,7 +115,9 @@ RANK_REPORT_FIELD_NAMES = {
     EX: 'Highest Auto Type': ('highest_auto_type', 'Highest Auto', 'category', ('breach', 'reach', 'no_interaction')) """
 
 RANK_OPTIONS = [
-    ('FuelCycles', 'Avg Fuel Cycles', 'descending')
+    ('FuelCycles', 'Avg Fuel Cycles', 'descending'),
+    ('AvgGearsTele', 'Avg Gears Tele', 'descending'),
+    ('AvgGearsAuto', 'Avg Gears Auto', 'descending')
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""

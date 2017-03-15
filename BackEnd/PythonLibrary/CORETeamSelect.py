@@ -59,7 +59,7 @@ for match in COREDependencies.COREMatchSchedule.SCHEDULE:
     match_num += 1
 print('</table>')
 # brett plz fix this, ty m8
-print('<form action="prepopulate.php" method="post">')
+print('<form action="prepopulate.php" method="get">')
 print('MatchNumber= <input type="number" name="match" required>')
 print('TeamNumber= <input type="number" name="team" required>')
 print('<input type="submit" value="submit"><br>')

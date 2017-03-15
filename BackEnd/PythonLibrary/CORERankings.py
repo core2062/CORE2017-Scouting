@@ -5,14 +5,6 @@ import COREDependencies
 import DataCalculation
 
 
-"""class _MyHTTPRedirectHandler(COREDependencies.urllib.request.HTTPRedirectHandler):
-    def http_error_302(self, req, fp, code, msg, headers):
-        print('Follow redirect...')
-        return COREDependencies.urllib.request.HTTPRedirectHandler.http_error_302(self, req, fp, code, msg, headers)
-
-    http_error_301 = http_error_303 = http_error_307 = http_error_302"""
-
-
 class Rankings:
 
     """ Process for looking at each teams statistics and ranking them accordingly

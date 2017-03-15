@@ -54,9 +54,9 @@ print('<b> Teams: </b>')
 print('<table>')
 for team in int_nums:
     print('<tr>')
-    print('<td><img src="/testdev/BackEnd/RobotPictures/' + str(team) +
+    print('<td><img src="../RobotPictures/' + str(team) +
           '.jpg" alt="Team Image Not Available" width="25%" height="25%"></td>')
-    print('<td><a href="/testdev/BackEnd/PythonLibrary/CORETeamReport.py?team_number=' +
+    print('<td><a href="CORETeamReport.py?team_number=' +
           str(team) + '">' + str(team) + '</a></td>')
     print('</tr>')
 print('</table>')
