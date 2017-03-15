@@ -42,7 +42,8 @@ NUMBER_NAMES = [
     'HighAlliancePressure',
 ]
 TEXT_NAMES = [
-    'ScoutName'
+    'ScoutName',
+    'comments'
 ]
 RADIO_NAMES = [
     'DeliverGearAuto',
