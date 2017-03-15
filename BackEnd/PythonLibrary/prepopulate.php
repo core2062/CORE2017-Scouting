@@ -27,8 +27,11 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.min.js" integrity="sha256-QKOftzbqahZaXS2amOh27JacZ6TbmT4TmGxNo4Jue4Y=" crossorigin="anonymous"></script>
 
+		<!--<script type="text/javascript" src="show.js"></script>-->
+
 	</head>
 	<body>
+
 		<form name="main" id="form" action="COREDataEntry.py" method="post" data-parsley-validate>
 			<div class="row">
 				<div class="small-12 columns">
@@ -63,7 +66,7 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<label>Scout Name: *
-												<input name="ScoutName" placeholder="John Smith" required/>
+												<input name="ScoutName" placeholder="John Smith" autocomplete="off" data-parsley-required="true"/>
 											</label>
 										</div>
 									</div>									
@@ -79,9 +82,9 @@
       										<fieldset class="large-6 columns">
       										<legend>Deliver Gear:</legend>
       										 	<input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="radio"><label for="leftgear">Left</label>
-      										 	<input name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
-      										 	<input name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
-       										 	<input name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>     										 
+      										 	<input required="" name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
+      										 	<input required="" name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
+       										 	<input required="" name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>     										 
       										</fieldset>
       									</div>
 
@@ -95,9 +98,9 @@
       								<div class="row">
       									<fieldset class="large-6 columns">
       										<legend>Score Fuel:</legend>
-      										 <input name="FuelAuto" id="FuelLowAuto" value="FuelLowAuto" type="radio"><label for="FuelLowAuto">Low Goal</label>
-      										 <input name="FuelAuto" id="FuelHighAuto" value="FuelHighAuto" type="radio"><label for="FuelHighAuto">High Goal</label>	 
-      										 <input name="FuelAuto" id="FuelNoneAuto" value="FuelNoneAuto" type="radio"><label for="FuelNoneAuto">None</label>	      										 
+      										 <input required="" name="FuelAuto" id="FuelLowAuto" value="FuelLowAuto" type="radio"><label for="FuelLowAuto">Low Goal</label>
+      										 <input required="" name="FuelAuto" id="FuelHighAuto" value="FuelHighAuto" type="radio"><label for="FuelHighAuto">High Goal</label>	 
+      										 <input required="" name="FuelAuto" id="FuelNoneAuto" value="FuelNoneAuto" type="radio"><label for="FuelNoneAuto">None</label>	      										 
       									</fieldset>
       								</div>
 
@@ -105,7 +108,7 @@
       									<fieldset class="large-6 columns">
       										<legend>Post Auto Pressure: *</legend>
       										<label>
-      											<input type="tel" value="0" name="PressureAuto">
+      											<input data-parsley-required="true" data-parsley-range="[0, 100]" type="tel" value="0" name="PressureAuto" autocomplete="off">
       										</label>
       									</fieldset>
       								</div>
@@ -158,7 +161,6 @@
                   				
 
                    					<div class="row">
-                   					 <fieldset>
                   					<legend>Gears Dropped:</legend>
                     					<div class="large-12 columns">
                       						<div class="row collapse">
@@ -221,9 +223,9 @@
       										 <input name="GearFloorPickup" id="GearFloorPickup" type="checkbox"><label for="GearFloorPickup">Floor Pickup?</label>
 
       										<legend>Gear Handling Type:</legend>
-      										 <input name="GearFloorPickupType" id="ActivePickup" value="Active" type="radio"><label for="ActivePickup">Active</label>
-      										  <input name="GearFloorPickupType" id="PassivePickup" value="Passive" type="radio"><label for="PassivePickup">Passive</label>
-      										  <input name="GearFloorPickupType" id="NoPickup" value="None" type="radio"><label for="NoPickup">None</label>
+      										 <input required="" name="GearFloorPickupType" id="ActivePickup" value="Active" type="radio"><label for="ActivePickup">Active</label>
+      										  <input required="" name="GearFloorPickupType" id="PassivePickup" value="Passive" type="radio"><label for="PassivePickup">Passive</label>
+      										  <input required="" name="GearFloorPickupType" id="NoPickup" value="None" type="radio"><label for="NoPickup">None</label>
       									</fieldset>
       								</div>                  				
 
@@ -244,9 +246,9 @@
 								<legend>Score Fuel:</legend>
 								<div class="row">
 									
-									<input name="ShooterType" id="High" value="High" type="radio"><label for="High">High Goal</label>
-									<input name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low Goal</label>
-									 <input name="ShooterType" id="None" value="None" type="radio"><label for="None">None</label>
+									<input required="" name="ShooterType" id="High" value="High" type="radio"><label for="High">High Goal</label>
+									<input required="" name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low Goal</label>
+									 <input required="" name="ShooterType" id="None" value="None" type="radio"><label for="None">None</label>
 
 								</div>
 							</fieldset>
@@ -254,7 +256,7 @@
 
                   					<fieldset>
                   					<legend>High Goal:</legend>
-                   					<div class="row">
+                   					<div class="row" id="HighOption">
       										<legend>Frequency:</legend>
       										 <input name="HighFrequency" id="Slow" value="Slow" type="radio"><label for="Slow">Slow</label>
       										 <input name="HighFrequency" id="Medium" value="Medium" type="radio"><label for="Medium">Medium</label>
@@ -269,7 +271,7 @@
       								<div class="row"> 
       										<legend>Post Match Alliance Pressure:</legend>
       										<label>
-      											<input type="tel" name="HighAlliancePressure">
+      											<input data-parsley-required="true" data-parsley-type="integer" type="tel" name="HighAlliancePressure" autocomplete="off">
       										</label>
       								</div>
 
@@ -294,9 +296,9 @@
 								<legend>Climbing:</legend>
 								<div class="row">
 									
-									<input name="Climb" id="DidClimb" value="DidClimb" type="radio"><label for="DidClimb">Sucessful Climb</label>
-									<input name="Climb" id="NoClimb" value="NoClimb" type="radio"><label for="NoClimb">No Climb</label>
-									 <input name="Climb" id="ClimbFail" value="ClimbFail" type="radio"><label for="ClimbFail">Failed Climb</label>
+									<input required="" name="Climb" id="DidClimb" value="DidClimb" type="radio"><label for="DidClimb">Sucessful Climb</label>
+									<input required="" name="Climb" id="NoClimb" value="NoClimb" type="radio"><label for="NoClimb">No Climb</label>
+									 <input required="" name="Climb" id="ClimbFail" value="ClimbFail" type="radio"><label for="ClimbFail">Failed Climb</label>
 
 								</div>
 							</fieldset>
@@ -306,10 +308,16 @@
       										<legend>Active Defense:</legend>
       										 <input name="ActiveDefense" id="ActiveDefense" type="checkbox"><label for="ActiveDefense">Yes</label>
       									</fieldset>
-      								</div> 							
+      								</div> 	
+      								</div>						
 
 
-
+									<div class="row">
+    								<div class="large-12 columns">
+      								<label>Comments
+        								<textarea name="comments" placeholder=""></textarea>
+      								</label>
+    								</div>
 
 
 							<input class="button round SubmitButton" type="submit" value="Submit">
