@@ -1,0 +1,4 @@
+COREDatabaseCredentials - Stores User, Password, and host information. The file should be kept behind the www folder
+    hidden from the browser user. Make sure to update this yearly with the database information.
+
+COREConstants - Must be updated to contain all form HTML values in addition to controlling the names for each statistic
