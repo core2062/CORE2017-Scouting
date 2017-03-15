@@ -84,7 +84,12 @@ Match Report Row Headers (no dependency)
 REPORT_HEADER = [
     'Avg Fuel Cycles',
     'Avg Gears Tele',
-    'Avg Gears Auto'
+    'Avg Gears Auto',
+    'Avg Gear Lost Transit',
+    'Avg Gear Lost at Peg',
+    'Avg Gear Lost at Feeder',
+    'Shooter Type',
+    'Shooter Rate and Accuracy'
 ]
 
 
@@ -118,7 +123,12 @@ RANK_REPORT_FIELD_NAMES = {
 RANK_OPTIONS = [
     ('FuelCycles', 'Avg Fuel Cycles', 'descending'),
     ('AvgGearsTele', 'Avg Gears Tele', 'descending'),
-    ('AvgGearsAuto', 'Avg Gears Auto', 'descending')
+    ('AvgGearsAuto', 'Avg Gears Auto', 'descending'),
+    ('AvgGearsLostTrans', 'Avg Gear Lost Transit', 'descending'),
+    ('AvgGearsLostPeg', 'Avg Gear Lost at Peg', 'descending'),
+    ('AvgGearsLostFeed', 'Avg Gear Lost at Feeder', 'descending'),
+    ('ShooterType', 'Shooter Type', 'category', ('None', 'Low', 'High')),
+    ('ShootRateAccuracy', 'Shooter Rate and Accuracy', )
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""

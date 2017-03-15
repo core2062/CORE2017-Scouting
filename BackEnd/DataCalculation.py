@@ -24,5 +24,16 @@ class TeamData(CORETeamData.Team):
         AllRightGearsAuto = self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[0], COREDependencies.COREConstants.RADIO_VALUES['DeliverGearAuto'][2])
         AllGearsAuto = AllLeftGearsAuto + AllMiddleGearsAuto + AllRightGearsAuto
         MatchesPlayed = self.num_data_entries('MatchNumber')
-        self.team_data[COREDependencies.COREConstants.REPORT_HEADER[2]]= str(AllGearsAuto) + ' : ' + str(MatchesPlayed)
+        self.team_data[COREDependencies.COREConstants.REPORT_HEADER[2]] = str(AllGearsAuto) + ' : ' + str(MatchesPlayed)
+        self.team_data[COREDependencies.COREConstants.REPORT_HEADER[3]] = self.avg_data(COREDependencies.COREConstants.NUMBER_NAMES[4])
+        self.team_data[COREDependencies.COREConstants.REPORT_HEADER[4]] = self.avg_data(COREDependencies.COREConstants.NUMBER_NAMES[3])
+        self.team_data[COREDependencies.COREConstants.REPORT_HEADER[5]] = self.avg_data(COREDependencies.COREConstants.NUMBER_NAMES[5])
+        self.team_data[COREDependencies.COREConstants.REPORT_HEADER[6]] = self.avg_category(COREDependencies.COREConstants.RADIO_VALUES[3])
+        if self.avg_category(COREDependencies.COREConstants.RADIO_VALUES[3]) == 'High':
+            ShooterRateAccuracy = self.avg_category(COREDependencies.COREConstants.RADIO_VALUES[4]) + ' ' + str(self.avg_category(COREDependencies.COREConstants.RADIO_VALUES[5]))
+        elif self.avg_category(COREDependencies.COREConstants.RADIO_VALUES[3]) == 'Low':
+            ShooterRateAccuracy = self.avg_category(COREDependencies.COREConstants.RADIO_VALUES[6])
+        else:
+            ShooterRateAccuracy = ('Not Applicable')
+
 
