@@ -45,6 +45,7 @@ class Team:
                         for (key, value) in zip(keys, values):
                             self._category_dictionary[key] += (value,)
                     id = cursor.fetchone()
+
         finally:
             self.db_connection.close()
 

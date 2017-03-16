@@ -39,6 +39,21 @@ class Rankings:
                 while id is not None:
                     self._team_numbers.append(id['TABLE_NAME'])
                     id = cursor.fetchone()
+        except Exception as e:
+            # Debug Code for Creating Database
+            print("Content-type:text/html\r\n\r\n")
+            print('<html>')
+            print('<head>')
+            print('<title>Error Console</title>')
+            print('</head>')
+            print('<body>')
+            print('Oh no, something went wrong with SQL<br>')
+            print('Printing error below...<br>')
+            print('ERROR SELECTING TABLE NAMES')
+            print('<p> ------------ </p>')
+            print(e)
+            print('</body>')
+            print('</html>')
         finally:
             self._db_connection.close()
 

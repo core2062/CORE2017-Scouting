@@ -52,6 +52,21 @@ class ColorTeam:
                                 self._team_matches_in_db[team] += (value,)
                         matches = cursor.fetchone()
                     # Goal is to create dictionary with key team number and value: tuple of all match submitions
+        except Exception as e:
+            # Debug Code for Creating Database
+            print("Content-type:text/html\r\n\r\n")
+            print('<html>')
+            print('<head>')
+            print('<title>Error Console</title>')
+            print('</head>')
+            print('<body>')
+            print('Oh no, something went wrong with SQL<br>')
+            print('Printing statement below...<br>')
+            print('ERROR SELECTING TABLE ID\'S AND MATCH NUMBER')
+            print('<p> ------------ </p>')
+            print(e)
+            print('</body>')
+            print('</html>')
         finally:
             self._db_connection.close()
 
