@@ -50,7 +50,7 @@
       								<div class="row">
       									<div class="small-12 columns">
       										<label>Match Number: *
-												<input name="MatchNumber" class="form-control" type="number" placeholder="1" value="<?php echo $_GET['match']; ?>" readonly/>
+												<input  name="MatchNumber" class="form-control" type="number" placeholder="1" value="<?php echo $_GET['match']; ?>" required="" readonly/>
 											</label>
 										</div>
 									</div>
@@ -58,7 +58,7 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<label>Team Number: *
-												<input name="TeamNumber" class="form-control" value="<?php echo $_GET['team']; ?>" placeholder="2062" readonly/>
+												<input name="TeamNumber" class="form-control" value="<?php echo $_GET['team']; ?>" required="" placeholder="2062" readonly/>
 											</label>
 										</div>
 									</div>
@@ -271,7 +271,7 @@
       								<div class="row"> 
       										<legend>Post Match Alliance Pressure:</legend>
       										<label>
-      											<input data-parsley-required="true" data-parsley-type="integer" type="tel" name="HighAlliancePressure" autocomplete="off">
+      											<input data-parsley-type="integer" type="tel" name="HighAlliancePressure" autocomplete="off">
       										</label>
       								</div>
 
