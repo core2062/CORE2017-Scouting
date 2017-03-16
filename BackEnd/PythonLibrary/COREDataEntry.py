@@ -35,16 +35,45 @@ class HtmlInput:
                                                                       password=COREDependencies.COREDatabaseCredentials.DB_PASS,
                                                                       charset='utf8mb4',
                                                                       cursorclass=COREDependencies.pymysql.cursors.DictCursor)
-        except:
-            print("Database Creation Error!")
+        except Exception as e:
+            # Debug Code for Connecting to the SERVER
+            print("Content-type:text/html\r\n\r\n")
+            print('<html>')
+            print('<head>')
+            print('<title>Error Console</title>')
+            print('</head>')
+            print('<body>')
+            print('Oh no, something went wrong with SQL<br>')
+            print('Printing statement below...<br>')
+            print('ERROR CREATING DATABASE')
+            print('<p> ------------ </p>')
+            print(e)
+            print('</body>')
+            print('</html>')
 
         try:
             with self._serverConnection.cursor() as cursor:
                 cursor.execute("SET sql_notes = 0;")
-                cursor.execute(("CREATE DATABASE IF NOT EXISTS " + str(
-                    COREDependencies.COREConstants.COMPETITION_NAME)))
+                creation_string = "CREATE DATABASE IF NOT EXISTS " + str(
+                    COREDependencies.COREConstants.COMPETITION_NAME)
+                cursor.execute(creation_string)
                 cursor.execute("SET sql_notes = 1;")
             self._serverConnection.commit()
+        except Exception as e:
+            # Debug Code for Creating Database
+            print("Content-type:text/html\r\n\r\n")
+            print('<html>')
+            print('<head>')
+            print('<title>Error Console</title>')
+            print('</head>')
+            print('<body>')
+            print('Oh no, something went wrong with SQL<br>')
+            print('Printing statement below...<br>')
+            print('ERROR CREATING DATABASE')
+            print('<p> ------------ </p>')
+            print(e)
+            print('</body>')
+            print('</html>')
         finally:
             self._serverConnection.close()
 
@@ -57,8 +86,21 @@ class HtmlInput:
                                                                   database=COREDependencies.COREConstants.COMPETITION_NAME,
                                                                   charset='utf8mb4',
                                                                   cursorclass=COREDependencies.pymysql.cursors.DictCursor)
-        except:
-            print("Database Connection Error!")
+        except Exception as e:
+            # Debug Code for Creating Database
+            print("Content-type:text/html\r\n\r\n")
+            print('<html>')
+            print('<head>')
+            print('<title>Error Console</title>')
+            print('</head>')
+            print('<body>')
+            print('Oh no, something went wrong with SQL<br>')
+            print('Printing statement below...<br>')
+            print('ERROR CREATING DATABASE')
+            print('<p> ------------ </p>')
+            print(e)
+            print('</body>')
+            print('</html>')
 
     def define_team_number(self, number):
 
@@ -151,24 +193,6 @@ class HtmlInput:
         self._insert_SQL_values += ")"
         _insert_SQLstmt = self._insert_SQL + self._insert_SQL_values
 
-        """
-        #Debug Code for printing the SQL out.
-        #Uncomment this block and comment The try statement below to view inset sql
-        print("Content-type:text/html\r\n\r\n")
-        print('<html>')
-        print('<head>')
-        print('<title>CGI receipt</title>')
-        print('</head>')
-        print('<body>')
-        print(self._create_table_SQL)
-        print('<p> ------------ </p>')
-        print(_insert_SQLstmt)
-        print('<p> ------------ </p>')
-        print(self._insert_data)
-        print('</body>')
-        print('</html>')
-        """
-
         try:
             with self._dbConnection.cursor() as cursor:
                 cursor.execute("SET sql_notes = 0;")
@@ -176,6 +200,25 @@ class HtmlInput:
                 cursor.execute("SET sql_notes = 1;")
                 cursor.execute(_insert_SQLstmt, self._insert_data)
             self._dbConnection.commit()
+        except:
+            # Debug Code for printing the SQL out.
+            # Uncomment this block and comment The try statement below to view inset sql
+            print("Content-type:text/html\r\n\r\n")
+            print('<html>')
+            print('<head>')
+            print('<title>CGI receipt</title>')
+            print('</head>')
+            print('<body>')
+            print('Oh no, something went wrong with SQL<br>')
+            print('Printing statement below...<br>')
+            print(self._create_table_SQL)
+            print('<p> ------------ </p>')
+            print(_insert_SQLstmt)
+            print('<p> ------------ </p>')
+            print(self._insert_data)
+            print('<br>')
+            print('</body>')
+            print('</html>')
         finally:
             self._dbConnection.close()
 

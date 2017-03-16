@@ -42,7 +42,8 @@ class MatchReport:
     def generate_table(self):
 
         """ Iterates through each team objects internal dictionary that contains values for each report statistic
-            and dynamically generates a table containing statistics for each CoreFiles.Constants.REPORT_HEADER """
+            and dynamically generates a table containing statistics for each CoreFiles.Constants.MATCH_HEADER
+             CoreFiles.Constants.RANK_AND_MATCH_HEADER """
 
         print("Content-type:text/html\r\n\r\n")
         print('<html>')
@@ -62,7 +63,13 @@ class MatchReport:
                 print('<td class ="colBlue">', self._team_dictionary[keys]._team_number, '</td>')
             count += 1
         print('</tr>')
-        for dictionary_key in COREDependencies.COREConstants.REPORT_HEADER:
+        for dictionary_key in COREDependencies.COREConstants.MATCH_HEADERS:
+            print('<tr>')
+            print('<td>', dictionary_key, '</td>')
+            for key in self.TEAM_NUMBER_FIELDS:
+                print('<td>', self._team_dictionary[key].team_data[dictionary_key], '</td>')
+            print('</tr>')
+        for dictionary_key in COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS:
             print('<tr>')
             print('<td>', dictionary_key, '</td>')
             for key in self.TEAM_NUMBER_FIELDS:

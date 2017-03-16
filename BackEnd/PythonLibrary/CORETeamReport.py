@@ -27,11 +27,19 @@ print('<img src="../RobotPictures/' + str(team_number) +
       '.jpg" alt="Team Image Not Available" width="25%" height="25%">')
 print('<table>')
 print('<tr>')
-for dictionary_key in COREDependencies.COREConstants.REPORT_HEADER:
+for dictionary_key in COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS:
+    print('<td>', dictionary_key, '</td>')
+for dictionary_key in COREDependencies.COREConstants.MATCH_HEADERS:
+    print('<td>', dictionary_key, '</td>')
+for dictionary_key in COREDependencies.COREConstants.RANK_HEADERS:
     print('<td>', dictionary_key, '</td>')
 print('</tr>')
 print('<tr>')
-for dictionary_key in COREDependencies.COREConstants.REPORT_HEADER:
+for dictionary_key in COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS:
+    print('<td>' + str(calculated_team_data.team_data[dictionary_key]) + '</td>')
+for dictionary_key in COREDependencies.COREConstants.MATCH_HEADERS:
+    print('<td>' + str(calculated_team_data.team_data[dictionary_key]) + '</td>')
+for dictionary_key in COREDependencies.COREConstants.RANK_HEADERS:
     print('<td>' + str(calculated_team_data.team_data[dictionary_key]) + '</td>')
 print('</tr>')
 print('</table>')
