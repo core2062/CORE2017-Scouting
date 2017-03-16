@@ -98,6 +98,8 @@ RANK_ONLY_HEADERS = [
 
 MATCH_HEADERS = [
     'Avg Gears Auto'
+    'Fuel Pickup Type'
+    'Auto Gear Delivery Pegs'
 ]
 
 
