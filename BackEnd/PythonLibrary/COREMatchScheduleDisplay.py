@@ -25,7 +25,7 @@ print('<link rel="stylesheet" href="css/app.css">')
 print('<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="' +
       'sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>')
 print('</head>')
-print('<body>')
+print('<body link="##000000">')
 
 cellColorizer = COREDependencies.COREClassColor.ColorTeam()
 print('<table width="100%">')
