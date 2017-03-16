@@ -47,28 +47,28 @@ class TeamData(CORETeamData.Team):
         #Fuel Pickup Type
         FuelHopperON = self.times_key_exists_in_category(COREDependencies.COREConstants.CHECKBOX_NAMES[2],'ON')
         if FuelHopperON > MatchesPlayed/2:
-            FuelHopper = 'Hopper Pickup'
+            FuelHopper = 'Hopper, '
         else:
-            FuelHopper = 'No Hopper Pickup'
+            FuelHopper = ''
         FuelFloorON = self.times_key_exists_in_category(COREDependencies.COREConstants.CHECKBOX_NAMES[3],'ON')
         if FuelFloorON > MatchesPlayed/2:
-            FuelFloor = 'Fuel Floor Pickup'
+            FuelFloor = 'Floor'
         else:
-            FuelFloor = 'No Fuel Floor Pickup'
-        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[1]] = str(FuelHopper) + str(FuelFloor)
+            FuelFloor = ''
+        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[1]] = (FuelHopper + FuelFloor)
         #Which Gears in Auto
         if AllLeftGearsAuto > 0:
-            AutoLeftGear = 'Left Peg'
+            AutoLeftGear = 'Left,'
         else:
             AutoLeftGear = ''
         if AllRightGearsAuto > 0:
-            AutoRightGear = 'Right Peg'
+            AutoRightGear = 'Right'
         else:
             AutoRightGear = ''
         if AllMiddleGearsAuto > 0:
-            AutoMiddleGear = 'Middle Peg'
+            AutoMiddleGear = 'Middle,'
         else:
             AutoMiddleGear = ''
-        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = str(AutoLeftGear) +  str(AutoMiddleGear) + str(AutoRightGear)
+        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoLeftGear +  AutoMiddleGear + AutoRightGear)
 
 
