@@ -35,5 +35,6 @@ class TeamData(CORETeamData.Team):
             ShooterRateAccuracy = self.avg_category(COREDependencies.COREConstants.RADIO_VALUES[6])
         else:
             ShooterRateAccuracy = ('Not Applicable')
+        self.team_data[COREDependencies.COREConstants.REPORT_HEADER[7]] = ShooterRateAccuracy
 
 

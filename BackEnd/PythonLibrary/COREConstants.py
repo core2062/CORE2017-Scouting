@@ -128,7 +128,7 @@ RANK_OPTIONS = [
     ('AvgGearsLostPeg', 'Avg Gear Lost at Peg', 'descending'),
     ('AvgGearsLostFeed', 'Avg Gear Lost at Feeder', 'descending'),
     ('ShooterType', 'Shooter Type', 'category', ('None', 'Low', 'High')),
-    ('ShootRateAccuracy', 'Shooter Rate and Accuracy', )
+    ('ShootRateAccuracy', 'Shooter Rate and Accuracy', 'category', ('SlowLow', 'FastLow', 'Slow 25', 'Slow 50', 'Slow 75', 'Medium 25', 'Medium 50', 'Medium 75', 'Fast 25', 'Fast 50', 'Fast 75'))
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""
