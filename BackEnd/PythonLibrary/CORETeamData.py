@@ -45,7 +45,20 @@ class Team:
                         for (key, value) in zip(keys, values):
                             self._category_dictionary[key] += (value,)
                     id = cursor.fetchone()
-
+        except Exception as e:
+            # Debug Code for Getting team data
+            print("Content-type:text/html\r\n\r\n")
+            print('<html>')
+            print('<head>')
+            print('<title>Error Console</title>')
+            print('</head>')
+            print('<body>')
+            print('Oh no, something went wrong with SQL<br>')
+            print('Printing statement below...<br>')
+            print(e)
+            print('<br>')
+            print('</body>')
+            print('</html>')
         finally:
             self.db_connection.close()
 
