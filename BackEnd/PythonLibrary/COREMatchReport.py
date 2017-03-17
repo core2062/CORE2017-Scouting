@@ -82,13 +82,13 @@ class MatchReport:
             count += 1
         print('</tr>')
         print('</thead>')
-        for dictionary_key in COREDependencies.COREConstants.MATCH_HEADERS:
+        for dictionary_key in COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS:
             print('<tr>')
             print('<td>', dictionary_key, '</td>')
             for key in self.TEAM_NUMBER_FIELDS:
                 print('<td>', self._team_dictionary[key].team_data[dictionary_key], '</td>')
             print('</tr>')
-        for dictionary_key in COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS:
+        for dictionary_key in COREDependencies.COREConstants.MATCH_HEADERS:
             print('<tr>')
             print('<td>', dictionary_key, '</td>')
             for key in self.TEAM_NUMBER_FIELDS:
