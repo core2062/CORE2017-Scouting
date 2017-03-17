@@ -70,5 +70,6 @@ class TeamData(CORETeamData.Team):
         else:
             AutoMiddleGear = ''
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoLeftGear +  AutoMiddleGear + AutoRightGear)
-
+        #Climb Ratio. Success:Fail:No Attempt
+        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[3]] = str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'ClimbFail')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'NoClimb'))
 
