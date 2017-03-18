@@ -11,7 +11,7 @@ class TeamData(CORETeamData.Team):
 
     def populate_data(self):
 
-        """ Use Constants from REPORT_HEADER when defining keys for team_data """
+        """ Use Constants from RANK_AND_MATCH_HEADERS, MATCH_HEADERS, and RANK_ONLY_HEADERS when defining keys for team_data """
 
         """self.team_data[COREDependencies.COREConstants.REPORT_HEADER[0]] = 76
         self.team_data[COREDependencies.COREConstants.REPORT_HEADER[1]] = self.avg_data(COREDependencies.COREConstants.NUMBER_NAMES[0])
@@ -70,5 +70,9 @@ class TeamData(CORETeamData.Team):
         else:
             AutoMiddleGear = ''
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoLeftGear +  AutoMiddleGear + AutoRightGear)
-
-
+        #Climb Ratio. Success:Fail:No Attempt
+        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[3]] = str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'ClimbFail')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'NoClimb'))
+        ClimbRatio = self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb') / MatchesPlayed
+        self.team_data[COREDependencies.COREConstants.RANK_ONLY_HEADERS[0]] = ClimbRatio
+        #Comments
+        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[4]] = self.list_all_results(COREDependencies.COREConstants.TEXT_NAMES[1])

@@ -69,7 +69,7 @@ print('<b> Teams: </b>')
 print('<table>')
 for team in int_nums:
     print('<tr>')
-    print('<td><img src="../RobotPictures/' + str(team) +
+    print('<td><img src="http://2062scouting.imgix.net/' + str(team) +
           '.jpg" alt="Team Image Not Available" width="25%" height="25%"></td>')
     print('<td><a href="CORETeamReport.py?team_number=' +
           str(team) + '">' + str(team) + '</a></td>')

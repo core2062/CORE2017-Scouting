@@ -231,8 +231,8 @@ class Team:
             category : header that exists in the database.
             return : a string that contains all results separated by ;'s."""
 
-        output = ''
+        output = ' '
         if self._verify_category(category) == 1:
             for data in self._get_data(category):
-                output += str(data) + '; '
+                output += data + '; '
         return output
