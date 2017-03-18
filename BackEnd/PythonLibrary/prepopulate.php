@@ -27,7 +27,7 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.min.js" integrity="sha256-QKOftzbqahZaXS2amOh27JacZ6TbmT4TmGxNo4Jue4Y=" crossorigin="anonymous"></script>
 
-		<!--<script type="text/javascript" src="show.js"></script>-->
+		<script type="text/javascript" src="show.js"></script>
 
 	</head>
 	<body>
@@ -246,9 +246,9 @@
 								<legend>Score Fuel:</legend>
 								<div class="row">
 									
-									<input required="" name="ShooterType" id="High" value="High" type="radio"><label for="High">High Goal</label>
-									<input required="" name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low Goal</label>
-									 <input required="" name="ShooterType" id="None" value="None" type="radio"><label for="None">None</label>
+									<input required="" name="ShooterType" id="High" onclick="LowDisable()" value="High" type="radio"><label for="High">High Goal</label>
+									<input required="" onclick="HighDisable()" name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low Goal</label>
+									 <input required="" name="ShooterType" id="None" onclick="BothDisabled()" value="None" type="radio"><label for="None">None</label>
 
 								</div>
 							</fieldset>
@@ -271,7 +271,7 @@
       								<div class="row"> 
       										<legend>Post Match Alliance Pressure:</legend>
       										<label>
-      											<input data-parsley-type="integer" type="tel" name="HighAlliancePressure" autocomplete="off">
+      											<input id="HighAlliancePressure" data-parsley-type="integer" type="tel" name="HighAlliancePressure" autocomplete="off" value="0">
       										</label>
       								</div>
 
