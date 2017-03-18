@@ -92,14 +92,16 @@ RANK_AND_MATCH_HEADERS = [
 
 
 RANK_ONLY_HEADERS = [
-
+    'Climb Percentage'
 ]
 
 
 MATCH_HEADERS = [
     'Avg Gears Auto',
     'Fuel Pickup Type',
-    'Auto Gear Delivery Pegs'
+    'Auto Gear Delivery Pegs',
+    'Climbing, Success:Failure:No Attempt',
+    'Comments'
 ]
 
 
@@ -124,7 +126,7 @@ RANK_REPORT_FIELD_NAMES = {
         (4). (ORDER SPECIFIC ARGUMENT) Should only be supplied if order is 'category'.
             A tuple of all possible submission data for the supplied rank_statistic
             category corresponding to the statistic's RADIO_VALUES values in order of
-            which should be displayed last, worst -> best.
+            which should be displayed last, best -> worst.
             Intended to be used for ranking based on a priority of strings.
     EX: 'High Goal Accuracy': ('highGoals', 'high Goal Accuracy', 'descending')
     EX: 'Highest Auto Type': ('highest_auto_type', 'Highest Auto', 'category', ('breach', 'reach', 'no_interaction')) """
@@ -135,7 +137,8 @@ RANK_OPTIONS = [
     ('AvgGearsLostPeg', 'Avg Gear Lost at Peg', 'descending'),
     ('AvgGearsLostFeed', 'Avg Gear Lost at Feeder', 'descending'),
     ('ShooterType', 'Shooter Type', 'category', ('None', 'Low', 'High')),
-    ('ShootRateAccuracy', 'Shooter Rate and Accuracy', 'category', ('SlowLow', 'FastLow', 'Slow 25', 'Slow 50', 'Slow 75', 'Medium 25', 'Medium 50', 'Medium 75', 'Fast 25', 'Fast 50', 'Fast 75'))
+    ('ShootRateAccuracy', 'Shooter Rate and Accuracy', 'category', ('Fast 75', 'Fast 50', 'Fast 25', 'Medium 75', 'Medium 50', 'Medium 25', 'Slow 75', 'Slow 50', 'Slow 25', 'FastLow', 'SlowLow', 'Not Applicable')),
+    ('ClimbPercentage', 'Climb Percentage', 'descending')
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""
