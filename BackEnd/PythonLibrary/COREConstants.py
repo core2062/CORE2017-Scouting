@@ -97,7 +97,7 @@ RANK_ONLY_HEADERS = [
 
 
 MATCH_HEADERS = [
-    'Avg Gears Auto',
+    'Avg Gears Auto, Gears : Matches Played',
     'Fuel Pickup Type',
     'Auto Gear Delivery Pegs',
     'Climbing, Success:Failure:No Attempt',

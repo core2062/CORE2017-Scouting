@@ -55,7 +55,10 @@ class TeamData(CORETeamData.Team):
             FuelFloor = 'Floor'
         else:
             FuelFloor = ''
-        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[1]] = (FuelHopper + FuelFloor)
+        if (FuelHopper + FuelFloor) == '':
+            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[1]] = 'None'
+        else:
+            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[1]] = (FuelHopper + FuelFloor)
         #Which Gears in Auto
         if AllLeftGearsAuto > 0:
             AutoLeftGear = 'Left,'
@@ -69,7 +72,10 @@ class TeamData(CORETeamData.Team):
             AutoMiddleGear = 'Middle,'
         else:
             AutoMiddleGear = ''
-        self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoLeftGear +  AutoMiddleGear + AutoRightGear)
+        if (AutoLeftGear + AutoMiddleGear + AutoRightGear) == '':
+            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = 'None'
+        else:
+            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoLeftGear + AutoMiddleGear + AutoRightGear)
         #Climb Ratio. Success:Fail:No Attempt
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[3]] = str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'ClimbFail')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'NoClimb'))
         ClimbRatio = self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb') / MatchesPlayed
