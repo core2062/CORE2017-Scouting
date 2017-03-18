@@ -32,3 +32,10 @@ function BothDisabled() {
     document.getElementById("FastLow").disabled = true;
     document.getElementById("SlowLow").disabled = true;
 }
+function DisableAutoPressure() {
+    document.getElementById("PressureAuto").disabled = true;
+
+}
+function EnableAutoPressure() {
+    document.getElementById("PressureAuto").removeAttribute("disabled");
+}

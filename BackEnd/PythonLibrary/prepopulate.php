@@ -98,9 +98,9 @@
       								<div class="row">
       									<fieldset class="large-6 columns">
       										<legend>Score Fuel:</legend>
-      										 <input required="" name="FuelAuto" id="FuelLowAuto" value="FuelLowAuto" type="radio"><label for="FuelLowAuto">Low Goal</label>
-      										 <input required="" name="FuelAuto" id="FuelHighAuto" value="FuelHighAuto" type="radio"><label for="FuelHighAuto">High Goal</label>	 
-      										 <input required="" name="FuelAuto" id="FuelNoneAuto" value="FuelNoneAuto" type="radio"><label for="FuelNoneAuto">None</label>	      										 
+      										 <input required="" name="FuelAuto" onclick="EnableAutoPressure()" id="FuelLowAuto" value="FuelLowAuto" type="radio"><label for="FuelLowAuto">Low Goal</label>
+      										 <input required="" name="FuelAuto" onclick="EnableAutoPressure()" id="FuelHighAuto" value="FuelHighAuto" type="radio"><label for="FuelHighAuto">High Goal</label>	 
+      										 <input required="" onclick="DisableAutoPressure()" name="FuelAuto" id="FuelNoneAuto" value="FuelNoneAuto" type="radio"><label for="FuelNoneAuto">None</label>	      										 
       									</fieldset>
       								</div>
 
@@ -108,7 +108,7 @@
       									<fieldset class="large-6 columns">
       										<legend>Post Auto Pressure: *</legend>
       										<label>
-      											<input data-parsley-required="true" data-parsley-range="[0, 100]" type="tel" value="0" name="PressureAuto" autocomplete="off">
+      											<input data-parsley-required="true" data-parsley-range="[0, 100]" type="tel" value="0" id="PressureAuto" name="PressureAuto" autocomplete="off">
       										</label>
       									</fieldset>
       								</div>
