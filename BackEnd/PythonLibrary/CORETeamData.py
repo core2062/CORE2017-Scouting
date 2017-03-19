@@ -170,6 +170,22 @@ class Team:
                     min = data
             return min
 
+    def times_value_exists(self, category, value):
+
+        """ NUMBER SPECIFIC FUNCTION which looks for the number of entries a specific integer value
+            exists in the category
+
+            category : number name that exists in the database.
+            value : desired integer value that is being looked for.
+            return : number of times value exists """
+
+        if self._verify_category(category) == 1:
+            count = 0
+            for data in self._get_data(category):
+                if value == data:
+                    count += 1
+            return count
+
     def rank_category(self, category, rank_order):
 
         """ RADIO SPECIFIC FUNCTION which displays best option.
@@ -209,11 +225,12 @@ class Team:
 
     def times_key_exists_in_category(self, category, key):
 
-        """ RADIO SPECIFIC FUNCTION which looks for the number of entries for a specific key
+        """ RADIO (OR CHECKBOX) SPECIFIC FUNCTION which looks for the number of entries for a specific key
             in the given radio category.
 
             category : radio name that exists in the database.
-            key : a COREDependencies.COREConstants.RADIO_VALUES option for the given category
+            key : a COREDependencies.COREConstants.RADIO_VALUES option for the given category.
+            Or 'Yes' / 'No' if checkbox
             return : number of times 'key' exists """
 
         if self._verify_category(category) == 1:
@@ -236,3 +253,17 @@ class Team:
             for data in self._get_data(category):
                 output += data + '; '
         return output
+
+    def _list_of_all_results(self, category):
+
+        """ INTERNAL NON-DISPLAYABLE FUNCTION: Usable by any input type but returns a
+        list of all the entries in list format. Used for further custom calculations.
+
+            category : header that exists in the database.
+            return : a list that contains all results ."""
+
+        results = []
+        if self._verify_category(category) == 1:
+            for data in self._get_data(category):
+                results.append(data)
+        return results
