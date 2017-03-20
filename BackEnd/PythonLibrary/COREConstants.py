@@ -91,7 +91,8 @@ RANK_AND_MATCH_HEADERS = [
     'Shooter Type',
     'Shooter Rate and Accuracy',
     'Avg Auto Kpa',
-    'Avg Tele Kpa'
+    'Avg Tele Kpa',
+    'CORE-PR'
 ]
 
 # Shows up as a ranking Option only
@@ -144,7 +145,8 @@ RANK_OPTIONS = [
     ('ShootRateAccuracy', 'Shooter Rate and Accuracy', 'category', ('Fast 75', 'Fast 50', 'Fast 25', 'Medium 75', 'Medium 50', 'Medium 25', 'Slow 75', 'Slow 50', 'Slow 25', 'FastLow', 'SlowLow', 'Not Applicable')),
     ('ClimbPercentage', 'Climb Percentage', 'descending'),
     ('AutoKpa', 'Avg Auto Kpa', 'descending'),
-    ('TeleKpa', 'Avg Tele Kpa', 'descending')
+    ('TeleKpa', 'Avg Tele Kpa', 'descending'),
+    ('CorePR', 'CORE-PR', 'descending')
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""

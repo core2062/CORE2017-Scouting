@@ -92,7 +92,7 @@ class TeamData(CORETeamData.Team):
         auto_kap_counter = 0
         if times_auto_high > 0 or times_auto_low > 0:
             for entry in all_auto_kpas:
-                if entry != 0:
+                if entry != 0 or None:
                     auto_kap_counter += 1
                     auto_kap_sum += entry
             if auto_kap_counter != 0:
@@ -109,7 +109,7 @@ class TeamData(CORETeamData.Team):
         tele_kap_counter = 0
         if times_tele_high > 0 or times_tele_low > 0:
             for entry in all_tele_kaps:
-                if entry != 0:
+                if entry != 0 or None:
                     tele_kap_counter += 1
                     tele_kap_sum += entry
             if tele_kap_counter != 0:
@@ -118,3 +118,13 @@ class TeamData(CORETeamData.Team):
                 self.team_data['Avg Tele Kpa'] = 0
         else:
             self.team_data['Avg Tele Kpa'] = 0
+
+        # Draven OPR
+
+        baseline_crosses = self.times_key_exists_in_category('CrossedBaselineAuto', 'ON')
+        if MatchesPlayed != 0:
+            self.team_data['CORE-PR'] = round((self.team_data['Avg Tele Kpa'] + self.team_data['Avg Auto Kpa'] +
+                                        (self.team_data['Avg Gears Tele'] * 11.43) + ((AllGearsAuto / MatchesPlayed) * 17.14)
+                                        + (ClimbRatio*50) + ((baseline_crosses / MatchesPlayed) * 5)), 2)
+        else:
+            self.team_data['CORE-PR'] = 0
