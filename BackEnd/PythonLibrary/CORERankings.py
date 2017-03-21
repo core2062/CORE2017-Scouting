@@ -73,7 +73,7 @@ class Rankings:
 
         self._rank_option_name = str(rank_option_name)
 
-    def register_rank_option(self, field_value, rank_statistic, rank_order='descending', category_options=None):
+    def register_rank_option(self, field_value, rank_statistic, rank_order, category_options=None):
 
         """ Registers form radio options and specifies how they should be ranked.
 
@@ -87,12 +87,14 @@ class Rankings:
             category_options : left as None unless rank_order='category'. It should contain
                 a tuple of all possible submission data for the supplied rank_statistic category.
                 Intended to be used for ranking based on a priority list of text names. """
-
+        items = ()
         if rank_order == 'category':
             if category_options is None:
                 print("No category ranking options supplied by: " + rank_statistic)
             else:
-                self._rank_option_data.append((field_value, rank_statistic, rank_order, category_options))
+                for item in category_options:
+                    items += (item,)
+                self._rank_option_data.append((field_value, rank_statistic, rank_order, items))
         else:
             self._rank_option_data.append((field_value, rank_statistic, rank_order))
 
@@ -166,8 +168,10 @@ class Rankings:
             for category in (self._teams_data[team]):
                 if category == RANK_HEADER:
                     score.append(self._teams_data[team][category])
-        for (teamNumber, value) in zip(self._team_numbers, score):
-            priority_dictionary[score] = ((teamNumber, value),)
+        for teamNumber in self._team_numbers:
+            for category in self._teams_data[teamNumber]:
+                if category == RANK_HEADER:
+                    priority_dictionary[self._teams_data[teamNumber][category]].append((teamNumber, self._teams_data[teamNumber][category]))
         for team in data_list:
             for item in priority_dictionary:
                 if team[1] == priority_dictionary[item]:
@@ -243,8 +247,8 @@ class Rankings:
 form_data = Rankings()
 form_data.change_form_names(COREDependencies.COREConstants.RANK_REPORT_FIELD_NAMES['ranking_options'])
 for item in COREDependencies.COREConstants.RANK_OPTIONS:
-    if item[1] == 'category':
-        form_data.register_rank_option(item[0], item[1], item[2])
+    if item[2] == 'category':
+        form_data.register_rank_option(item[0], item[1], item[2], item[3])
     else:
-        form_data.register_rank_option(item[0],  item[1])
+        form_data.register_rank_option(item[0], item[1], item[2])
 form_data.generate_table()

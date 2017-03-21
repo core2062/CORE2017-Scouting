@@ -21,6 +21,7 @@ class Team:
         self._data_list = COREDependencies.COREConstants.ALL_NAMES
         self._all_data = []
         self._category_dictionary = {}
+        self._err = 0
 
         self.db_connection = COREDependencies.pymysql.connect(host=COREDependencies.COREDatabaseCredentials.DB_HOST,
                                                               user=COREDependencies.COREDatabaseCredentials.DB_USER,
@@ -46,19 +47,9 @@ class Team:
                             self._category_dictionary[key] += (value,)
                     id = cursor.fetchone()
         except Exception as e:
-            # Debug Code for Getting team data
-            print("Content-type:text/html\r\n\r\n")
-            print('<html>')
-            print('<head>')
-            print('<title>Error Console</title>')
-            print('</head>')
-            print('<body>')
-            print('Oh no, something went wrong with SQL<br>')
-            print('Printing statement below...<br>')
-            print(e)
-            print('<br>')
-            print('</body>')
-            print('</html>')
+            for category in COREDependencies.COREConstants.ALL_NAMES:
+                self._category_dictionary[category] = ('Not Set',)
+            self._err = 1
         finally:
             self.db_connection.close()
 
@@ -102,6 +93,8 @@ class Team:
             return : sum of all data in given headers. """
 
         if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
             total = 0
             for data in self._get_data(category):
                 total += data
@@ -129,6 +122,8 @@ class Team:
             to the nearest hundredth. """
 
         if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
             if self.num_data_entries(category) != 0:
                 return round(self.sum_data(category)/self.num_data_entries(category), 2)
             else:
@@ -142,6 +137,8 @@ class Team:
             return : max number in a given category. """
 
         if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
             count = 0
             max = 0
             for data in self._get_data(category):
@@ -160,6 +157,8 @@ class Team:
             return : max number in a given category. """
 
         if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
             count = 0
             min = 0
             for data in self._get_data(category):
@@ -169,6 +168,24 @@ class Team:
                 if data < min:
                     min = data
             return min
+
+    def times_value_exists(self, category, value):
+
+        """ NUMBER SPECIFIC FUNCTION which looks for the number of entries a specific integer value
+            exists in the category
+
+            category : number name that exists in the database.
+            value : desired integer value that is being looked for.
+            return : number of times value exists """
+
+        if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
+            count = 0
+            for data in self._get_data(category):
+                if value == data:
+                    count += 1
+            return count
 
     def rank_category(self, category, rank_order):
 
@@ -180,6 +197,8 @@ class Team:
             return : best option. """
 
         if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
             highest = 'N/A'
             for item in rank_order:
                 for data in self._get_data(category):
@@ -195,6 +214,8 @@ class Team:
             return : most common radio option. """
 
         if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
             maxx = 0
             maxx_name = 'No_Data'
             for item in COREDependencies.COREConstants.RADIO_VALUES[category]:
@@ -209,11 +230,12 @@ class Team:
 
     def times_key_exists_in_category(self, category, key):
 
-        """ RADIO SPECIFIC FUNCTION which looks for the number of entries for a specific key
+        """ RADIO (OR CHECKBOX) SPECIFIC FUNCTION which looks for the number of entries for a specific key
             in the given radio category.
 
             category : radio name that exists in the database.
-            key : a COREDependencies.COREConstants.RADIO_VALUES option for the given category
+            key : a COREDependencies.COREConstants.RADIO_VALUES option for the given category.
+            Or 'Yes' / 'No' if checkbox
             return : number of times 'key' exists """
 
         if self._verify_category(category) == 1:
@@ -233,6 +255,22 @@ class Team:
 
         output = ' '
         if self._verify_category(category) == 1:
+            if self._err == 1:
+                return -1
             for data in self._get_data(category):
                 output += data + '; '
         return output
+
+    def _list_of_all_results(self, category):
+
+        """ INTERNAL NON-DISPLAYABLE FUNCTION: Usable by any input type but returns a
+        list of all the entries in list format. Used for further custom calculations.
+
+            category : header that exists in the database.
+            return : a list that contains all results ."""
+
+        results = []
+        if self._verify_category(category) == 1:
+            for data in self._get_data(category):
+                results.append(data)
+        return results

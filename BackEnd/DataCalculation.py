@@ -82,3 +82,49 @@ class TeamData(CORETeamData.Team):
         self.team_data[COREDependencies.COREConstants.RANK_ONLY_HEADERS[0]] = ClimbRatio
         #Comments
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[4]] = self.list_all_results(COREDependencies.COREConstants.TEXT_NAMES[1])
+
+        # Draven Auto & Tele Kpa
+
+        times_auto_high = self.times_key_exists_in_category('FuelAuto', 'FuelHighAuto')
+        times_auto_low = self.times_key_exists_in_category('FuelAuto', 'FuelLowAuto')
+        all_auto_kpas = self._list_of_all_results('PressureAuto')
+        auto_kap_sum = 0
+        auto_kap_counter = 0
+        if times_auto_high > 0 or times_auto_low > 0:
+            for entry in all_auto_kpas:
+                if entry != 0 or None:
+                    auto_kap_counter += 1
+                    auto_kap_sum += entry
+            if auto_kap_counter != 0:
+                self.team_data['Avg Auto Kpa'] = (auto_kap_sum/auto_kap_counter)
+            else:
+                self.team_data['Avg Auto Kpa'] = 0
+        else:
+            self.team_data['Avg Auto Kpa'] = 0
+
+        times_tele_high = self.times_key_exists_in_category('ShooterType', 'High')
+        times_tele_low = self.times_key_exists_in_category('ShooterType', 'Low')
+        all_tele_kaps = self._list_of_all_results('HighAlliancePressure')
+        tele_kap_sum = 0
+        tele_kap_counter = 0
+        if times_tele_high > 0 or times_tele_low > 0:
+            for entry in all_tele_kaps:
+                if entry != 0 or None:
+                    tele_kap_counter += 1
+                    tele_kap_sum += entry
+            if tele_kap_counter != 0:
+                self.team_data['Avg Tele Kpa'] = (tele_kap_sum / tele_kap_counter)
+            else:
+                self.team_data['Avg Tele Kpa'] = 0
+        else:
+            self.team_data['Avg Tele Kpa'] = 0
+
+        # Draven OPR
+
+        baseline_crosses = self.times_key_exists_in_category('CrossedBaselineAuto', 'ON')
+        if MatchesPlayed != 0:
+            self.team_data['CORE-PR'] = round((self.team_data['Avg Tele Kpa'] + self.team_data['Avg Auto Kpa'] +
+                                        (self.team_data['Avg Gears Tele'] * 11.43) + ((AllGearsAuto / MatchesPlayed) * 17.14)
+                                        + (ClimbRatio*50) + ((baseline_crosses / MatchesPlayed) * 5)), 2)
+        else:
+            self.team_data['CORE-PR'] = 0
