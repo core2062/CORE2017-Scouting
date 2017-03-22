@@ -4,12 +4,12 @@ $(function() {
     $('#PostAutoPressure').hide();
 });
 function HighGoal() {
-    $('#HighFieldset').hide();
-    $('#LowFieldset').show();
-}
-function LowGoal() {
     $('#HighFieldset').show();
     $('#LowFieldset').hide();
+}
+function LowGoal() {
+    $('#HighFieldset').hide();
+    $('#LowFieldset').low();
 }
 function BothDisabled() {
     $('#HighFieldset').hide();
