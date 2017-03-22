@@ -9,7 +9,7 @@ function HighGoal() {
 }
 function LowGoal() {
     $('#HighFieldset').hide();
-    $('#LowFieldset').low();
+    $('#LowFieldset').show();
 }
 function BothDisabled() {
     $('#HighFieldset').hide();
