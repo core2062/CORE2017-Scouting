@@ -113,7 +113,7 @@ class TeamData(CORETeamData.Team):
                     tele_kap_counter += 1
                     tele_kap_sum += entry
             if tele_kap_counter != 0:
-                self.team_data['Avg Tele Kpa'] = (tele_kap_sum / tele_kap_counter)
+                self.team_data['Avg Tele Kpa'] = ((tele_kap_sum / tele_kap_counter) - self.team_data['Avg Auto Kpa'])
             else:
                 self.team_data['Avg Tele Kpa'] = 0
         else:

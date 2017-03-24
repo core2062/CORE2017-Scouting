@@ -37,7 +37,8 @@ class Rankings:
                                str(COREDependencies.COREConstants.COMPETITION_NAME) + "'")
                 id = cursor.fetchone()
                 while id is not None:
-                    self._team_numbers.append(id['TABLE_NAME'])
+                    if id['TABLE_NAME'] != 'none':
+                        self._team_numbers.append(id['TABLE_NAME'])
                     id = cursor.fetchone()
         except Exception as e:
             # Debug Code for Creating Database
@@ -140,11 +141,12 @@ class Rankings:
         # Potential optimization after testing
         data_list = []
         score = []
+        team_numbers = self._teams_data.keys()
         for team in self._teams_data:
             for category in (self._teams_data[team]):
                 if category == RANK_HEADER:
                     score.append(self._teams_data[team][category])
-        for (teamNumber, value) in zip(self._team_numbers, score):
+        for (teamNumber, value) in zip(team_numbers, score):
             data_list.append((teamNumber, value),)
         return sorted(data_list, key=self._sort_by_second, reverse=True)
 
