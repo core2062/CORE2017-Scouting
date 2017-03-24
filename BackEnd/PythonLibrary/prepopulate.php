@@ -104,7 +104,7 @@
       									</fieldset>
       								</div>
 
-      								<div class="row"> 
+      								<div class="row" id="PostAutoPressure"> 
       									<fieldset class="large-6 columns">
       										<legend>Post Auto Pressure: *</legend>
       										<label>
@@ -246,15 +246,15 @@
 								<legend>Score Fuel:</legend>
 								<div class="row">
 									
-									<input required="" name="ShooterType" id="High" onclick="LowDisable()" value="High" type="radio"><label for="High">High Goal</label>
-									<input required="" onclick="HighDisable()" name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low Goal</label>
+									<input required="" name="ShooterType" id="High" onclick="HighGoal()" value="High" type="radio"><label for="High">High Goal</label>
+									<input required="" onclick="LowGoal()" name="ShooterType" id="Low" value="Low" type="radio"><label for="Low">Low Goal</label>
 									 <input required="" name="ShooterType" id="None" onclick="BothDisabled()" value="None" type="radio"><label for="None">None</label>
 
 								</div>
 							</fieldset>
 
 
-                  					<fieldset>
+                  					<fieldset id="HighFieldset">
                   					<legend>High Goal:</legend>
                    					<div class="row" id="HighOption">
       										<legend>Frequency:</legend>
@@ -280,7 +280,7 @@
                   				
 
        								<div class="row">
-      									<fieldset class="large-6 columns">
+      									<fieldset class="large-6 columns" id="LowFieldset">
       										<legend>Low Goal:</legend>
                           <legend> </legend>
                           <legend>Frequency:</legend>
@@ -331,6 +331,5 @@
 <script type="text/javascript">
   $('#form').parsley();
 </script>
-
 	</body>
 </html>     												
