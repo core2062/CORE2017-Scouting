@@ -38,7 +38,7 @@ print('</head>')
 print('<body link="##000000">')
 print(str(team_number))
 print('<img src="http://2062scouting.imgix.net/' + str(team_number) +
-      '.jpg" alt="Team Image Not Available" width="25%" height="25%">')
+      '.jpg?h=200" alt="Team Image Not Available">')
 print('<table>')
 print('<tr>')
 for dictionary_key in COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS:

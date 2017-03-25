@@ -37,7 +37,7 @@ class Rankings:
                                str(COREDependencies.COREConstants.COMPETITION_NAME) + "'")
                 id = cursor.fetchone()
                 while id is not None:
-                    if id['TABLE_NAME'] != 'none':
+                    if id['TABLE_NAME'] != 'None':
                         self._team_numbers.append(id['TABLE_NAME'])
                     id = cursor.fetchone()
         except Exception as e:

@@ -33,15 +33,15 @@ print('<table width="100%">')
 print('<thead>')
 print('<tr>')
 print('<th rowspan="2" width="20%">Match #</th>')
-print('<th colspan="3" width="40%">Red Alliance</th>')
 print('<th colspan="3" width="40%">Blue Alliance</th>')
+print('<th colspan="3" width="40%">Red Alliance</th>')
 print('</tr>')
 print('<tr>')
 for i in range(1, 7):
     if i <= 3:
-        print('<th> Red Team #' + str(i) + '</th>')
+        print('<th> Blue Team #' + str(i) + '</th>')
     else:
-        print('<th> Blue Team #' + str((i-3)) + '</th>')
+        print('<th> Red Team #' + str((i-3)) + '</th>')
 print('</tr>')
 print('</thead>')
 match_num = 1
