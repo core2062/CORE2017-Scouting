@@ -79,7 +79,7 @@ class TeamData(CORETeamData.Team):
         #Climb Ratio. Success:Fail:No Attempt
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[3]] = str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'ClimbFail')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'NoClimb'))
         ClimbRatio = self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb') / MatchesPlayed
-        self.team_data[COREDependencies.COREConstants.RANK_ONLY_HEADERS[0]] = round(ClimbRatio, 2)
+        self.team_data[COREDependencies.COREConstants.RANK_ONLY_HEADERS[0]] = ClimbRatio
         #Comments
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[4]] = self.list_all_results(COREDependencies.COREConstants.TEXT_NAMES[1])
 
@@ -128,6 +128,3 @@ class TeamData(CORETeamData.Team):
                                         + (ClimbRatio*50) + ((baseline_crosses / MatchesPlayed) * 5)), 2)
         else:
             self.team_data['CORE-PR'] = 0
-
-        # Active V. Passive
-        self.team_data[COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS[9]] = self.avg_category(COREDependencies.COREConstants.RADIO_NAMES[2])
