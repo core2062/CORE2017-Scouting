@@ -81,9 +81,9 @@
       									<div class="row">
       										<fieldset class="large-6 columns">
       										<legend>Deliver Gear:</legend>
-      										 	<input name="DeliverGearAuto" id="leftgear" value="LeftGearAuto" type="radio"><label for="leftgear">Left</label>
+      										 	<input name="DeliverGearAuto" id="BoilerGearAuto" value="BoilerGearAuto" type="radio"><label for="BoilerGearAuto">Boiler Side</label>
       										 	<input required="" name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
-      										 	<input required="" name="DeliverGearAuto" id="rightgear" value="RightGearAuto" type="radio"><label for="rightgear">Right</label>
+      										 	<input required="" name="DeliverGearAuto" id="FeederGearAuto" value="FeederGearAuto" type="radio"><label for="FeederGearAuto">Feeder Side</label>
        										 	<input required="" name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>     										 
       										</fieldset>
       									</div>
