@@ -14,7 +14,7 @@ General Team Info (no dependency)
 
 TEAM_NUMBER = 2062
 
-COMPETITION_NAME = 'testdata'
+COMPETITION_NAME = 'Milwaukee_Qualifications'
 
 """===========================================
 Scout HTML input field names (form dependency)
@@ -92,12 +92,14 @@ RANK_AND_MATCH_HEADERS = [
     'Shooter Rate and Accuracy',
     'Avg Auto Kpa',
     'Avg Tele Kpa',
-    'CORE-PR'
+    'CORE-PR',
+    'Gear Manipulator'
 ]
 
 # Shows up as a ranking Option only
 RANK_ONLY_HEADERS = [
     'Climb Percentage'
+
 ]
 
 # Shows up on Match Report only
@@ -146,7 +148,8 @@ RANK_OPTIONS = [
     ('ClimbPercentage', 'Climb Percentage', 'descending'),
     ('AutoKpa', 'Avg Auto Kpa', 'descending'),
     ('TeleKpa', 'Avg Tele Kpa', 'descending'),
-    ('CorePR', 'CORE-PR', 'descending')
+    ('CorePR', 'CORE-PR', 'descending'),
+    ('GearManipulator', 'Gear Manipulator', 'category', ('Active', 'Passive', 'None'))
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""

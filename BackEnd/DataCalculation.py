@@ -113,7 +113,7 @@ class TeamData(CORETeamData.Team):
                     tele_kap_counter += 1
                     tele_kap_sum += entry
             if tele_kap_counter != 0:
-                self.team_data['Avg Tele Kpa'] = (tele_kap_sum / tele_kap_counter)
+                self.team_data['Avg Tele Kpa'] = ((tele_kap_sum / tele_kap_counter) - self.team_data['Avg Auto Kpa'])
             else:
                 self.team_data['Avg Tele Kpa'] = 0
         else:
@@ -128,3 +128,6 @@ class TeamData(CORETeamData.Team):
                                         + (ClimbRatio*50) + ((baseline_crosses / MatchesPlayed) * 5)), 2)
         else:
             self.team_data['CORE-PR'] = 0
+
+        # Active V. Passive
+        self.team_data[COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS[9]] = self.avg_category(COREDependencies.COREConstants.RADIO_NAMES[2])
