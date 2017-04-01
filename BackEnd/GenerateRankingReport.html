@@ -1,20 +1,48 @@
 <!doctype html>
 <html>
+<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>CORE 2062 Scouting | Ranking Request</title>
+		<link rel="shortcut icon" href="favicon.ico" />
+		<meta name="description" content="CORE 2062 Scouting Form">
+    	<meta name="author" content="CORE2062">
+    	<meta name="robots" content="noindex, nofollow">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css" integrity="sha256-NTds7atVCDeolLUzbcl45lx4gJYO+hNXCaX1wC2HQHc=" crossorigin="anonymous" />
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js" integrity="sha256-KXypdIy75PPHsbEaVkrhBvlQg8XTQy8NvalzrIxMrco=" crossorigin="anonymous"></script>
+</head>
 <body>
-	<b>Ranking Report:<b><br>
+	<h1>Ranking Report:</h1>
 	<form action="PythonLibrary/CORERankings.py" method="get">
-		AvgGearsTele: <input type="radio" name="ranking_type" value="AvgGearsTele"> <br>
-		AvgGearsLostTrans: <input type="radio" name="ranking_type" value="AvgGearsLostTrans"> <br>
-		AvgGearsLostPeg: <input type="radio" name="ranking_type" value="AvgGearsLostPeg"> <br>
-		AvgGearsLostFeed: <input type="radio" name="ranking_type" value="AvgGearsLostFeed"> <br>
-		ShooterType: <input type="radio" name="ranking_type" value="ShooterType"> <br>
-		ShootRateAccuracy: <input type="radio" name="ranking_type" value="ShootRateAccuracy"> <br>
-		ClimbPercentage: <input type="radio" name="ranking_type" value="ClimbPercentage"> <br>
-		AutoKpa: <input type="radio" name="ranking_type" value="AutoKpa"> <br>
-		TeleKpa: <input type="radio" name="ranking_type" value="TeleKpa"> <br>
-		CORE PR: <input type="radio" name="ranking_type" value="CorePR"> <br>
-		GearManipulator: <input type="radio" name="ranking_type" value="GearManipulator"> <br>
-		<input type="submit" value ="submit"><br>
+  		<div class="row">
+   		 <div class="large-12 columns">
+      		<label>
+        		<select name="ranking_type">
+          		<option value="AvgGearsTele">AvgGearsTele</option>
+          		<option value="AvgGearsLostTrans">AvgGearsLostTrans</option>
+          		<option value="AvgGearsLostPeg">AvgGearsLostPeg</option>
+          		<option value="AvgGearsLostFeed">AvgGearsLostFeed</option>
+          		<option value="ShooterType">ShooterType</option>
+          		<option value="ShootRateAccuracy">ShootRateAccuracy</option>
+          		<option value="ClimbPercentage">ClimbPercentage</option>
+          		<option value="AutoKpa">AutoKpa</option>
+          		<option value="TeleKpa">TeleKpa</option>
+          		<option value="CorePR">CorePR</option>
+          		<option value="GearManipulator">GearManipulator</option>
+        		</select>
+      		</label>
+    		</div>
+  		</div>
+		<input class="button SubmitButton" type="submit" value ="submit">
 	</form>
+<script>
+      $(document).foundation();
+</script>
 </body>
 </html>
