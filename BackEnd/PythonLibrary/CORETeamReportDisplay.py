@@ -42,8 +42,10 @@ except Exception as e:
     print('</html>')
 finally:
     db_connection.close()
+
 for team in team_numbers:
-    int_nums.append(int(team))
+    if team != 'None':
+        int_nums.append(int(team))
 int_nums.sort()
 print("Content-type:text/html\r\n\r\n")
 print('<html class="no-js" lang="en">')

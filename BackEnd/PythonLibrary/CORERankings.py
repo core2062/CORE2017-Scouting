@@ -37,8 +37,7 @@ class Rankings:
                                str(COREDependencies.COREConstants.COMPETITION_NAME) + "'")
                 id = cursor.fetchone()
                 while id is not None:
-                    if id['TABLE_NAME'] != 'None':
-                        self._team_numbers.append(id['TABLE_NAME'])
+                    self._team_numbers.append(id['TABLE_NAME'])
                     id = cursor.fetchone()
         except Exception as e:
             # Debug Code for Creating Database
@@ -58,6 +57,9 @@ class Rankings:
         finally:
             self._db_connection.close()
 
+        for all in self._team_numbers:
+            if all == 'None':
+                self._team_numbers.remove('None')
         for teams in self._team_numbers:
             self._team_dictionary[teams] = DataCalculation.TeamData(teams)
         for populate in self._team_dictionary:
