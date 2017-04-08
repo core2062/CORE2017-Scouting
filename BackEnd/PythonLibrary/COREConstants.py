@@ -2,7 +2,7 @@
 """ Various constants used throughout the program that are intended primarily to map form fields,
     but also for key names
 
-        form dependency : Needs to be the same names as those given by the html form.
+        form dependency : Needs to be the same names as those given by the corresponding html form.
             It is important that these names appear EXACTLY the same as those supplied by the front end!
         no dependency : Names that will be visually displayed on output tables.
             Should be named in accordance of which they are displaying, but the name is not dependant on any

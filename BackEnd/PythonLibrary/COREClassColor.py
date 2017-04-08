@@ -53,7 +53,6 @@ class ColorTeam:
                         matches = cursor.fetchone()
                     # Goal is to create dictionary with key team number and value: tuple of all match submitions
         except Exception as e:
-            # Debug Code for Creating Database
             print("Content-type:text/html\r\n\r\n")
             print('<html>')
             print('<head>')
