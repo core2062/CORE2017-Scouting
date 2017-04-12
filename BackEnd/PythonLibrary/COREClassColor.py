@@ -210,13 +210,13 @@ class ColorTeam:
         orange_count = 0
         for team in teams:
             color = self.find_color(team, match_number)
-            if color == 'ready_to_generate':
+            if color == 'ready_to_generate' or 'ready_to_generate my_team':
                 green_count += 1
-            if color == 'not_ready_to_generate':
+            if color == 'not_ready_to_generate' or 'not_ready_to_generate my_team':
                 red_count += 1
-            if color == 'submitted':
+            if color == 'submitted' or 'submitted my_team':
                 blue_count += 1
-            if color == 'not_submitted':
+            if color == 'not_submitted' or 'not_submitted my_team':
                 grey_count += 1
             if color == 'my_team':
                 orange_count += 1
