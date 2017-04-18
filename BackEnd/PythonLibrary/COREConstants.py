@@ -14,7 +14,7 @@ General Team Info (no dependency)
 
 TEAM_NUMBER = 2062
 
-COMPETITION_NAME = 'Milwaukee_Qualifications'
+COMPETITION_NAME = 'Lacrosse_Practice'
 
 """===========================================
 Scout HTML input field names (form dependency)
@@ -56,7 +56,7 @@ RADIO_NAMES = [
     'Climb'
 ]
 RADIO_VALUES = {
-    'DeliverGearAuto': ('LeftGearAuto', 'MiddleGearAuto', 'RightGearAuto', 'None'),
+    'DeliverGearAuto': ('BoilerGearAuto', 'MiddleGearAuto', 'FeederGearAuto', 'None'),
     'FuelAuto': ('FuelLowAuto', 'FuelHighAuto', 'FuelNoneAuto'),
     'GearFloorPickupType': ('Active', 'Passive', 'None'),
     'ShooterType': ('High', 'Low', 'None'),
