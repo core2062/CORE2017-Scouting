@@ -2,7 +2,7 @@
 """ Various constants used throughout the program that are intended primarily to map form fields,
     but also for key names
 
-        form dependency : Needs to be the same names as those given by the corresponding html form.
+        form dependency : Needs to be the same names as those given by the html form.
             It is important that these names appear EXACTLY the same as those supplied by the front end!
         no dependency : Names that will be visually displayed on output tables.
             Should be named in accordance of which they are displaying, but the name is not dependant on any
@@ -14,7 +14,7 @@ General Team Info (no dependency)
 
 TEAM_NUMBER = 2062
 
-COMPETITION_NAME = 'Lacrosse_Practice'
+COMPETITION_NAME = 'Lacrosse_Qualifications'
 
 """===========================================
 Scout HTML input field names (form dependency)
@@ -84,21 +84,23 @@ Match Report Row Headers (no dependency)
 
 # Show up on Match Report and Ranking Report if applicable
 RANK_AND_MATCH_HEADERS = [
-    'Avg Gears Tele',
     'Avg Gear Lost Transit',
     'Avg Gear Lost at Peg',
     'Avg Gear Lost at Feeder',
     'Shooter Type',
     'Shooter Rate and Accuracy',
-    'Avg Auto Kpa',
-    'Avg Tele Kpa',
     'CORE-PR',
-    'Gear Manipulator'
+    'Gear Manipulator',
+    'Total Kpa Accumulated',
+    'Total Gears Average',
+    'Gear Floor Pickup'
 ]
 
 # Shows up as a ranking Option only
 RANK_ONLY_HEADERS = [
-    'Climb Percentage'
+    'Climb Percentage',
+    'Avg Auto Kpa',
+    'Avg Tele Kpa'
 
 ]
 
@@ -139,7 +141,6 @@ RANK_REPORT_FIELD_NAMES = {
     EX: 'Highest Auto Type': ('highest_auto_type', 'Highest Auto', 'category', ('breach', 'reach', 'no_interaction')) """
 
 RANK_OPTIONS = [
-    ('AvgGearsTele', 'Avg Gears Tele', 'descending'),
     ('AvgGearsLostTrans', 'Avg Gear Lost Transit', 'descending'),
     ('AvgGearsLostPeg', 'Avg Gear Lost at Peg', 'descending'),
     ('AvgGearsLostFeed', 'Avg Gear Lost at Feeder', 'descending'),
@@ -149,7 +150,10 @@ RANK_OPTIONS = [
     ('AutoKpa', 'Avg Auto Kpa', 'descending'),
     ('TeleKpa', 'Avg Tele Kpa', 'descending'),
     ('CorePR', 'CORE-PR', 'descending'),
-    ('GearManipulator', 'Gear Manipulator', 'category', ('Active', 'Passive', 'None'))
+    ('GearManipulator', 'Gear Manipulator', 'category', ('Active', 'Passive', 'None')),
+    ('TotalKpa', 'Total Kpa Accumulated', 'descending'),
+    ('TotalGearsAverage', 'Total Gears Average', 'descending'),
+    ('GearFloorPickup', 'Gear Floor Pickup', 'category', ('Gear Floor Pickup', 'No Gear Floor Pickup'))
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""
