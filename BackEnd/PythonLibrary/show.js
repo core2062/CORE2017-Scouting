@@ -2,7 +2,14 @@ $(function() {
     $('#HighFieldset').hide();
     $('#LowFieldset').hide();
     $('#PostAutoPressure').hide();
+    $('#AutoGearStatus').hide();
 });
+function EnableAutoGearStatus() {
+    $('#AutoGearStatus').show();
+}
+function DisableAutoGearStatus() {
+    $('#AutoGearStatus').hide();
+}
 function HighGoal() {
     $('#HighFieldset').show();
     $('#LowFieldset').hide();

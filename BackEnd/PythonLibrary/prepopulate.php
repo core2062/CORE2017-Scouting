@@ -81,14 +81,19 @@
       									<div class="row">
       										<fieldset class="large-6 columns">
       										<legend>Deliver Gear:</legend>
-      										 	<input name="DeliverGearAuto" id="BoilerGearAuto" value="BoilerGearAuto" type="radio"><label for="BoilerGearAuto">Boiler Side</label>
-      										 	<input required="" name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
-      										 	<input required="" name="DeliverGearAuto" id="FeederGearAuto" value="FeederGearAuto" type="radio"><label for="FeederGearAuto">Feeder Side</label>
-       										 	<input required="" name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>
-                          <legend>Sucess/Fail:</legend>
-                            <input name="AutoGearSuccessFail" id="Success" value="Success" type="radio"><label for="Success">Success</label>
-                            <input name="AutoGearSuccessFail" id="Fail" value="Fail" type="radio"><label for="Fail">Fail</label>     										 
+      										 	<input onclick="EnableAutoGearStatus()"  name="DeliverGearAuto" id="BoilerGearAuto" value="BoilerGearAuto" type="radio"><label for="BoilerGearAuto">Boiler Side</label>
+      										 	<input required="" onclick="EnableAutoGearStatus()" name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
+      										 	<input required="" onclick="EnableAutoGearStatus()" name="DeliverGearAuto" id="FeederGearAuto" value="FeederGearAuto" type="radio"><label for="FeederGearAuto">Feeder Side</label>
+       										 	<input required="" onclick="DisableAutoGearStatus()" name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>    										 
       										</fieldset>
+                        </div>
+                        <div class="row">
+                          <fieldset id="AutoGearStatus">
+                            <legend>Success/Fail:</legend>
+                            <input name="AutoGearSuccessFail" id="Success" value="Success" type="radio"><label for="Success">Success</label>
+                            <input name="AutoGearSuccessFail" id="Fail" value="Fail" type="radio"><label for="Fail">Fail</label>
+                          <fieldset>
+
       									</div>
 
       								<div class="row">
