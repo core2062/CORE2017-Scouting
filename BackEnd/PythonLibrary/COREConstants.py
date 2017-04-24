@@ -28,8 +28,7 @@ CHECKBOX_NAMES = [
     'CrossedBaselineAuto',
     'GearFloorPickup',
     'FuelPickupHopper',
-    'FuelPickupFloor',
-    'ActiveDefense'
+    'FuelPickupFloor'
 ]
 NUMBER_NAMES = [
     MATCH_NUMBER['match_number'],
@@ -53,7 +52,9 @@ RADIO_NAMES = [
     'HighFrequency',
     'HighAccuracy',
     'LowGoalFrequency',
-    'Climb'
+    'Climb',
+    'Defense',
+    'AutoGearSuccessFail'
 ]
 RADIO_VALUES = {
     'DeliverGearAuto': ('BoilerGearAuto', 'MiddleGearAuto', 'FeederGearAuto', 'None'),
@@ -63,7 +64,9 @@ RADIO_VALUES = {
     'HighFrequency': ('Slow', 'Medium', 'Fast'),
     'HighAccuracy': ('25', '50', '75'),
     'LowGoalFrequency': ('SlowLow', 'FastLow'),
-    'Climb': ('DidClimb', 'NoClimb', 'ClimbFail')
+    'Climb': ('DidClimb', 'NoClimb', 'ClimbFail'),
+    'Defense': ('NotGreat', 'Alright', 'Good', 'Amazing'),
+    'AutoGearsSuccessFail': ('Success', 'Fail')
 }
 
 ALL_NAMES = []
@@ -100,7 +103,8 @@ RANK_AND_MATCH_HEADERS = [
 RANK_ONLY_HEADERS = [
     'Climb Percentage',
     'Avg Auto Kpa',
-    'Avg Tele Kpa'
+    'Avg Tele Kpa',
+    'Defense Rating'
 
 ]
 
@@ -153,7 +157,8 @@ RANK_OPTIONS = [
     ('GearManipulator', 'Gear Manipulator', 'category', ('Active', 'Passive', 'None')),
     ('TotalKpa', 'Total Kpa Accumulated', 'descending'),
     ('TotalGearsAverage', 'Total Gears Average', 'descending'),
-    ('GearFloorPickup', 'Gear Floor Pickup', 'category', ('Gear Floor Pickup', 'No Gear Floor Pickup'))
+    ('GearFloorPickup', 'Gear Floor Pickup', 'category', ('Gear Floor Pickup', 'No Gear Floor Pickup')),
+    ('Defense', 'Defense Rating', 'category', ('Amazing', 'Good', 'Alright', 'Not Great'))
 ]
 """('highGoals', 'High Goal Accuracy', 'descending'),
     ('Autotype', 'Auto Type', 'category', ('Moat', 'Rockwall', 'RoughTerrain'))"""

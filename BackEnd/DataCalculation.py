@@ -59,7 +59,7 @@ class TeamData(CORETeamData.Team):
         else:
             self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[1]] = (FuelHopper + FuelFloor)
         #Which Gears in Auto
-        if AllLeftGearsAuto > 0:
+        """if AllLeftGearsAuto > 0:
             AutoLeftGear = 'Boiler,'
         else:
             AutoLeftGear = ''
@@ -74,7 +74,40 @@ class TeamData(CORETeamData.Team):
         if (AutoLeftGear + AutoMiddleGear + AutoRightGear) == '':
             self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = 'None'
         else:
-            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoLeftGear + AutoMiddleGear + AutoRightGear)
+            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoLeftGear + AutoMiddleGear + AutoRightGear)"""
+        SuccessOrFail = self._list_of_all_results(COREDependencies.COREConstants.RADIO_NAMES[9])
+        Gears = self._list_of_all_results(COREDependencies.COREConstants.RADIO_NAMES[1])
+
+        BoilerSuccess = 0
+        MiddleSuccess = 0
+        FeederSuccess = 0
+        Failures = 0
+        for (GearPeg, SuccessesOrFails) in zip(Gears, SuccessOrFail):
+            if GearPeg == 'BoilerGearAuto' and SuccessesOrFails == 'Success':
+                BoilerSuccess += 1
+            elif GearPeg == 'MiddleGearAuto' and SuccessesOrFails == 'Success':
+                MiddleSuccess += 1
+            elif GearPeg == 'FeederGearAuto' and SuccessesOrFails == 'Success':
+                FeederSuccess += 1
+            else:
+                Failures += 1
+            AutoFailGear = str(Failures)
+            if BoilerSuccess > 0:
+                AutoBoilerGear = 'Boiler,'
+            else:
+                AutoBoilerGear = ''
+            if MiddleSuccess > 0:
+                AutoMiddleGear = 'Middle,'
+            else:
+                AutoMiddleGear = ''
+            if FeederSuccess > 0:
+                AutoFeederGear = 'Feeder'
+            else:
+                AutoFeederGear = ''
+            if (AutoBoilerGear + AutoMiddleGear + AutoFeederGear) == '':
+                self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = ('None' + 'Fails:' + AutoFailGear)
+            else:
+                self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoBoilerGear + AutoMiddleGear + AutoFeederGear + 'Fails:' + AutoFailGear)
         #Climb Ratio. Success:Fail:No Attempt
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[3]] = str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'ClimbFail')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'NoClimb'))
         ClimbRatio = self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb') / MatchesPlayed
@@ -142,3 +175,5 @@ class TeamData(CORETeamData.Team):
             self.team_data[COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS[9]] = 'Gear Floor Pickup'
         else:
             self.team_data[COREDependencies.COREConstants.RANK_AND_MATCH_HEADERS[9]] = 'No Gear Floor Pickup'
+        #Defense Rating
+        self.team_data[COREDependencies.COREConstants.RANK_ONLY_HEADERS[3]] = self.avg_category(COREDependencies.COREConstants.RADIO_NAMES[8])
