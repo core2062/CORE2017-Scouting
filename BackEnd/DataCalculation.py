@@ -82,6 +82,10 @@ class TeamData(CORETeamData.Team):
         MiddleSuccess = 0
         FeederSuccess = 0
         Failures = 0
+        AutoBoilerGear = ''
+        AutoMiddleGear = ''
+        AutoFeederGear = ''
+        AutoFailGear = ''
         for (GearPeg, SuccessesOrFails) in zip(Gears, SuccessOrFail):
             if GearPeg == 'BoilerGearAuto' and SuccessesOrFails == 'Success':
                 BoilerSuccess += 1
@@ -104,10 +108,10 @@ class TeamData(CORETeamData.Team):
                 AutoFeederGear = 'Feeder'
             else:
                 AutoFeederGear = ''
-            if (AutoBoilerGear + AutoMiddleGear + AutoFeederGear) == '':
-                self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = ('None' + 'Fails:' + AutoFailGear)
-            else:
-                self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoBoilerGear + AutoMiddleGear + AutoFeederGear + 'Fails:' + AutoFailGear)
+        if (BoilerSuccess + MiddleSuccess + FeederSuccess) == 0:
+            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = ('None' + 'Fails:' + AutoFailGear)
+        else:
+            self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[2]] = (AutoBoilerGear + AutoMiddleGear + AutoFeederGear + 'Fails:' + AutoFailGear)
         #Climb Ratio. Success:Fail:No Attempt
         self.team_data[COREDependencies.COREConstants.MATCH_HEADERS[3]] = str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'ClimbFail')) + ':' + str(self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'NoClimb'))
         ClimbRatio = self.times_key_exists_in_category(COREDependencies.COREConstants.RADIO_NAMES[7],'DidClimb') / MatchesPlayed
@@ -158,7 +162,7 @@ class TeamData(CORETeamData.Team):
         baseline_crosses = self.times_key_exists_in_category('CrossedBaselineAuto', 'ON')
         if MatchesPlayed != 0:
             self.team_data['CORE-PR'] = (round((self.team_data['Avg Tele Kpa']) + (self.team_data['Avg Auto Kpa']) +
-                                               ((AllGearsTele * 11.43) + ((AllGearsAuto / MatchesPlayed) * 17.14) + (ClimbRatio * 50) + ((baseline_crosses / MatchesPlayed) * 5)), 2))
+                                               ((AllGearsTele / MatchesPlayed * 11.43) + ((AllGearsAuto / MatchesPlayed) * 17.14) + (ClimbRatio * 50) + ((baseline_crosses / MatchesPlayed) * 5)), 2))
         else:
             self.team_data['CORE-PR'] = 0
 
