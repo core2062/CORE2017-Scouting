@@ -84,7 +84,10 @@
       										 	<input name="DeliverGearAuto" id="BoilerGearAuto" value="BoilerGearAuto" type="radio"><label for="BoilerGearAuto">Boiler Side</label>
       										 	<input required="" name="DeliverGearAuto" id="middlegear" value="MiddleGearAuto" type="radio"><label for="middlegear">Middle</label>
       										 	<input required="" name="DeliverGearAuto" id="FeederGearAuto" value="FeederGearAuto" type="radio"><label for="FeederGearAuto">Feeder Side</label>
-       										 	<input required="" name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>     										 
+       										 	<input required="" name="DeliverGearAuto" id="nonegear" value="None" type="radio"><label for="nonegear">None</label>
+                          <legend>Sucess/Fail:</legend>
+                            <input name="AutoGearSuccessFail" id="Success" value="Success" type="radio"><label for="Success">Success</label>
+                            <input name="AutoGearSuccessFail" id="Fail" value="Fail" type="radio"><label for="Fail">Fail</label>     										 
       										</fieldset>
       									</div>
 
@@ -106,7 +109,7 @@
 
       								<div class="row" id="PostAutoPressure"> 
       									<fieldset class="large-6 columns">
-      										<legend>Post Auto Pressure: *</legend>
+      										<legend>Auto Pressure: *</legend>
       										<label>
       											<input data-parsley-required="true" data-parsley-range="[0, 100]" type="tel" value="0" id="PressureAuto" name="PressureAuto" autocomplete="off">
       										</label>
@@ -220,7 +223,7 @@
 
       										<legend>Gear Manipulation:</legend>
 
-      										 <input name="GearFloorPickup" id="GearFloorPickup" type="checkbox"><label for="GearFloorPickup">Floor Pickup?</label>
+      										 <input name="GearFloorPickup" id="GearFloorPickup" type="checkbox"><label for="GearFloorPickup">Gear Floor Pickup?</label>
 
       										<legend>Gear Handling Type:</legend>
       										 <input required="" name="GearFloorPickupType" id="ActivePickup" value="Active" type="radio"><label for="ActivePickup">Active</label>
@@ -305,8 +308,11 @@
 
       								<div class="row">
       									<fieldset class="large-6 columns">
-      										<legend>Active Defense:</legend>
-      										 <input name="ActiveDefense" id="ActiveDefense" type="checkbox"><label for="ActiveDefense">Yes</label>
+      										<legend>Defense:</legend>
+                           <input name="Defense" id="NotGreat" value="NotGreat" type="radio"><label for="NotGreat">Not Great</label>
+                           <input name="Defense" id="Alright" value="Alright" type="radio"><label for="Alright">Alright</label>
+                           <input name="Defense" id="Good" value="Good" type="radio"><label for="Good">Good</label>
+                           <input name="Defense" id="Amazing" value="Amazing" type="radio"><label for="Amazing">Amazing</label>
       									</fieldset>
       								</div> 	
       								</div>						
