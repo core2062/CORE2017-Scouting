@@ -27,7 +27,7 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.min.js" integrity="sha256-QKOftzbqahZaXS2amOh27JacZ6TbmT4TmGxNo4Jue4Y=" crossorigin="anonymous"></script>
 
-		<script type="text/javascript" src="show.js"></script>
+		<script type="text/javascript" src="show.js?v=1"></script>
 
 	</head>
 	<body>
@@ -314,10 +314,11 @@
       								<div class="row">
       									<fieldset class="large-6 columns">
       										<legend>Defense:</legend>
-                           <input name="Defense" id="NotGreat" value="NotGreat" type="radio"><label for="NotGreat">Not Great</label>
-                           <input name="Defense" id="Alright" value="Alright" type="radio"><label for="Alright">Alright</label>
-                           <input name="Defense" id="Good" value="Good" type="radio"><label for="Good">Good</label>
-                           <input name="Defense" id="Amazing" value="Amazing" type="radio"><label for="Amazing">Amazing</label>
+                           <input required="" name="Defense" id="NotGreat" value="NotGreat" type="radio"><label for="NotGreat">Not Great</label>
+                           <input required="" name="Defense" id="Alright" value="Alright" type="radio"><label for="Alright">Alright</label>
+                           <input required="" name="Defense" id="Good" value="Good" type="radio"><label for="Good">Good</label>
+                           <input required="" name="Defense" id="Amazing" value="Amazing" type="radio"><label for="Amazing">Amazing</label>
+                           <input required="" name="Defense" id="DefenseNone" value="None" type="radio"><label for="DefenseNone">None</label>
       									</fieldset>
       								</div> 	
       								</div>						
