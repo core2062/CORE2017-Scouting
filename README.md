@@ -1,2 +1,2 @@
-# 2017-Scouting-Library
-The Python library used on CORE 2062's scouting database
+# CORE 2062's 2017 Scouting Code
+Library and Web page alog with competition specific input.
